@@ -75,5 +75,6 @@ README〜ER図作成：9/8 〆切
 
 ## 画面遷移図
 [figma](https://www.figma.com/file/A1eFk16SlsYSZO32imTql0/Kariteyomu?node-id=0%3A1)
-
+## ER図
 [draw.io](https://drive.google.com/file/d/18dcv_MPLpA9ZiRLJ7ujeoAkZj7heGwFm/view?usp=sharing)
+https://drive.google.com/file/d/18dcv_MPLpA9ZiRLJ7ujeoAkZj7heGwFm/view?usp=sharing
