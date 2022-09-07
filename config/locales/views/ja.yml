@@ -12,7 +12,7 @@ ja:
       title: 'ログイン'
       to_register_page: '登録ページへ'
       password_forget: 'パスワードをお忘れの方はこちら'
-  boards:
+  books:
     index:
       title: '掲示板一覧'
     new:

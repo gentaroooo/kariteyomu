@@ -1,0 +1,37 @@
+<div class="col-sm-12 col-lg-4 mb-3">
+  <div id="book-id-<%= book.id %>">
+    <div class="card">
+      <%= image_tag 'board_placeholder.png', class: 'card-img-top', size: '300x200' %>
+      <div class="card-body">
+        <h4 class="card-title">
+          <a href="#">
+            <%= book.title %>
+          </a>
+        </h4>
+        <div class='mr10 float-right'>
+          <a href="#"><%= icon 'fas', 'trash', class: 'pr-1' %></a>
+          <a href="#"><%= icon 'fa', 'pen' %></a>
+        </div>
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <%= icon 'far', 'user' %>
+            <%
+=begin%>
+ <%= book.user.decorate.full_name %> 
+<%
+=end%>
+          </li>
+          <li class="list-inline-item">
+            <%= icon 'far', 'calendar' %>
+            <%
+=begin%>
+ <%= l book.created_at, format: :long %> 
+<%
+=end%>
+          </li>
+        </ul>
+        <p class="card-text"><%= book.body %></p>
+      </div>
+    </div>
+  </div>
+</div>
