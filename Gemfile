@@ -56,3 +56,22 @@ gem 'net-pop'
 gem 'bootstrap', '~> 4.3.1'
 gem 'font-awesome-sass', '~> 5.11.2'
 gem 'jquery-rails'
+
+gem 'sorcery', '0.16.3'
+gem 'pry-byebug'
+
+
+# gem 'draper', '3.1.0'
+
+gem 'carrierwave', '2.0.2'
+gem 'cloudinary'
+
+gem 'kaminari', '1.1.1'
+
+gem 'ransack', '2.3.0'
+
+gem 'config', '2.0.0'
+
+gem 'enum_help', '0.0.17'
+
+gem 'faraday'
