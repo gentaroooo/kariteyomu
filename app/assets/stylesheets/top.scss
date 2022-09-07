@@ -1,8 +1,11 @@
 .top-wrapper {
   background-image: image-url("top.jpg");
-  height: calc(100vh - 134px);
+  // height: calc(100vh - 134px);
   position: relative;
   background-position: center;
+  width: auto;
+  height: 500px;
+  padding: 10px 20px;  
 
   .top-inner-text {
     position: absolute;
@@ -11,11 +14,36 @@
     transform: translate(-50%, -50%);
     width: 100%;
     text-align: center;
-    font-size: 3rem;
-    color: white;
+    color: black;
+    background-color: silver;
+    opacity: 0.8;
+    font-size: 80%;
 
-    @media screen and (max-width: 767px) {
-      font-size: 2.0rem;
-    }
+  //   @media screen and (max-width: 767px) {
+  //      font-size: 2.0rem;
+  //    }
   }
+}
+
+.top-image {
+  // position: relative;
+  background-position: center;
+  width: auto;
+  height: 450px;
+  padding: 10px 20px; 
+}
+
+.top-picture {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.top-picture2 {
+  text-align: center;
+  color: rgb(14, 32, 202);
+}
+
+.top-picture3 {
+  text-align: center;
+  color: rgb(233, 189, 10);
 }
