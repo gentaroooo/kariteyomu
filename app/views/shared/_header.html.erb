@@ -7,6 +7,7 @@
     <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <%= link_to 'ログアウト', logout_path, class: 'dropdown-item', method: :delete %>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto main-nav align-items-center">
@@ -34,7 +35,7 @@
             <div class="dropdown-divider"></div>
             <%= link_to 'プロフィール', '#', class: 'dropdown-item' %>
 
-            <%= link_to 'ログアウト', '#', class: 'dropdown-item' %>
+            <%= link_to 'ログアウト', logout_path, class: 'dropdown-item', method: :delete %>
           </div>
         </li>
       </ul>

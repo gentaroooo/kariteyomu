@@ -1,0 +1,155 @@
+
+
+/*****************************************
+  サイドバー
+******************************************/
+.side-link:hover{
+  background-color: rgba(220,220,220,1)
+}
+
+.w-250px{
+  width: 250px;
+}
+/*****************************************
+  フッター
+******************************************/
+footer{
+  position: sticky;
+  position: -webkit-sticky;
+  top: 100vh;
+  background-color: #ddd;
+}
+
+.copyright{
+  font-size: 12px;
+}
+
+/*****************************************
+  メイン
+******************************************/
+.book-img{
+  max-height: 205px;
+}
+
+a.hover-decoration{
+  text-decoration: none;
+}
+
+a.hover-decoration:hover{
+  text-decoration: underline;
+}
+
+.card-link{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.card-link:hover{
+  background-color: rgba(220,220,220,0.2);
+  box-shadow: 4px 4px 10px rgba(110,110,110,0.4);
+}
+
+#comments-list li{
+  list-style-position: inside;
+}
+
+.categories a{
+  text-decoration: none;
+}
+
+.categories a:hover{
+  text-decoration: underline;
+}
+
+.twitter-share a{
+  width: 36px;
+  height: 36px;
+  display: block;
+  text-align: center;
+}
+
+.like-button a{
+  width: 36px;
+  height: 36px;
+  border-radius: 100px;
+  display: block;
+  text-align: center;
+}
+
+.like-button a:hover{
+  background-color: rgba(#dda0a0, 0.5);
+}
+
+.like-button i{
+  color: #ff0080
+}
+
+.like-count{
+  width: 50px;
+  height: 36px;
+  line-height: 2;
+}
+
+.like-color{
+  color: #ff0080;
+}
+
+.follow-nav{
+  background-color: rgba(#f0f0f0, 1);
+}
+
+.twitter{
+  background-color: #55acee;
+  color: #fff
+}
+
+.twitter:hover{
+  background-color: #558dee;
+  color: #fff
+}
+
+.text-border{
+  display: flex;
+  align-items: center;
+}
+
+.text-border::before,
+.text-border::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.text-border::before {
+  margin-right: 15px;
+}
+
+.text-border::after {
+  margin-left: 15px;
+}
+
+/* 利用規約 */
+.terms h1{
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.terms h2{
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+/* プライバシーポリシー */
+.privacy h1{
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.privacy h2{
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
