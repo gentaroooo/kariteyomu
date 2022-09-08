@@ -6,7 +6,7 @@
         <h4 class="card-title">
            <%= link_to book.title, book_path(book) %>
         </h4>
-        <%= render 'crud_menus', book: book %>
+        <%= render 'crud_menus', book: book if current_user.own?(book)%>
         </div>
         <ul class="list-inline">
           <li class="list-inline-item">

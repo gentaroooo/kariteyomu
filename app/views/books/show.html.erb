@@ -11,7 +11,7 @@
             </div>
             <div class='col-md-9'>
               <h3 class="d-inline"><%= @book.title %></h3>
-              <%= render 'crud_menus', book: @book %> 
+              <%= render 'crud_menus', book: @book if current_user.own?(@book) %> 
               <ul class="list-inline">
                 <li class="list-inline-item">by <%= @book.user.name %></li>
                 <li class="list-inline-item"><%= l @book.created_at, format: :long  %></li>
