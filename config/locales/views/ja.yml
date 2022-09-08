@@ -5,6 +5,10 @@ ja:
     logout: 'ログアウト'
     post: '投稿'
     message:
+      updated: "%{item}を更新しました"
+      not_updated: "%{item}を更新できませんでした"
+      deleted: "%{item}を削除しました"
+      delete_confirm: '削除しますか？'
       require_login: 'ログインしてください'
       created: "%{item}を作成しました"
       not_created: "%{item}を作成できませんでした"
@@ -32,6 +36,8 @@ ja:
       title: 'ブックマーク一覧'
     show:
       title: '掲示板詳細'
+    edit:
+      title: '掲示板編集'
   profiles:
     show:
       title: 'プロフィール'

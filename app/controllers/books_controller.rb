@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
-  before_action :find_board, only: [:edit, :update, :destroy]
-  
+  before_action :find_book, only: [:edit, :update, :destroy]
+
   def index
     @books = Book.all.includes(:user).order(created_at: :desc)
   end
@@ -29,16 +29,16 @@ class BooksController < ApplicationController
 
   def update
     if @book.update(book_params)
-      redirect_to @book, success: t('defaults.message.updated', item: book.model_name.human)
+      redirect_to @book, success: t('defaults.message.updated', item: Book.model_name.human)
     else
-      flash.now['danger'] = t('defaults.message.not_updated', item: book.model_name.human)
+      flash.now['danger'] = t('defaults.message.not_updated', item: Book.model_name.human)
       render :edit
     end
   end
 
   def destroy
     @book.destroy!
-    redirect_to books_path, success: t('defaults.message.deleted', item: book.model_name.human)
+    redirect_to books_path, success: t('defaults.message.deleted', item: Book.model_name.human)
   end
 
   private
