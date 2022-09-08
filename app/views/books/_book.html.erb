@@ -6,9 +6,7 @@
         <h4 class="card-title">
            <%= link_to book.title, book_path(book) %>
         </h4>
-        <div class='mr10 float-right'>
-          <a href="#"><%= icon 'fas', 'trash', class: 'pr-1' %></a>
-          <a href="#"><%= icon 'fa', 'pen' %></a>
+        <%= render 'crud_menus', book: book %>
         </div>
         <ul class="list-inline">
           <li class="list-inline-item">
