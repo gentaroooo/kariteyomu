@@ -1,7 +1,7 @@
 <div class="col-sm-12 col-lg-4 mb-3">
   <div id="book-id-<%= book.id %>">
     <div class="card">
-      <%= image_tag 'board_placeholder.png', class: 'card-img-top', size: '300x200' %>
+      <%= image_tag book.book_image_url, class: 'card-img-top', size: '300x200' %> 
       <div class="card-body">
         <h4 class="card-title">
           <a href="#">
@@ -15,19 +15,13 @@
         <ul class="list-inline">
           <li class="list-inline-item">
             <%= icon 'far', 'user' %>
-            <%
-=begin%>
- <%= book.user.decorate.full_name %> 
-<%
-=end%>
+            <%= book.user.name %> 
+
           </li>
           <li class="list-inline-item">
             <%= icon 'far', 'calendar' %>
-            <%
-=begin%>
- <%= l book.created_at, format: :long %> 
-<%
-=end%>
+            <%= l book.created_at, format: :long %> 
+
           </li>
         </ul>
         <p class="card-text"><%= book.body %></p>

@@ -13,3 +13,4 @@ ja:
       book:
         title: 'タイトル'
         body: '本文'
+        book_image: 'サムネイル'
