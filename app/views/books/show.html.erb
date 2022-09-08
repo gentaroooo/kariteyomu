@@ -11,11 +11,7 @@
             </div>
             <div class='col-md-9'>
               <h3 class="d-inline"><%= @book.title %></h3>
-              <%
-=begin%>
- <%= render 'crud_menus', book: @book %> 
-<%
-=end%>
+              <%= render 'crud_menus', book: @book %> 
               <ul class="list-inline">
                 <li class="list-inline-item">by <%= @book.user.name %></li>
                 <li class="list-inline-item"><%= l @book.created_at, format: :long  %></li>
@@ -29,16 +25,7 @@
   </div>
 
   <!-- コメントフォーム -->
-  <%
-=begin%>
- <%= render 'comments/form', { book: @book, comment: @comment } %> 
-<%
-=end%>
-
+  <%= render 'comments/form', { book: @book, comment: @comment } %> 
   <!-- コメントエリア -->
-  <%
-=begin%>
- <%= render 'comments/comments', { comments: @comments } %> 
-<%
-=end%>
+  <%= render 'comments/comments', { comments: @comments } %> 
 </div>
