@@ -73,6 +73,7 @@ RSpec.describe '掲示板', type: :system do
         fill_in 'タイトル', with: 'テストタイトル'
         click_button '登録する'
         expect(page).to have_content('掲示板を作成できませんでした')
+        expect(page).to have_content('本文を入力してください')
       end
     end
   end
