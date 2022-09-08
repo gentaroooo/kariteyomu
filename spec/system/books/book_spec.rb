@@ -77,4 +77,30 @@ RSpec.describe '掲示板', type: :system do
       end
     end
   end
+
+  describe '掲示板の詳細' do
+    context 'ログインしていない場合' do
+      it 'ログインページにリダイレクトされること' do
+        visit book_path(book)
+        expect(current_path).to eq login_path
+        expect(page).to have_content 'ログインしてください'
+      end
+    end
+
+    context 'ログインしている場合' do
+      before do
+        book
+        login_as(user)
+      end
+      it '掲示板の詳細が表示されること' do
+        visit books_path
+        within "#book-id-#{book.id}" do
+          click_on book.title
+        end
+        expect(page).to have_content book.title
+        expect(page).to have_content book.user.name
+        expect(page).to have_content book.body
+      end
+    end
+  end
 end
