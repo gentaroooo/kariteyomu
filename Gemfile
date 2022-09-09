@@ -82,28 +82,15 @@ gem 'jquery-rails'
 
 gem 'sorcery', '0.16.3'
 gem 'pry-byebug'
-
-
 # gem 'draper', '3.1.0'
-
 gem 'carrierwave', '2.2.2'
-
 gem 'mini_magick'
-
 gem 'cloudinary'
-
-gem 'kaminari', '1.1.1'
-
+gem 'kaminari', '1.2.2'
 gem 'ransack', '2.3.0'
-
 gem 'config', '2.0.0'
-
 gem 'enum_help', '0.0.17'
-
 gem 'faraday'
-
 gem 'rails-i18n'
-
 gem 'ancestry'
-
 gem 'gon'
