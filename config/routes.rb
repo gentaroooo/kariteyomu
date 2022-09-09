@@ -7,6 +7,6 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[new create]
   resources :books do
-    resources :comments, only: %i[create], shallow: true
+    resources :comments, only: %i[create update destroy], shallow: true
   end
 end

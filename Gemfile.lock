@@ -62,6 +62,8 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    ancestry (4.2.0)
+      activerecord (>= 5.2.6)
     ast (2.4.2)
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
@@ -109,6 +111,10 @@ GEM
     digest (3.1.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     dry-configurable (0.15.0)
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.6)
@@ -154,6 +160,11 @@ GEM
       sassc (>= 1.11)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    gon (6.4.0)
+      actionpack (>= 3.0.20)
+      i18n (>= 0.7)
+      multi_json
+      request_store (>= 1.0)
     hashie (5.0.0)
     http-accept (1.7.0)
     http-cookie (1.0.5)
@@ -302,6 +313,8 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.5.0)
+    request_store (1.5.1)
+      rack (>= 1.4)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
@@ -424,6 +437,7 @@ PLATFORMS
   x86_64-darwin-21
 
 DEPENDENCIES
+  ancestry
   bootsnap (>= 1.4.4)
   bootstrap (~> 4.3.1)
   byebug
@@ -431,16 +445,19 @@ DEPENDENCIES
   carrierwave (= 2.2.2)
   cloudinary
   config (= 2.0.0)
+  dotenv-rails
   enum_help (= 0.0.17)
   factory_bot_rails
   faker
   faraday
   font-awesome-sass (~> 5.11.2)
+  gon
   jbuilder (~> 2.7)
   jquery-rails
   kaminari (= 1.1.1)
   letter_opener_web (~> 1.0)
   listen (>= 3.0.5, < 3.2)
+  mini_magick
   net-imap
   net-pop
   net-smtp
