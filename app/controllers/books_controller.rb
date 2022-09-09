@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :find_book, only: [:edit, :update, :destroy]
 
   def index
-    @books = Book.all.includes(:user).order(created_at: :desc)
+    @books = Book.all.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   def new

@@ -6,7 +6,8 @@
         <h4 class="card-title">
            <%= link_to book.title, book_path(book) %>
         </h4>
-        <%= render 'crud_menus', book: book if current_user.own?(book)%>
+        <div class='mr10 float-right'>
+          <%= render 'crud_menus', book: book if current_user.own?(book)%>
         </div>
         <ul class="list-inline">
           <li class="list-inline-item">
@@ -17,7 +18,6 @@
           <li class="list-inline-item">
             <%= icon 'far', 'calendar' %>
             <%= l book.created_at, format: :long %> 
-
           </li>
         </ul>
         <p class="card-text"><%= book.body %></p>

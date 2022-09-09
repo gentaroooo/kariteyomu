@@ -73,27 +73,24 @@ gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
 
+gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap', '~> 4.3.1'
+
+gem 'dotenv-rails'
 gem 'font-awesome-sass', '~> 5.11.2'
 gem 'jquery-rails'
 
 gem 'sorcery', '0.16.3'
 gem 'pry-byebug'
-
-
 # gem 'draper', '3.1.0'
-
 gem 'carrierwave', '2.2.2'
+gem 'mini_magick'
 gem 'cloudinary'
-
-gem 'kaminari', '1.1.1'
-
+gem 'kaminari', '1.2.2'
 gem 'ransack', '2.3.0'
-
 gem 'config', '2.0.0'
-
 gem 'enum_help', '0.0.17'
-
 gem 'faraday'
-
 gem 'rails-i18n'
+gem 'ancestry'
+gem 'gon'
