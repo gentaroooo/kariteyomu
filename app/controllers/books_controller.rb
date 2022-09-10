@@ -58,10 +58,23 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :book_image, :book_image_cache)
+    params.require(:book).permit(:title, :body, :book_image, :book_image_cache, :remote_book_image_url, :info_link, :published_date)
   end
 
   def find_book
     @book = current_user.books.find(params[:id])
+  end
+
+  def authors_params
+    params.require(:book).permit(authors: [])
+  end
+
+  def set_volume_info
+    @volume_info = {}
+    @volume_info[:title] = params[:board][:title]
+    @volume_info[:authors] = params[:board][:authors]
+    @volume_info[:bookImage] = params[:board][:remote_board_image_url]
+    @volume_info[:infoLink] = params[:board][:info_link]
+    @volume_info[:publishedDate] = params[:board][:published_date]
   end
 end
