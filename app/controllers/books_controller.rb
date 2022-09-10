@@ -41,6 +41,20 @@ class BooksController < ApplicationController
     redirect_to books_path, success: t('defaults.message.deleted', item: Book.model_name.human)
   end
 
+  def search 
+    if params[:search].nil?
+      return
+    elsif params[:search].blank?
+      flash.now[:danger] = '検索キーワードが入力されていません'
+      return
+    else
+      url = "https://www.googleapis.com/books/v1/volumes"
+      text = params[:search]
+      res = Faraday.get(url, q: text, langRestrict: 'ja', maxResults: 30
+      @google_books = JSON.parse(res.body)
+    end
+  end
+
   private
 
   def book_params
