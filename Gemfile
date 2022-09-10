@@ -51,7 +51,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # gem 'spring'
   # gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'letter_opener_web', '~> 1.0'
+  gem 'letter_opener_web', '2.0'
 end
 
 group :test do
@@ -88,7 +88,7 @@ gem 'mini_magick'
 gem 'cloudinary'
 gem 'kaminari', '1.2.2'
 gem 'ransack', '2.3.0'
-gem 'config', '2.0.0'
+gem 'config', '2.2.1'
 gem 'enum_help', '0.0.17'
 gem 'faraday'
 gem 'rails-i18n'
