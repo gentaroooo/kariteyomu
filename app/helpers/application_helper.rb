@@ -1,5 +1,4 @@
 module ApplicationHelper
-  module ApplicationHelpe
     def google_book_thumbnail(google_book)
       google_book['volumeInfo']['imageLinks'].nil? ? 'sample.jpg' : google_book['volumeInfo']['imageLinks']['thumbnail']
     end
@@ -8,5 +7,11 @@ module ApplicationHelper
       google_book['volumeInfo']['bookImage'] = google_book.dig('volumeInfo', 'imageLinks', 'thumbnail')
       google_book['volumeInfo'].slice('title', 'authors', 'publishedDate', 'infoLink', 'bookImage')
     end
-  end
+
+    def google_book_isbn(google_book)
+      google_book['volumeInfo']&.each do |isbn|
+        isbn
+      end
+    end
+  
 end

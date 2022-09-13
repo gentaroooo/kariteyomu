@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.6', '>= 6.1.6.1'
 # Use sqlite3 as the database for Active Record
@@ -43,7 +42,6 @@ group :development, :test do
   ## ここまで
 end
 
-
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
@@ -73,7 +71,7 @@ gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
 
-gem 'bootsnap', '>= 1.4.4', require: false
+# gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap', '~> 4.3.1'
 
 gem 'dotenv-rails'
@@ -82,8 +80,9 @@ gem 'jquery-rails'
 
 gem 'sorcery', '0.16.3'
 gem 'pry-byebug'
-# gem 'draper', '3.1.0'
-gem 'carrierwave', '2.2.2'
+gem 'draper', '4.0.0'
+# gem 'carrierwave', '2.2.2'
+gem 'carrierwave', '~> 2.0.2'
 gem 'mini_magick'
 gem 'cloudinary'
 gem 'kaminari', '1.2.2'

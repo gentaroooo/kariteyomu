@@ -5,7 +5,7 @@ class CreateBookAuthors < ActiveRecord::Migration[6.1]
       t.references :author, null: false, foreign_key: true
 
       t.timestamps
-    add_index :book_authors, [:book_id, :author_id], unique: true
     end
+    add_index :book_authors, [:book_id, :author_id], unique: true
   end
 end

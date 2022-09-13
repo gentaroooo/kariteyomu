@@ -1,8 +1,41 @@
- <div class="container">
-   <div class="row">
-     <div class="col-lg-8 offset-lg-2">
-       <h1><%= t('.title') %></h1>
-       <%= render 'form', { book: @book } %>
-     </div>
-   </div>
- </div>
+<% content_for(:title, t('.title')) %>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+      <h1 class="mb-3"><%= t('.title') %></h1>
+      <div class="card mb-4 p-3">
+        <div class="row g-0">
+          <div class="col-5">
+            <%= image_tag @volume_info[:bookImage].blank? ? 'sample.jpeg' : @volume_info[:bookImage], class: 'img-fluid border' %>
+          </div>
+          <div class="col-7">
+            <div class="card-body">
+              <h5 class="card-title"><%= @volume_info[:title] %></h5>
+              <p class="card-text mb-2"><%= @volume_info[:authors]&.join(', ') %></p>
+              <p class="card-text"><small class="text-muted"><%= @volume_info[:publishedDate] %></small></p>
+              <%= link_to '詳細を見る', @volume_info[:infoLink], target: '_blank' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 投稿フォーム -->
+      <%= form_with model: @book, local: true do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="mb-4">
+          <%= f.label :body %>
+          <%= f.text_area :body, class: 'form-control', rows: 10 %>
+        </div>
+
+        <%= f.hidden_field :title, value: @volume_info[:title] %>
+        <%= f.hidden_field :published_date, value: @volume_info[:publishedDate] %>
+        <%= f.hidden_field :info_link, value: @volume_info[:infoLink] %>
+        <%= f.hidden_field :image_link, value: @volume_info[:bookImage] %>
+
+        <% @volume_info[:authors]&.each do |author| %>
+          <%= hidden_field_tag 'book[authors][]', author %>
+        <% end %>
+
+        <%= f.submit class: 'btn btn-primary' %>
+      <% end %>
+  </div>
+</div>
