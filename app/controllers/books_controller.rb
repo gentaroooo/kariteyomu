@@ -12,7 +12,8 @@ class BooksController < ApplicationController
 
   def create
     @book = current_user.books.build(book_params)
-    if @book.save_with_author(authors_params[:authors])
+    if @book.save
+      @book.save_with_author(authors_params[:authors])
       redirect_to books_path, success: t('defaults.message.created', item: t('defaults.review'))
     else
       set_volume_info
@@ -60,7 +61,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :image_link, :info_link, :published_date)
+    params.require(:book).permit(:title, :body, :image_link, :info_link, :published_date, :systemid)
   end
 
   def set_book
@@ -71,6 +72,10 @@ class BooksController < ApplicationController
     params.require(:book).permit(authors: [])
   end
 
+  def systemid_params
+    params.require(:book).permit(:systemid)
+  end
+
   def set_volume_info
     @volume_info = {}
     @volume_info[:title] = params[:book][:title]
@@ -78,5 +83,6 @@ class BooksController < ApplicationController
     @volume_info[:bookImage] = params[:book][:image_link]
     @volume_info[:infoLink] = params[:book][:info_link]
     @volume_info[:publishedDate] = params[:book][:published_date]
+    @volume_info[:systemid] = params[:book][:systemid]
   end
 end

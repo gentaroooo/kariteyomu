@@ -5,13 +5,10 @@ module ApplicationHelper
   
     def set_google_book_params(google_book)
       google_book['volumeInfo']['bookImage'] = google_book.dig('volumeInfo', 'imageLinks', 'thumbnail')
-      google_book['volumeInfo'].slice('title', 'authors', 'publishedDate', 'infoLink', 'bookImage')
-    end
 
-    def google_book_isbn(google_book)
-      google_book['volumeInfo']&.each do |isbn|
-        isbn
+      if google_book['volumeInfo']['industryIdentifiers']&.select{|h| h["type"].include?("ISBN") }.present?
+        google_book['volumeInfo']['systemid'] = google_book['volumeInfo']['industryIdentifiers'].select{|h| h["type"].include?("ISBN") }.first["identifier"]
       end
+      google_book['volumeInfo'].slice('title', 'authors', 'publishedDate', 'infoLink', 'bookImage', 'systemid')
     end
-  
 end

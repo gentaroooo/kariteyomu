@@ -31,10 +31,6 @@
                   <h5 class="card-title"><%= google_book['volumeInfo']['title'].truncate(30) %></h5>
                   <p class="card-text mb-2"><%= google_book['volumeInfo']['authors']&.join(', ')&.truncate(20) %></p>
                   <p class="card-text"><small class="text-muted"><%= google_book['volumeInfo']['publishedDate'] %></small></p>
-                  
-                  <p class="card-text"><small class="text-muted"><%= google_book['volumeInfo']['industryIdentifiers']&.each do |isbn| %></small></p>
-                    <%= isbn['identifier'] %>
-                  <% end %>
                 </div>
               </div>
             </div>
