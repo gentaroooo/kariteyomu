@@ -1,27 +1,27 @@
-<div class="col-sm-12 col-lg-4 mb-3">
-  <div id="book-id-<%= book.id %>">
-    <div class="card">
-      <%= image_tag book.book_image_url, class: 'card-img-top', size: '300x200' %> 
+<div class="card mb-3", style="height: 350px; min-width: 300px;">
+  <div class="row g-0", style="height: 220px">
+    <div class="col-5">
+     <% if book.image_link.present? %>
+      <%= image_tag book.image_link, class: 'img-fluid ms-2 mt-2 border book-img' %>
+    <% end %>
+    
+    </div>
+    <div class="col-7">
       <div class="card-body">
-        <h4 class="card-title">
-           <%= link_to book.title, book_path(book) %>
-        </h4>
-        <div class='mr10 float-right'>
-          <%= render 'crud_menus', book: book if current_user.own?(book)%>
-        </div>
-        <ul class="list-inline">
-          <li class="list-inline-item">
-            <%= icon 'far', 'user' %>
-            <%= book.user.name %> 
-
-          </li>
-          <li class="list-inline-item">
-            <%= icon 'far', 'calendar' %>
-            <%= l book.created_at, format: :long %> 
-          </li>
-        </ul>
-        <p class="card-text"><%= book.body %></p>
+        <h5 class="card-title"><%= book.title.truncate(30) %></h5>
+        <p class="card-text mb-2"><%= book.authors.pluck(:name).join(', ')&.truncate(20) %></p>
+        <p class="card-text"><small class="text-muted"><%= book.published_date %></small></p>
       </div>
     </div>
   </div>
+  <div class="d-flex border-top pt-2">
+    <div>
+      <%= image_tag book.user.avatar.url, class: 'rounded-circle mt-1 ms-2 me-3', size: '40x40' %>
+    </div>
+    <div>
+      <p class="fs-7 mb-1"><%= book.user.name %></p>
+    </div>
+  </div>
+  <p class="card-text mx-3"><%= book.body.truncate(30) %></p>
+  <%= link_to '', book_path(book), class: 'card-link' %>
 </div>

@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   
   resources :users, only: %i[new create]
   resources :books do
-    resources :comments, only: %i[create update destroy], shallow: true
+    resources :comments, only: %i[create destroy], shallow: true
+    collection { get :search }
   end
   resources :password_resets, only: %i[new create edit update]
 end

@@ -5,6 +5,9 @@ ja:
     logout: 'ログアウト'
     post: '投稿'
     edit: '編集'
+    search_word: '検索ワード'
+    search: '検索'
+    show: '詳細'
     message:
       updated: "%{item}を更新しました"
       not_updated: "%{item}を更新できませんでした"

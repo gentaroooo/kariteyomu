@@ -10,12 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_10_010327) do
+ActiveRecord::Schema.define(version: 2022_09_10_204529) do
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "book_authors", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "author_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_book_authors_on_author_id"
+    t.index ["book_id", "author_id"], name: "index_book_authors_on_book_id_and_author_id", unique: true
+    t.index ["book_id"], name: "index_book_authors_on_book_id"
+  end
 
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.text "body"
-    t.integer "systemid"
+    t.text "info_link"
+    t.string "published_date"
+    t.string "image_link"
+    t.string "systemid"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -49,6 +68,8 @@ ActiveRecord::Schema.define(version: 2022_09_10_010327) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end
 
+  add_foreign_key "book_authors", "authors"
+  add_foreign_key "book_authors", "books"
   add_foreign_key "books", "users"
   add_foreign_key "comments", "books"
   add_foreign_key "comments", "users"
