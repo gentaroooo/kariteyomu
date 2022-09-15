@@ -31,12 +31,17 @@
                   <h5 class="card-title"><%= google_book['volumeInfo']['title'].truncate(30) %></h5>
                   <p class="card-text mb-2"><%= google_book['volumeInfo']['authors']&.join(', ')&.truncate(20) %></p>
                   <p class="card-text"><small class="text-muted"><%= google_book['volumeInfo']['publishedDate'] %></small></p>
-
-                   <!-- 確認用 -->
+                  <%=  @google_book_isbn %>
+                  
+                   <%
+=begin%>
+ <!-- 確認用 -->
                   <% google_book_isbn(google_book) %>
                   <%= google_book['volumeInfo']['systemid1'] %>
-                  <%= google_book['volumeInfo']['systemid2'] %>
-                  
+                  <%= google_book['volumeInfo']['systemid2'] %> 
+<%
+=end%>
+            
                 </div>
               </div>
             </div>
