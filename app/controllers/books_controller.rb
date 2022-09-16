@@ -102,6 +102,5 @@ class BooksController < ApplicationController
     @volume_info[:infoLink] = params[:book][:info_link]
     @volume_info[:publishedDate] = params[:book][:published_date]
     @volume_info[:systemid] = params[:book][:systemid]
-    binding.pry
   end
 end
