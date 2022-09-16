@@ -21,15 +21,11 @@
       <!-- 投稿フォーム -->
       <%= form_with model: @book, local: true do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
-        <div class="mb-4">
-          <%= f.label :body %>
-          <%= f.text_area :body, class: 'form-control', rows: 10 %>
-        </div>
-
+        
         <%= f.hidden_field :title, value: @volume_info[:title] %>
         <%= f.hidden_field :published_date, value: @volume_info[:publishedDate] %>
         <%= f.hidden_field :info_link, value: @volume_info[:infoLink] %>
-        <%= f.hidden_field :remote_board_image_url, value: @volume_info[:bookImage] %>
+        <%= f.hidden_field :image_link, value: @volume_info[:bookImage] %>
         <% @volume_info[:authors]&.each do |author| %>
           <%= hidden_field_tag 'book[authors][]', author %>
         <% end %>

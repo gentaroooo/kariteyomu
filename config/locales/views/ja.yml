@@ -43,6 +43,9 @@ ja:
     edit:
       title: '掲示板編集'
       password_reset: 'パスワードリセット'
+    create:
+      success: '読みたいに登録しました'
+      fail: '読みたいの登録に失敗しました'
   profiles:
     show:
       title: 'プロフィール'

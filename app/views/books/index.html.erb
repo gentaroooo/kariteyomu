@@ -1,4 +1,4 @@
-<div class="container pt-3">
+<div class="container-fluid">
    <div class="row">
      <div class="col-lg-10 offset-lg-1">
        <!-- 検索フォーム -->
@@ -15,7 +15,7 @@
  
    <!-- 掲示板一覧 -->
    <div class="row">
-     <div class="col-12">
+     <div class="col-sm-12">
        <div class="row">
          <% if @books.present? %>
            <%= render @books %>
@@ -24,10 +24,6 @@
          <% end %>
        </div>
      </div>
-    <%
-=begin%>
- <%= paginate @books %> 
-<%
-=end%>
+     <%= paginate @books %> 
    </div>
  </div>
