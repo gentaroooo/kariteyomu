@@ -14,10 +14,10 @@ class BooksController < ApplicationController
     @book = current_user.books.build(book_params)
     if @book.save
       @book.save_with_author(authors_params[:authors])
-      redirect_to books_path, success: t('defaults.message.created', item: t('defaults.review'))
+      redirect_to books_path, success: t('.success')
     else
       set_volume_info
-      flash.now[:danger] = t('defaults.message.not_created', item: t('defaults.review'))
+      flash.now[:danger] = t('.fail')
       render 'new'
     end
   end
