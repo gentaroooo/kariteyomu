@@ -4,7 +4,7 @@
       <!-- 検索フォーム -->
       <%= form_with url: search_books_path, local: true, method: :get do |f| %>
         <div class="mb-3">
-          <p class="fw-bolder">レビューする絵本を検索してください</p>
+          <p class="fw-bolder">絵本を検索してください</p>
           <%= f.search_field :search, class: "form-control", placeholder: '検索', value: params[:search] %>
           <p class=""><small class="text-secondary">書名・著者等で検索することができます。</small></p>
         </div>
@@ -19,11 +19,12 @@
     </div>
     <div class="row">
       <% @google_books['items']&.each do |google_book| %>
+      
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="card mb-3", style="height: 370px; min-width: 300px;">
             <div class="row g-0">
               <div class="col-5">
-                <%= link_to 'レビューする', new_book_path(volumeInfo: set_google_book_params(google_book)) %>
+                <%= link_to '読みたい', new_book_path(volumeInfo: set_google_book_params(google_book)) %>
                 <%= image_tag google_book_thumbnail(google_book), class: 'img-fluid ms-2 mt-2 border book-img' %>
               </div>
               <div class="col-7">
@@ -31,18 +32,25 @@
                   <h5 class="card-title"><%= google_book['volumeInfo']['title'].truncate(30) %></h5>
                   <p class="card-text mb-2"><%= google_book['volumeInfo']['authors']&.join(', ')&.truncate(20) %></p>
                   <p class="card-text"><small class="text-muted"><%= google_book['volumeInfo']['publishedDate'] %></small></p>
-                  <%
-=begin%>
- <%=  @google_book_isbn %> 
-<%
-=end%>
                   
                   <!-- 確認用 -->
                   <% google_book_isbn(google_book) %>
-                  <%= google_book['volumeInfo']['systemid1'] %>
+                  <%
+=begin%>
+ <%= google_book['volumeInfo']['systemid1'] %>
                   <%= google_book['volumeInfo']['systemid2'] %> 
-  
-            
+<%
+=end%>
+
+                  <!-- 投稿フォーム -->
+                  <%= form_with model: @book, local: true do |f| %>
+                    <%= f.hidden_field :title, value: set_google_book_params(google_book)["title"] %>
+                    <%= f.hidden_field :published_date, value: set_google_book_params(google_book)["publishedDate"] %>
+                    <%= f.hidden_field :info_link, value: set_google_book_params(google_book)["infoLink"] %>
+                    <%= f.hidden_field :image_link, value: set_google_book_params(google_book)["bookImage"] %>
+                    <%= f.hidden_field :systemid, value: set_google_book_params(google_book)["systemid"] %>
+                    <%= f.submit class: 'btn btn-primary' %>
+                  <% end %>
                 </div>
               </div>
             </div>

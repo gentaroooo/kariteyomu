@@ -8,24 +8,12 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <%= link_to 'ログアウト', logout_path, class: 'dropdown-item', method: :delete %>
-    <%= link_to '新規投稿', search_books_path, class: 'dropdown-item' %>
+    <%= link_to '探す', search_books_path, class: 'dropdown-item' %>
+    <%= link_to ('読みたい絵本一覧'), books_path, class: 'dropdown-item' %>
+    <%= link_to ('投稿する'), new_book_path, class: 'dropdown-item' %>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto main-nav align-items-center">
-        <li class="nav-item dropdown dropdown-slide">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            掲示板
-          </a>
-
-          <div class="dropdown-menu dropdown-menu-right">
-            <%= link_to t('books.index.title'), books_path, class: 'dropdown-item' %>
-            <%= link_to t('books.new.title'), new_book_path, class: 'dropdown-item' %>
-          </div>
-        </li>
-
-        <li class="nav-item">
-          <%= link_to 'ブックマーク一覧', '#', class: 'nav-link' %>
-        </li>
 
         <li class="nav-item dropdown dropdown-slide">
           <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="header-profile">

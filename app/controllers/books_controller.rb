@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: %i[edit update destroy]
 
   def index
-    @books = Book.all.includes(:authors, :user).order(created_at: :desc)
+    @books = Book.all.includes(:authors, :user).order(created_at: :desc).page(params[:page])
   end
 
   def new
@@ -14,10 +14,10 @@ class BooksController < ApplicationController
     @book = current_user.books.build(book_params)
     if @book.save
       @book.save_with_author(authors_params[:authors])
-      redirect_to books_path, success: t('defaults.message.created', item: t('defaults.review'))
+      redirect_to books_path, success: t('.success')
     else
       set_volume_info
-      flash.now[:danger] = t('defaults.message.not_created', item: t('defaults.review'))
+      flash.now[:danger] = t('.fail')
       render 'new'
     end
   end
@@ -45,6 +45,9 @@ class BooksController < ApplicationController
   end
 
   def search 
+    @book = Book.new
+    @volume_info = params[:volumeInfo]
+    
     if params[:search].nil?
       return
     elsif params[:search].blank?
@@ -56,27 +59,27 @@ class BooksController < ApplicationController
       res = Faraday.get(url, q: text, langRestrict: 'ja', maxResults: 30)
       @google_books = JSON.parse(res.body)
 
-      if @google_books.present?
-        @google_books['items']&.each do |google_book|
-          if google_book['volumeInfo']['industryIdentifiers']&.select{|h| h["type"].include?("ISBN") }.present?
-            @google_book_isbn = google_book['volumeInfo']['industryIdentifiers'].select{|h| h["type"].include?("ISBN") }.first["identifier"].to_i
-          end
-        end
-      end
+      # if @google_books.present?
+      #   @google_books['items']&.each do |google_book|
+      #     if google_book['volumeInfo']['industryIdentifiers']&.select{|h| h["type"].include?("ISBN") }.present?
+      #       @google_book_isbn = google_book['volumeInfo']['industryIdentifiers'].select{|h| h["type"].include?("ISBN") }.first["identifier"].to_i
+      #     end
+      #   end
+      # end
       
-      appkey = "入力"
+      # appkey = "入力"
 
-      uri = URI.parse("https://api.calil.jp/check")
+      # uri = URI.parse("https://api.calil.jp/check")
 
-      q = {appkey: appkey,
-          isbn: @google_book_isbn,
-          systemid: "Tokyo_Setagaya",
-          callback: :no}
+      # q = {appkey: appkey,
+      #     isbn: @google_book_isbn,
+      #     systemid: "Tokyo_Setagaya",
+      #     callback: :no}
 
-      uri.query = URI.encode_www_form(q)
-      response = Net::HTTP.get_response(uri)
+      # uri.query = URI.encode_www_form(q)
+      # response = Net::HTTP.get_response(uri)
 
-      @hash = JSON.parse(response.body)["books"]["#{@google_book_isbn}"]["Tokyo_Setagaya"]["libkey"]
+      # @hash = JSON.parse(response.body)["books"]["#{@google_book_isbn}"]["Tokyo_Setagaya"]["libkey"]
     end
   end
 
