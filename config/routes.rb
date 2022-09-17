@@ -10,10 +10,14 @@ Rails.application.routes.draw do
   resource :profile, only: %i[show edit update]
   
   resources :users, only: %i[new create]
+  
   resources :books do
-    resources :comments, only: %i[create destroy], shallow: true
     collection { get :search }
   end
+ 
+  resources :posts do
+    resources :comments, only: %i[create destroy], shallow: true
+  end
+
   resources :password_resets, only: %i[new create edit update]
-  resources :posts, only: %i[index new create]
 end
