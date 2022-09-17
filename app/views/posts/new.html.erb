@@ -34,6 +34,7 @@
         <% @volume_info[:authors]&.each do |author| %>
           <%= hidden_field_tag 'book[authors][]', author %>
         <% end %>
+        
         <%= f.submit class: 'btn btn-primary' %>
       <% end %>
   </div>

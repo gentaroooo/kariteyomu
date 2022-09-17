@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
 
   def index
-    @posts = Post.all.includes(:user).order(created_at: :desc).page(params[:page])
+    @posts = Post.all.includes(:authors, :user).order(created_at: :desc).page(params[:page])
   end
 
   def new
@@ -12,8 +12,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    if @post.save
-      # @post.save_with_author(authors_params[:authors])
+    if @post.save_with_author(authors_params[:authors])
       redirect_to posts_path, success: t('.success')
     else
       set_volume_info
@@ -94,7 +93,7 @@ class PostsController < ApplicationController
   end
 
   def authors_params
-    params.require(:post).permit(authors: [])
+    params.require(:book).permit(authors: [])
   end
 
   def set_volume_info

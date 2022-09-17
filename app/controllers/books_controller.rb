@@ -12,8 +12,7 @@ class BooksController < ApplicationController
 
   def create
     @book = current_user.books.build(book_params)
-    if @book.save
-      @book.save_with_author(authors_params[:authors])
+    if @book.save_with_author(authors_params[:authors])
       redirect_to books_path, success: t('.success')
     else
       set_volume_info
