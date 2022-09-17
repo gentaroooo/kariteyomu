@@ -45,10 +45,10 @@ ActiveRecord::Schema.define(version: 2022_09_17_083347) do
   create_table "comments", force: :cascade do |t|
     t.text "body", null: false
     t.integer "user_id", null: false
-    t.integer "book_id", null: false
+    t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_comments_on_book_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 2022_09_17_083347) do
   add_foreign_key "book_authors", "authors"
   add_foreign_key "book_authors", "books"
   add_foreign_key "books", "users"
-  add_foreign_key "comments", "books"
+  add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "post_authors", "authors"
   add_foreign_key "post_authors", "posts"
