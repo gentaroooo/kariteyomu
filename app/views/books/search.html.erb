@@ -24,8 +24,11 @@
           <div class="card mb-3", style="height: 370px; min-width: 300px;">
             <div class="row g-0">
               <div class="col-5">
-                <%= link_to '読みたい', new_book_path(volumeInfo: set_google_book_params(google_book)) %>
+
+                <%= link_to '投稿する', new_post_path(volumeInfo: set_google_book_params(google_book)) %>
                 <%= image_tag google_book_thumbnail(google_book), class: 'img-fluid ms-2 mt-2 border book-img' %>
+
+
               </div>
               <div class="col-7">
                 <div class="card-body">
@@ -49,7 +52,7 @@
                     <%= f.hidden_field :info_link, value: set_google_book_params(google_book)["infoLink"] %>
                     <%= f.hidden_field :image_link, value: set_google_book_params(google_book)["bookImage"] %>
                     <%= f.hidden_field :systemid, value: set_google_book_params(google_book)["systemid"] %>
-                    <%= f.submit class: 'btn btn-primary' %>
+                    <%= f.submit "読んでみたい" %>
                   <% end %>
                 </div>
               </div>
