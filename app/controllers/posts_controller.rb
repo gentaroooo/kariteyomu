@@ -1,19 +1,19 @@
-class BooksController < ApplicationController
-  before_action :set_book, only: %i[edit update destroy]
+class PostsController < ApplicationController
+  before_action :set_post, only: %i[edit update destroy]
 
   def index
-    @books = Book.all.includes(:authors, :user).order(created_at: :desc).page(params[:page])
+    @posts = Post.all.includes(:authors, :user).order(created_at: :desc).page(params[:page])
   end
 
   def new
-    @book = Book.new
+    @post = Post.new
     @volume_info = params[:volumeInfo]
   end
 
   def create
-    @book = current_user.books.build(book_params)
-    if @book.save_with_author(authors_params[:authors])
-      redirect_to books_path, success: t('.success')
+    @post = current_user.posts.build(post_params)
+    if @post.save_with_author(authors_params[:authors])
+      redirect_to posts_path, success: t('.success')
     else
       set_volume_info
       flash.now[:danger] = t('.fail')
@@ -22,29 +22,29 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
+    @post = Post.find(params[:id])
     @comment = Comment.new
-    @comments = @book.comments.includes(:user).order(created_at: :desc)
+    @comments = @post.comments.includes(:user).order(created_at: :desc)
   end
 
   def edit; end
 
   def update
-    if @book.update(book_params)
-      redirect_to @book, success: t('defaults.message.updated', item: Book.model_name.human)
+    if @post.update(post_params)
+      redirect_to @post, success: t('defaults.message.updated', item: Post.model_name.human)
     else
-      flash.now['danger'] = t('defaults.message.not_updated', item: Book.model_name.human)
+      flash.now['danger'] = t('defaults.message.not_updated', item: Post.model_name.human)
       render :edit
     end
   end
 
   def destroy
-    @book.destroy!
-    redirect_to books_path, success: t('defaults.message.deleted', item: Book.model_name.human)
+    @post.destroy!
+    redirect_to posts_path, success: t('defaults.message.deleted', item: Post.model_name.human)
   end
 
   def search 
-    @book = Book.new
+    @post = Post.new
     @volume_info = params[:volumeInfo]
     
     if params[:search].nil?
@@ -84,12 +84,12 @@ class BooksController < ApplicationController
 
   private
 
-  def book_params
-    params.require(:book).permit(:title, :body, :image_link, :info_link, :published_date, :systemid)
+  def post_params
+    params.require(:post).permit(:title, :body, :image_link, :info_link, :published_date, :systemid)
   end
 
-  def set_book
-    @book = current_user.books.find(params[:id])
+  def set_post
+    @post = current_user.posts.find(params[:id])
   end
 
   def authors_params

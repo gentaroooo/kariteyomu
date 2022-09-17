@@ -7,10 +7,18 @@
   )
 end
 
-100.times do |index|
+20.times do |index|
   Book.create(
       user: User.offset(rand(User.count)).first,
       title: "タイトル#{index}",
       body: "本文#{index}"
+  )
+end
+
+20.times do |index|
+Post.create(
+    user: User.offset(rand(User.count)).first,
+    title: "タイトル#{index}",
+    body: "本文#{index}"
   )
 end

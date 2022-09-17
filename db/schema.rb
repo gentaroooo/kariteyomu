@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_10_204529) do
+ActiveRecord::Schema.define(version: 2022_09_17_083347) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name", null: false
@@ -52,6 +52,29 @@ ActiveRecord::Schema.define(version: 2022_09_10_204529) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "post_authors", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "author_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_post_authors_on_author_id"
+    t.index ["post_id", "author_id"], name: "index_post_authors_on_post_id_and_author_id", unique: true
+    t.index ["post_id"], name: "index_post_authors_on_post_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body", null: false
+    t.text "info_link"
+    t.string "published_date"
+    t.string "image_link"
+    t.string "systemid"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -73,4 +96,7 @@ ActiveRecord::Schema.define(version: 2022_09_10_204529) do
   add_foreign_key "books", "users"
   add_foreign_key "comments", "books"
   add_foreign_key "comments", "users"
+  add_foreign_key "post_authors", "authors"
+  add_foreign_key "post_authors", "posts"
+  add_foreign_key "posts", "users"
 end

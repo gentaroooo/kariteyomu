@@ -15,4 +15,5 @@ Rails.application.routes.draw do
     collection { get :search }
   end
   resources :password_resets, only: %i[new create edit update]
+  resources :posts, only: %i[index new create]
 end
