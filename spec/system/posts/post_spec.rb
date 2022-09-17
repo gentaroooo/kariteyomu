@@ -123,6 +123,6 @@ RSpec.describe '投稿', type: :system do
   #         expect(page).to have_selector("#button-delete-#{post.id}")
   #       end
   #     end
-    end
-  end
+    # end
+  # end
 end

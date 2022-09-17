@@ -62,3 +62,19 @@ ja:
     update:
       success: 'パスワードを変更しました'
       fail: 'パスワードの変更に失敗しました'
+  posts:
+    index:
+      title: '投稿一覧'
+      no_result: '投稿がありません。'
+    new:
+      title: '投稿作成'
+    bookmarks:
+      title: 'ブックマーク一覧'
+    show:
+      title: '投稿詳細'
+    edit:
+      title: '投稿編集'
+      password_reset: 'パスワードリセット'
+    create:
+      success: '投稿に成功'
+      fail: '投稿に失敗しました'
