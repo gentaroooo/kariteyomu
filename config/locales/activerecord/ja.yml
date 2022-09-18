@@ -17,3 +17,5 @@ ja:
         book_image: 'サムネイル'
       comment:
         body: 'コメント'
+      post:
+        body: '本文'
