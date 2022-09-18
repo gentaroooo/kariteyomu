@@ -1,0 +1,43 @@
+<div class="container pt-5">
+  <div class="row mb-3">
+    <div class="col-lg-8 offset-lg-2">
+      <h1><%= t('.title') %></h1>
+      <!-- 掲示板内容 -->
+      <div class="card mb-4 p-3">
+        <div class="row g-0">
+          <div class="col-5">
+            <%= image_tag @post.image_link.blank? ? 'sample.jpeg' : @post.image_link, class: 'img-fluid border' %>
+          </div>
+          <div class="col-7">
+            <div class="card-body">
+  
+              <h5 class="card-title"><%= @post.title %></h5>
+              <p class="card-text mb-2"><%= @post.authors.pluck(:name).join(', ')&.truncate(50) %></p>
+              <p class="card-text"><small class="text-muted"><%= @post.published_date %></small></p>
+              <%= link_to '詳細を見る', @post.info_link, target: '_blank' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <article class="card">
+        <div class="card-body">
+          <div class='row'>
+            <div class='col-md-9'>
+              <%= render 'crud_menus', post: @post if current_user.own?(@post) %> 
+                <p class="card-text mb-2">投稿者：<%= @post.user.name %></p>
+                <p class="card-text mb-2">投稿日：<%= l @post.created_at, format: :long  %></p>
+                <p class="card-text mb-2"><%= simple_format(@post.body) %></p>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- コメントフォーム -->
+  <%= render 'comments/form', { post: @post, comment: @comment } %> 
+  <!-- コメントエリア -->
+  <%= render 'comments/comments', { comments: @comments } %> 
+</div>

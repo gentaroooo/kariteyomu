@@ -2,9 +2,7 @@
   <div class="card mb-3", style="height: 350px; width: 22rem;">
     <div class="row g-0", style="height: 220px">
       <div class="col-5">
-      <% if book.image_link.present? %>
-        <%= image_tag book.image_link, class: 'img-fluid ms-2 mt-2 border book-img' %>
-      <% end %>
+        <%= image_tag book.image_link.blank? ? 'sample.jpeg' : book.image_link, class: 'img-fluid ms-2 mt-2 border post-img' %>
       </div>
       <div class="col-7">
         <div class="card-body">
@@ -22,6 +20,6 @@
         <p class="fs-7 mb-1"><%= book.user.name %></p>
       </div>
     </div>
-    <%= link_to '', books_path(book), class: 'card-link' %>
+    <%= link_to '', book_path(book), class: 'card-link' %>
   </div>
 </div>

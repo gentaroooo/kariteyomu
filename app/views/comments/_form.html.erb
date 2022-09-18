@@ -1,4 +1,4 @@
-<%= form_with model: [book, comment], id: 'new-comment', local: false do |f|  %>
+<%= form_with model: [post, comment], id: 'new-comment', local: false do |f|  %>
   <%= f.label :body, 'コメントを残す', class: 'form-label fw-bolder' %>
   <%= f.text_area :body, placeholder: 'コメントを追加…', class: 'form-control mb-3', id: 'new-comment-body' %>
   <%= f.submit t('defaults.post'), class: 'btn btn-primary' %>
