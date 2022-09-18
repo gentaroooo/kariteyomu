@@ -21,7 +21,6 @@
       <!-- 投稿フォーム -->
       <%= form_with model: @book, local: true do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
-        
         <%= f.hidden_field :title, value: @volume_info[:title] %>
         <%= f.hidden_field :published_date, value: @volume_info[:publishedDate] %>
         <%= f.hidden_field :info_link, value: @volume_info[:infoLink] %>

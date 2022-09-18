@@ -21,13 +21,13 @@
    <div class="row">
      <div class="col-sm-12">
        <div class="row">
-         <% if @books.present? %>
-           <%= render @books %>
+         <% if @book.present? %>
+           <%= render @book %>
          <% else %>
            <p><%= t('.no_result') %></p>
          <% end %>
        </div>
      </div>
-     <%= paginate @books %> 
+     <%= paginate @book %> 
    </div>
  </div>
