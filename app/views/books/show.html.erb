@@ -3,29 +3,36 @@
     <div class="col-lg-8 offset-lg-2">
       <h1><%= t('.title') %></h1>
       <!-- 掲示板内容 -->
+      <div class="card mb-4 p-3">
+        <div class="row g-0">
+          <div class="col-5">
+            <%= image_tag @book.image_link.blank? ? 'sample.jpeg' : @book.image_link, class: 'img-fluid border' %>
+          </div>
+          <div class="col-7">
+            <div class="card-body">
+  
+              <h5 class="card-title"><%= @book.title %></h5>
+              <p class="card-text mb-2"><%= @book.authors.pluck(:name).join(', ')&.truncate(50) %></p>
+              <p class="card-text"><small class="text-muted"><%= @book.published_date %></small></p>
+              <%= link_to '詳細を見る', @book.info_link, target: '_blank' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <article class="card">
         <div class="card-body">
           <div class='row'>
-            <div class='col-md-3'>
-              <%= image_tag @book.book_image.url, class: 'card-img-top img-fluid', size: '300x200' %>
-            </div>
             <div class='col-md-9'>
-              <h3 class="d-inline"><%= @book.title %></h3>
               <%= render 'crud_menus', book: @book if current_user.own?(@book) %> 
-              <ul class="list-inline">
-                <li class="list-inline-item">by <%= @book.user.name %></li>
-                <li class="list-inline-item"><%= l @book.created_at, format: :long  %></li>
+                <p class="card-text mb-2">投稿者：<%= @book.user.name %></p>
+                <p class="card-text mb-2">投稿日：<%= l @book.created_at, format: :long  %></p>
+                <p class="card-text mb-2"><%= simple_format(@book.body) %></p>
               </ul>
             </div>
           </div>
-          <%= simple_format(@book.body) %>
         </div>
       </article>
     </div>
   </div>
-
-  <!-- コメントフォーム -->
-  <%= render 'comments/form', { book: @book, comment: @comment } %> 
-  <!-- コメントエリア -->
-  <%= render 'comments/comments', { comments: @comments } %> 
 </div>
