@@ -1,128 +1,113 @@
-require 'rails_helper'
+# require 'rails_helper'
 
-RSpec.describe '掲示板', type: :system do
-  let(:user) { create(:user) }
-  let(:book) { create(:book, user: user) }
-  let(:book_by_others) { create(:book) }
+# RSpec.describe 'Books', type: :system do
+#   describe '本のCRUD' do
+#     let(:me) { create(:user) }
+#     let(:book) { create(:book) }
+#     let(:book_by_me) { create(:book, user: me) }
+#     let(:author) { create(:author) }
+#     before { login_as(me) }
 
-  describe '掲示板のCRUD' do
-    describe '掲示板の一覧' do
-      context 'ログインしていない場合' do
-        it 'ログインページにリダイレクトされること' do
-          visit books_path
-          expect(current_path).to eq(login_path), 'ログインページにリダイレクトされていません'
-          expect(page).to have_content('ログインしてください'), 'フラッシュメッセージ「ログインしてください」が表示されていません'
-        end
-      end
+#     context '正常系' do
+#       it '検索した本を新規追加できる' do
+#         visit search_books_path
+#         fill_in 'search', with: 'apple'
+#         click_button '検索'
+#         first('.card-link').click
+#         expect(current_path).to eq new_book_path
+#         fill_in 'レビュー', with: 'レビュー内容'
+#         select 'プログラミング', from: 'parent_category'
+#         select 'Ruby', from: 'child_category'
+#         expect{ click_button '登録する' }.to change{ Book.count }.by(1)
+#         expect(current_path).to eq books_path
+#         expect(page).to have_content 'レビューを作成しました'
+#       end
 
-      context 'ログインしている場合' do
-        it 'ヘッダーのリンクから掲示板一覧へ遷移できること' do
-          login_as(user)
-          click_on('掲示板')
-          click_on('掲示板一覧')
-          expect(current_path).to eq(books_path), 'ヘッダーのリンクから掲示板一覧画面へ遷移できません'
-        end
+#       it '本の一覧が表示される' do
+#         book_1 = create(:book)
+#         book_2 = create(:book)
+#         visit books_path
+#         expect(page).to have_content book_1.title
+#         expect(page).to have_content book_2.title
+#       end
 
-        context '掲示板が一件もない場合' do
-          it '何もない旨のメッセージが表示されること' do
-            login_as(user)
-            visit books_path
-            expect(page).to have_content('掲示板がありません'), '掲示板が一件もない場合、「掲示板がありません」というメッセージが表示されていません'
-          end
-        end
+#       it '本の詳細が表示される' do
+#         create(:book_author, author: author, book: book)
+#         visit book_path(book)
+#         expect(page).to have_content book.title
+#         expect(page).to have_content book.body
+#         expect(page).to have_content book.category.name
+#         expect(page).to have_content book.user.name
+#         expect(page).to have_content book.published_date
+#         expect(page).to have_content author.name
+#         expect(page).to have_link '詳細を見る', href: book.info_link
+#       end
 
-        context '掲示板がある場合' do
-          it '掲示板の一覧が表示されること' do
-            book
-            login_as(user)
-            visit books_path
-            expect(page).to have_content(book.title), '掲示板一覧画面に掲示板のタイトルが表示されていません'
-            expect(page).to have_content(book.body), '掲示板一覧画面に掲示板の本文が表示されていません'
-          end
-        end
-      end
-    end
-  end
+#       it '本の編集ができる' do
+#         visit edit_book_path(book_by_me)
+#         fill_in 'レビュー', with: 'レビュー編集'
+#         click_button '更新する'
+#         expect(current_path).to eq book_path(book_by_me)
+#         expect(page).to have_content 'レビューを更新しました'
+#         expect(page).to have_content 'レビュー編集'
+#       end
 
-  describe '掲示板の作成' do
-    context 'ログインしていない場合' do
-      it 'ログインページにリダイレクトされること' do
-        visit new_book_path
-        expect(current_path).to eq(login_path)
-        expect(page).to have_content('ログインしてください')
-      end
-    end
+#       it '本の削除ができる' do
+#         visit book_path(book_by_me)
+#         title = book_by_me.title
+#         find('.card .dropdown').click
+#         expect{
+#           click_link '削除' 
+#           page.accept_confirm
+#           expect(page).to have_content 'レビューを削除しました'
+#         }.to change{ Book.count }.by(-1)
+#         expect(current_path).to eq books_path
+#         expect(page).not_to have_content title
+#       end
 
-    context 'ログインしている場合' do
-      before do
-        login_as(user)
-        click_on('掲示板')
-        click_on('掲示板作成')
-      end
+#       it '自分が追加した本には歯車アイコンが表示される' do
+#         visit book_path(book_by_me)
+#         expect(page).to have_css '.card .dropdown'
+#       end
 
-      it '掲示板が作成できること' do
-        fill_in 'タイトル', with: 'テストタイトル'
-        fill_in '本文', with: 'テスト本文'
-        click_button '登録する'
-        expect(current_path).to eq(books_path)
-        expect(page).to have_content('掲示板を作成しました')
-        expect(page).to have_content('テストタイトル')
-        expect(page).to have_content('テスト本文')
-      end
+#       it '他人が追加した本には歯車アイコンが表示されない' do
+#         visit book_path(book)
+#         expect(page).not_to have_css '.card .dropdown' 
+#       end
+#     end
 
-      it '掲示板の作成に失敗すること' do
-        fill_in 'タイトル', with: 'テストタイトル'
-        click_button '登録する'
-        expect(page).to have_content('掲示板を作成できませんでした')
-        expect(page).to have_content('本文を入力してください')
-      end
-    end
-  end
+#     context '異常系' do
+#       it '検索キーワードがない場合検索されない' do
+#         visit search_books_path
+#         fill_in 'search', with: ''
+#         click_button '検索'
+#         expect(page).to have_content '検索キーワードが入力されていません'
+#         expect(page).not_to have_css '.card-link'
+#       end
 
-  describe '掲示板の詳細' do
-    context 'ログインしていない場合' do
-      it 'ログインページにリダイレクトされること' do
-        visit book_path(book)
-        expect(current_path).to eq login_path
-        expect(page).to have_content 'ログインしてください'
-      end
-    end
+#       it '入力が不足している場合、検索した本を新規追加できない' do
+#         visit search_books_path
+#         fill_in 'search', with: 'apple'
+#         click_button '検索'
+#         first('.card-link').click
+#         expect(current_path).to eq new_book_path
+#         fill_in 'レビュー', with: ''
+#         select 'プログラミング', from: 'parent_category'
+#         select 'Ruby', from: 'child_category'
+#         expect{ click_button '登録する' }.to change{ Book.count }.by(0)
+#         expect(current_path).to eq books_path
+#         expect(page).to have_content 'レビューを作成できませんでした'
+#         expect(page).to have_content 'レビューは5文字以上で入力してください'
+#       end
 
-    context 'ログインしている場合' do
-      before do
-        book
-        login_as(user)
-      end
-      it '掲示板の詳細が表示されること' do
-        visit books_path
-        within "#book-id-#{book.id}" do
-          click_on book.title
-        end
-        expect(page).to have_content book.title
-        expect(page).to have_content book.user.name
-        expect(page).to have_content book.body
-      end
-    end
-  end
-
-  describe '掲示板のCRUD' do
-    describe '掲示板の編集' do
-      context '他人の掲示板の場合' do
-        it '編集ボタン・削除ボタンが表示されないこと' do
-          login_as(user)
-          visit book_path book_by_others
-          expect(page).not_to have_selector("#button-edit-#{book_by_others.id}")
-          expect(page).not_to have_selector("#button-delete-#{book_by_others.id}")
-        end
-      end
-      context '自分の掲示板の場合' do
-        it '編集ボタン・削除ボタンが表示されること' do
-          login_as(user)
-          visit book_path book
-          expect(page).to have_selector("#button-edit-#{book.id}")
-          expect(page).to have_selector("#button-delete-#{book.id}")
-        end
-      end
-    end
-  end
-end
+#       it '入力が不足している場合、本の編集ができない' do
+#         visit edit_book_path(book_by_me)
+#         fill_in 'レビュー', with: ''
+#         click_button '更新する'
+#         expect(current_path).to eq book_path(book_by_me)
+#         expect(page).to have_content 'レビューを更新できませんでした'
+#         expect(page).to have_content 'レビューは5文字以上で入力してください'
+#       end
+#     end
+#   end
+# end

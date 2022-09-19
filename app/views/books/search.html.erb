@@ -25,7 +25,7 @@
             <div class="row g-0">
               <div class="col-5">
 
-                <%= link_to '投稿する', new_post_path(volumeInfo: set_google_book_params(google_book)) %>
+                <%= link_to 'レビューする', new_post_path(volumeInfo: set_google_book_params(google_book)), id: "new_review" %>
                 <%= image_tag google_book_thumbnail(google_book), class: 'img-fluid ms-2 mt-2 border book-img' %>
 
 
