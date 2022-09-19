@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Posts', type: :system do
-  describe '絵本のCRUD' do
+  describe 'レビューのCRUD' do
     let(:me) { create(:user) }
     let(:post) { create(:post) }
     let(:post_by_me) { create(:post, user: me) }
@@ -131,7 +131,7 @@ RSpec.describe 'Posts', type: :system do
 
         it '入力が不足している場合、検索した本を新規追加できない' do
           visit search_books_path
-          fill_in 'search', with: 'apple'
+          fill_in 'search', with: 'はらぺこあおむし'
           click_button '検索'
           first('#new_review').click
           # expect(current_path).to eq new_post_path
