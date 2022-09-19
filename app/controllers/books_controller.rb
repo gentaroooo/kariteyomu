@@ -24,8 +24,6 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @comment = Comment.new
-    @comments = @book.comments.includes(:user).order(created_at: :desc)
   end
 
   def edit; end

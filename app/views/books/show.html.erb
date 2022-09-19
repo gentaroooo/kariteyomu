@@ -10,7 +10,6 @@
           </div>
           <div class="col-7">
             <div class="card-body">
-  
               <h5 class="card-title"><%= @book.title %></h5>
               <p class="card-text mb-2"><%= @book.authors.pluck(:name).join(', ')&.truncate(50) %></p>
               <p class="card-text"><small class="text-muted"><%= @book.published_date %></small></p>
@@ -24,11 +23,20 @@
         <div class="card-body">
           <div class='row'>
             <div class='col-md-9'>
-              <%= render 'crud_menus', book: @book if current_user.own?(@book) %> 
-                <p class="card-text mb-2">投稿者：<%= @book.user.name %></p>
-                <p class="card-text mb-2">投稿日：<%= l @book.created_at, format: :long  %></p>
-                <p class="card-text mb-2"><%= simple_format(@book.body) %></p>
-              </ul>
+              <% if current_user.own?(@book) %> 
+                <ul class='crud-menu-btn list-inline float-right'>
+                  <li class="list-inline-item">
+                    <%= link_to book_path(@book), id: "button-delete-#{@book.id}", method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
+                      <%= icon 'fas', 'trash' %>
+                    <% end %>
+                  </li>
+                </ul>
+              <% end  %>
+              
+              <p class="card-text mb-2">投稿者：<%= @book.user.name %></p>
+              <p class="card-text mb-2">投稿日：<%= l @book.created_at, format: :long  %></p>
+              <p class="card-text mb-2"><%= simple_format(@book.body) %></p>
+            
             </div>
           </div>
         </div>

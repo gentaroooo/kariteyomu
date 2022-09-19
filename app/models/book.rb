@@ -2,9 +2,11 @@ class Book < ApplicationRecord
   mount_uploader :book_image, BookImageUploader
   
   belongs_to :user
-  has_many :comments, dependent: :destroy
+
   has_many :book_authors, dependent: :destroy
   has_many :authors, through: :book_authors
+  # has_many :comments, dependent: :destroy
+
   
   validates :title, presence: true, length: { maximum: 255 }
 

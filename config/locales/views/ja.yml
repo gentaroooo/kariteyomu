@@ -32,20 +32,20 @@ ja:
       success: 'ログアウトしました'
   books:
     index:
-      title: '掲示板一覧'
-      no_result: '掲示板がありません。'
+      title: '読みたいリスト'
+      no_result: '読みたいリストがありません。'
     new:
-      title: '掲示板作成'
+      title: '読みたいリスト作成'
     bookmarks:
       title: 'ブックマーク一覧'
     show:
-      title: '掲示板詳細'
+      title: '絵本詳細'
     edit:
-      title: '掲示板編集'
+      title: '絵本編集'
       password_reset: 'パスワードリセット'
     create:
       success: '読みたいに登録しました'
-      fail: '読みたいの登録に失敗しました'
+      fail: '読みたい登録に失敗しました'
   profiles:
     show:
       title: 'プロフィール'
@@ -64,17 +64,19 @@ ja:
       fail: 'パスワードの変更に失敗しました'
   posts:
     index:
-      title: '投稿一覧'
-      no_result: '投稿がありません。'
+      title: 'レビューリスト'
+      no_result: 'レビューがありません。'
     new:
-      title: '投稿作成'
+      title: 'レビュー作成'
     bookmarks:
       title: 'ブックマーク一覧'
     show:
-      title: '投稿詳細'
+      title: 'レビュー詳細'
     edit:
-      title: '投稿編集'
+      title: 'レビュー編集'
       password_reset: 'パスワードリセット'
     create:
-      success: '投稿に成功'
-      fail: '投稿に失敗しました'
+      success: 'レビューを投稿しました'
+      fail: 'レビューの投稿に失敗しました'
+    deleted:
+      success: 'レビューを削除しました'
