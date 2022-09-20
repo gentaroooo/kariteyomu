@@ -41,10 +41,15 @@
                   <%
 =begin%>
  <%= google_book['volumeInfo']['systemid1'] %>
-                  <%= google_book['volumeInfo']['systemid2'] %> 
+                  <%= google_book['volumeInfo']['systemid2'] %>  
 <%
 =end%>
-
+                  <%
+=begin%>
+ <%= @hash %> 
+<%
+=end%>
+                  
                   <!-- 投稿フォーム -->
                   <%= form_with model: @book, local: true, id: "new_book" do |f| %>
                     <%= f.hidden_field :title, value: set_google_book_params(google_book)["title"] %>

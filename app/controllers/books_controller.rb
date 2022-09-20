@@ -24,6 +24,17 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+
+    uri = URI.parse("https://api.calil.jp/check")
+    q = {appkey: ENV['APP_KEY'],
+        isbn: @book.systemid,
+        systemid: "Kanagawa_Hiratsuka",
+        callback: :no}
+
+    uri.query = URI.encode_www_form(q)
+    response = Net::HTTP.get_response(uri)
+    @hash = JSON.parse(response.body)["books"]["#{@book.systemid.to_i}"]["Kanagawa_Hiratsuka"]["libkey"].to_a
+
   end
 
   def edit; end
@@ -56,28 +67,6 @@ class BooksController < ApplicationController
       text = params[:search]
       res = Faraday.get(url, q: text, langRestrict: 'ja', maxResults: 30)
       @google_books = JSON.parse(res.body)
-
-      # if @google_books.present?
-      #   @google_books['items']&.each do |google_book|
-      #     if google_book['volumeInfo']['industryIdentifiers']&.select{|h| h["type"].include?("ISBN") }.present?
-      #       @google_book_isbn = google_book['volumeInfo']['industryIdentifiers'].select{|h| h["type"].include?("ISBN") }.first["identifier"].to_i
-      #     end
-      #   end
-      # end
-      
-      # appkey = "入力"
-
-      # uri = URI.parse("https://api.calil.jp/check")
-
-      # q = {appkey: appkey,
-      #     isbn: @google_book_isbn,
-      #     systemid: "Tokyo_Setagaya",
-      #     callback: :no}
-
-      # uri.query = URI.encode_www_form(q)
-      # response = Net::HTTP.get_response(uri)
-
-      # @hash = JSON.parse(response.body)["books"]["#{@google_book_isbn}"]["Tokyo_Setagaya"]["libkey"]
     end
   end
 

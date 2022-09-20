@@ -16,6 +16,15 @@
               <%= link_to '詳細を見る', @book.info_link, target: '_blank' %>
             </div>
           </div>
+          <% if current_user.own?(@book) %> 
+            <ul class='crud-menu-btn list-inline float-right'>
+              <li class="list-inline-item">
+                <%= link_to book_path(@book), id: "button-delete-#{@book.id}", method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
+                  <%= icon 'fas', 'trash' %>
+                <% end %>
+              </li>
+            </ul>
+          <% end  %>
         </div>
       </div>
       
@@ -23,19 +32,13 @@
         <div class="card-body">
           <div class='row'>
             <div class='col-md-9'>
-              <% if current_user.own?(@book) %> 
-                <ul class='crud-menu-btn list-inline float-right'>
-                  <li class="list-inline-item">
-                    <%= link_to book_path(@book), id: "button-delete-#{@book.id}", method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
-                      <%= icon 'fas', 'trash' %>
-                    <% end %>
-                  </li>
-                </ul>
-              <% end  %>
+
+              <% @hash.each do |a,b| %>
+              <%= a %>
+              <p><%= b %></P>
+              <% end %>
               
-              <p class="card-text mb-2">投稿者：<%= @book.user.name %></p>
-              <p class="card-text mb-2">投稿日：<%= l @book.created_at, format: :long  %></p>
-              <p class="card-text mb-2"><%= simple_format(@book.body) %></p>
+              
             
             </div>
           </div>
