@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_17_083347) do
+ActiveRecord::Schema.define(version: 2022_09_22_054411) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(version: 2022_09_17_083347) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "book_image"
     t.index ["user_id"], name: "index_books_on_user_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_Categories_on_name", unique: true
   end
 
   create_table "comments", force: :cascade do |t|
@@ -75,6 +82,16 @@ ActiveRecord::Schema.define(version: 2022_09_17_083347) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "posts_categories", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id", "post_id"], name: "index_posts_categories_on_category_id_and_post_id", unique: true
+    t.index ["category_id"], name: "index_posts_categories_on_category_id"
+    t.index ["post_id"], name: "index_posts_categories_on_post_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -99,4 +116,6 @@ ActiveRecord::Schema.define(version: 2022_09_17_083347) do
   add_foreign_key "post_authors", "authors"
   add_foreign_key "post_authors", "posts"
   add_foreign_key "posts", "users"
+  add_foreign_key "posts_categories", "categories"
+  add_foreign_key "posts_categories", "posts"
 end
