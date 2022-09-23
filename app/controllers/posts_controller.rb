@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.includes(:authors, :user).order(created_at: :desc).page(params[:page])
+    @posts = params[:category_id].present? ? Category.find(params[:category_id]).posts.page(params[:page]) : Post.all.includes(:authors, :user).order(created_at: :desc).page(params[:page])
   end
 
   def new

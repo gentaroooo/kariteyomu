@@ -28,14 +28,14 @@
         </div>
 
         <div class='form-group'>
-        <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
+          <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
             <div class='form-check'>
-                <%= category.label class: 'form-check-label' do %>
-                    <%= category.check_box class: 'form-check-input' %>
-                    <%= category.text %>
-                <% end %>
+              <%= category.label class: 'form-check-label' do %>
+                <%= category.check_box class: 'form-check-input' %>
+                <%= category.text %>
+              <% end %>
             </div>
-        <% end %>
+          <% end %>
         </div>
         
         <%= f.hidden_field :title, value: @volume_info[:title] %>

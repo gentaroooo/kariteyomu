@@ -5,5 +5,17 @@
      <%= f.text_area :body, class: 'form-control', rows: 10 %>
    </div>
 
+  <div class='form-group'>
+    <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
+      <div class='form-check'>
+        <%= category.label class: 'form-check-label' do %>
+          <%= category.check_box class: 'form-check-input' %>
+          <%= category.text %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  
+
    <%= f.submit class: 'btn btn-primary' %>
  <% end %>
