@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.includes(:authors, :user).order(created_at: :desc).page(params[:page])
+    @posts = params[:category_id].present? ? Category.find(params[:category_id]).posts.page(params[:page]) : Post.all.includes(:authors, :user).order(created_at: :desc).page(params[:page])
   end
 
   def new
@@ -63,7 +64,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :image_link, :info_link, :published_date, :systemid)
+    params.require(:post).permit(:title, :body, :image_link, :info_link, :published_date, :systemid, category_ids: [])
   end
 
   def set_post

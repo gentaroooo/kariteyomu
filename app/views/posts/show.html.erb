@@ -30,6 +30,15 @@
                 <p class="card-text mb-2"><%= simple_format(@post.body) %></p>
               </ul>
             </div>
+
+            <div class="d-flex">
+              <div>
+                <% @post.categories.each do |category| %>
+                  <div class="badge rounded-pill bg-primary text-decoration-none text-white"><%= category.name %></div> 
+                <% end %>
+              </div>
+            </div>
+
           </div>
         </div>
       </article>

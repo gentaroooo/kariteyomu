@@ -16,6 +16,16 @@
    </div> 
 <%
 =end%>
+  <%= form_tag posts_path, method: :get, class: 'boards__searchForm' do %>
+      <%= select_tag :category_id,
+                     options_from_collection_for_select(Category.all, :id, :name, params[:category_id]),
+                     {
+                       prompt: 'タグで絞り込み検索',
+                       onchange: 'submit(this.form);'
+                     }
+      %>
+    <% end %>
+
  
    <!-- 掲示板一覧 -->
    <div class="row">

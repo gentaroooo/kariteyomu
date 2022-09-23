@@ -21,6 +21,15 @@
       </div>
     </div>
     <p class="card-text mx-3"><%= post.body.truncate(30) %></p>
+
+    <div class="d-flex">
+      <div>
+        <% post.categories.each do |category| %>
+          <div class="badge rounded-pill bg-primary text-decoration-none text-white"><%= category.name %></div> 
+        <% end %>
+      </div>
+    </div>
+
      <%= link_to '', post_path(post), class: 'card-link' %> 
   </div>
 </div>
