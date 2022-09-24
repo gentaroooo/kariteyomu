@@ -2,8 +2,8 @@ class BooksController < ApplicationController
   before_action :set_book, only: %i[edit update destroy]
 
   def index
-    @books = Book.all.includes(:authors, :user).order(created_at: :desc).page(params[:page])
-    @book = current_user.books.includes(:authors, :user).order(created_at: :desc).page(params[:page])
+    @books = Book.all.includes([:authors, :user]).order(created_at: :desc).page(params[:page])
+    @book = current_user.books.includes([:authors, :user]).order(created_at: :desc).page(params[:page])
   end
 
   def new

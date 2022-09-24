@@ -1,0 +1,7 @@
+<%= link_to likes_path(post_id: post.id),
+            id: "js-like-button-for-post-#{post.id}",
+            class:"float-right",
+            method: :post,
+            remote: true do %>
+  <%= icon 'far', 'star' %>
+<% end %>
