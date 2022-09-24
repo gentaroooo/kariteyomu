@@ -1,0 +1,14 @@
+<% content_for(:title, t('.title')) %>
+ <!-- 掲示板一覧 -->
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <% if @like_posts.present? %>
+          <%= render @like_posts %>
+        <% else %>
+          <p><%= t('.no_result') %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

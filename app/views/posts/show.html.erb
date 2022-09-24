@@ -24,7 +24,13 @@
         <div class="card-body">
           <div class='row'>
             <div class='col-md-9'>
-              <%= render 'crud_menus', post: @post if current_user.own?(@post) %> 
+
+              <% if current_user.own?(@post) %>
+                <%= render 'crud_menus', post: @post %>
+              <% else %>
+                <%= render 'like_button', post: @post  %>
+              <% end %>
+
                 <p class="card-text mb-2">投稿者：<%= @post.user.name %></p>
                 <p class="card-text mb-2">投稿日：<%= l @post.created_at, format: :long  %></p>
                 <p class="card-text mb-2"><%= simple_format(@post.body) %></p>

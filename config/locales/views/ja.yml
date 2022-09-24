@@ -71,8 +71,9 @@ ja:
       no_result: 'レビューがありません。'
     new:
       title: 'レビュー作成'
-    bookmarks:
-      title: 'ブックマーク一覧'
+    likes:
+      title: 'いいねリスト'
+      no_result: 'いいねリストがありません。'
     show:
       title: 'レビュー詳細'
     edit:
@@ -83,3 +84,8 @@ ja:
       fail: 'レビューの投稿に失敗しました'
     deleted:
       success: 'レビューを削除しました'
+  likes:
+    create:
+      success: 'いいねしました'
+    destroy:
+      success: 'いいねを外しました'

@@ -30,6 +30,20 @@
       </div>
     </div>
 
+    <%
+=begin%>
+ <% if current_user.like?(post) %>
+      <%= render 'unlile', { post: post } %>
+    <% else %>
+      <%= render 'like', { post: post } %>
+    <% end %> 
+<%
+=end%>
+
+
+
+
+
      <%= link_to '', post_path(post), class: 'card-link' %> 
   </div>
 </div>
