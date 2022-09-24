@@ -2,9 +2,14 @@ class Post < ApplicationRecord
   belongs_to :user
 
   has_many :post_authors, dependent: :destroy
-  has_many :post_categories, dependent: :destroy
   has_many :authors, through: :post_authors
+
+  has_many :post_categories, dependent: :destroy
   has_many :categories, through: :post_categories
+  
+  has_many :likes, dependent: :destroy
+  has_many :users, through: :likes
+
   has_many :comments, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 255 }
