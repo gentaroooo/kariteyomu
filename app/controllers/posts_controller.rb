@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
 
   def index
-    @posts = Post.all.includes(:user, :authors, :categories, :likes).order(created_at: :desc).page(params[:page])
-    @posts = params[:category_id].present? ? Category.find(params[:category_id]).posts.page(params[:page]) : Post.all.includes(:user, :authors, :categories, :likes).order(created_at: :desc).page(params[:page])
+    @posts = Post.all.includes([:user, :authors, :categories, :likes]).order(created_at: :desc).page(params[:page])
+    @posts = params[:category_id].present? ? Category.find(params[:category_id]).posts.page(params[:page]) : Post.all.includes([:user, :authors, :categories, :likes]).order(created_at: :desc).page(params[:page])
   end
 
   def new
@@ -62,7 +62,7 @@ class PostsController < ApplicationController
   end
 
   def likes
-	@posts = current_user.like_posts
+    @like_posts = current_user.like_posts.includes([:user, :authors, :categories, :likes]).order(created_at: :desc)
   end
 
   private
