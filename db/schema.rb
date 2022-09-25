@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2022_09_24_024457) do
     t.string "crypted_password"
     t.string "salt"
     t.string "name", null: false
+    t.string "introduction"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "avatar"

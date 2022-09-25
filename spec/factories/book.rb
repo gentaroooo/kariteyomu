@@ -4,7 +4,7 @@ FactoryBot.define do
     published_date { "2022-05-01" }
     info_link { 'https://google.com' }
     image_link { 'https://google.com' }
-    systemid { 'isbn_1'}
+    sequence(:systemid, 'isbn_1')
     association :user
   end
 end
