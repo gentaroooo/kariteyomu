@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resource :profile, only: %i[show edit update]
   
-  resources :users, only: %i[new create]
+  resources :users, only: %i[new create index show] 
   
   resources :books do
     collection { get :search }
