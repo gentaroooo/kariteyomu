@@ -12,6 +12,7 @@ ja:
         password_confirmation: 'パスワード確認'
         name: 'ユーザーネーム'
         avatar: 'アバター'
+        introduction: '自己紹介'
       book:
         title: 'タイトル'
         body: '本文'

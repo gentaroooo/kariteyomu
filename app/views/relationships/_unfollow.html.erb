@@ -1,0 +1,5 @@
+<%= button_to 'フォロー解除',
+              relationship_path(current_user.active_relationships.find_by(follower: user)),
+              method: :delete,
+              remote: true,
+              class: 'btn btn-primary rounded-pill' %>

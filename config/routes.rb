@@ -6,10 +6,16 @@ Rails.application.routes.draw do
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
+  get 'relationships/create'
+  get 'relationships/destroy'
 
   resource :profile, only: %i[show edit update]
   
-  resources :users, only: %i[new create]
+  resources :users, only: %i[new create index show] do
+    member do
+      get :following, :follower
+    end
+  end 
   
   resources :books do
     collection { get :search }
@@ -25,4 +31,5 @@ Rails.application.routes.draw do
   resources :likes, only: %i[create destroy]
   resources :password_resets, only: %i[new create edit update]
 
+  resources :relationships, only: [:create, :destroy]
 end

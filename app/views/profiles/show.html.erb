@@ -10,8 +10,12 @@
           <td><%= current_user.email %></td>
         </tr>
         <tr>
-          <th scope="row"><%= t(User.human_attribute_name(:full_name)) %></th>
+          <th scope="row"><%= t(User.human_attribute_name(:name)) %></th>
           <td><%= current_user.name %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= t(User.human_attribute_name(:introduction)) %></th>
+          <td><%= current_user.introduction %></td>
         </tr>
         <tr>
           <th scope="row"><%= t(User.human_attribute_name(:avatar)) %></th>
