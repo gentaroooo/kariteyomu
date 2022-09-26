@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_24_024457) do
+ActiveRecord::Schema.define(version: 2022_09_26_012417) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name", null: false
@@ -102,6 +102,16 @@ ActiveRecord::Schema.define(version: 2022_09_24_024457) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "relationships", force: :cascade do |t|
+    t.integer "followed_id", null: false
+    t.integer "follower_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followed_id", "follower_id"], name: "index_relationships_on_followed_id_and_follower_id", unique: true
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -131,4 +141,6 @@ ActiveRecord::Schema.define(version: 2022_09_24_024457) do
   add_foreign_key "post_categories", "categories"
   add_foreign_key "post_categories", "posts"
   add_foreign_key "posts", "users"
+  add_foreign_key "relationships", "followeds"
+  add_foreign_key "relationships", "followers"
 end
