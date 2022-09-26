@@ -21,6 +21,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true
   validates :name, presence: true, length: { maximum: 16 }
   validates :reset_password_token, presence: true, uniqueness: true, allow_nil: true
+  validates :introduction, length: { maximum: 1000 }
 
   def own?(object)
     id == object.user_id
