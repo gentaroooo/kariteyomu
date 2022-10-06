@@ -25,32 +25,32 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
 
-    uri = URI.parse("https://api.calil.jp/check")
+    # uri = URI.parse("https://api.calil.jp/check")
 
-    # q = {appkey: ENV['APP_KEY'],
-    #     isbn: @book.systemid,
-    #     systemid: "Kanagawa_Hiratsuka",
-    #     callback: :no}
+    # # q = {appkey: ENV['APP_KEY'],
+    # #     isbn: @book.systemid,
+    # #     systemid: "Kanagawa_Hiratsuka",
+    # #     callback: :no}
 
-    q = {appkey: ENV['APP_KEY'], callback: :no}
-    q.merge!({isbn: @book.systemid})
-    q.merge!({systemid: "Kanagawa_Hiratsuka"})
-    uri.query = URI.encode_www_form(q)
-    response = hash = nil
+    # q = {appkey: ENV['APP_KEY'], callback: :no}
+    # q.merge!({isbn: @book.systemid})
+    # q.merge!({systemid: "Kanagawa_Hiratsuka"})
+    # uri.query = URI.encode_www_form(q)
+    # response = hash = nil
 
-    loop do
-      response = Net::HTTP.get_response(uri)
-      @hash = JSON.parse(response.body)["books"]["#{@book.systemid.to_i}"]["Kanagawa_Hiratsuka"]["libkey"].to_a
-      test = JSON.parse(response.body)
-      break if test["continue"].zero?
-      puts "continue"
-      sleep(3)
-      q = {appkey: ENV['APP_KEY'], session: test["session"], callback: :no}
-      uri.query = URI.encode_www_form(q)
-    end
+    # loop do
+    #   response = Net::HTTP.get_response(uri)
+    #   @hash = JSON.parse(response.body)["books"]["#{@book.systemid.to_i}"]["Kanagawa_Hiratsuka"]["libkey"].to_a
+    #   test = JSON.parse(response.body)
+    #   break if test["continue"].zero?
+    #   puts "continue"
+    #   sleep(3)
+    #   q = {appkey: ENV['APP_KEY'], session: test["session"], callback: :no}
+    #   uri.query = URI.encode_www_form(q)
+    # end
     
-    puts response.code
-    pp hash
+    # puts response.code
+    # pp hash
 
 
     # uri.query = URI.encode_www_form(q)
