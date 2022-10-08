@@ -55,29 +55,26 @@
                           .done(function(data){
                             console.log(data)
                             const test = data.books[Number("<%= @book.systemid %>")].Kanagawa_Hiratsuka.libkey
-                                              
-                            if (data.continue === 1) {
-                            console.log("取得に失敗");
-                            }else{
-                            console.log("取得に成功")
-                             clearTimeout( timer_id );
-                            
-                            }
 
-                            Object.keys(test).forEach( function(value) {
+                            if (data.continue === 0) {
+                              console.log("取得に成功")
+                              Object.keys(test).forEach( function(value) {
                               $("#choice").after(`<div>${value} : ${this[value]} </div>`)
-                            }, test)
+                              }, test)
+                              clearTimeout( timer_id );
+                            } else {
+                              if (count === 3 ) { // 3回目のコールでエラー
+                              reject(count);
+                              } else {
+                              resolve(count);
+                              }
+                            }
                            })
 
                           .fail(function(data){
                             $("#jsonp").append("エラーです");
                           });
-                          
-                          if (count === 5 ) { // 3回目のコールでエラー
-                            reject(count);
-                          } else {
-                            resolve(count);
-                          }
+
                         }, 2000);
                       });
                     }
@@ -86,8 +83,6 @@
                               // promiseFactory内のresolveが呼び出されるまで次の処理を実行しない
                               //awaitによってresolveの引数の値がcountに代入される
                               let count = await promiseFactory(0);
-                              count = await promiseFactory(count);
-                              count = await promiseFactory(count);
                               count = await promiseFactory(count);
                               count = await promiseFactory(count);
                               count = await promiseFactory(count);
