@@ -1,1 +1,134 @@
 <h1>libraryのindexだよ！！</h1>
+
+
+	<style type="text/css">
+	<!--
+
+	body {
+		width : 866px;
+		margin : 0 auto;
+	}
+
+	h1 {
+		color: white;
+		background-color: #26BEFF;
+		padding: 10px;
+		-moz-border-radius: 15px;
+		-webkit-border-radius: 15px;
+		text-align: center;
+	}
+
+	#content {
+		width: 90%;
+		margin: 10px auto 0;
+	}
+	h3 {
+		font-size : 120%;
+		margin-bottom: 5px;
+	}
+	h4 {
+		font-size: 85%;
+		padding-top: 10px;
+	}
+	p {
+		font-size: 85%;
+	}
+
+	select {
+		border: 1px solid #999;
+		margin-bottom: 15px;
+	}
+	#calil_booklist .calil_book {
+		float: left;
+		margin-right: 10px;
+	}
+
+	.clearfix {
+		*display: inline-block;
+	}
+	.clearfix:after {
+		content: ".";
+		display: block;
+		visibility: hidden;
+		height: 0.1px;
+		font-size: 0.1em;
+		line-height: 0;
+		clear: both;
+	}
+
+	-->
+	</style>
+
+</head>
+<body>
+
+
+<!-- ライブラリ読み込み -->
+
+<link href="http://gae.calil.jp/public/css/calilapi.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://gae.calil.jp/public/js/calilapi.js" charset="UTF-8"></script>
+
+
+<div id="content">
+
+	<!-- 市町村選択 -->
+	<div id="pref" >
+		選択された市町村:
+		<strong id="pref_name">神奈川県平塚市</strong>
+		<span id="lib_select" style="font-size: 85%;"> (<a href="javascript:void(0)" onmousedown="city_selector.showDlg()">図書館を変更する</a>)</span>
+	</div>
+
+	
+<script type="text/javascript">
+
+	//デフォルトの図書館ID(sysytemid)
+	var systemid_list = ['Knagawa_Hiratuka'];
+
+	//市町村選択時に実行される関数
+	function on_select_city(systemid, pref){
+
+		systemid_list = systemid;
+		log(systemid_list);
+
+		//選択市町村の表示
+		$('#pref').show();
+		$('#pref_name').html(pref);
+
+		apishow();
+
+	}
+
+	var city_selector = {};
+
+	$(function(){
+
+		//市町村選択ダイアログ
+		city_selector = new CalilCitySelectDlg({
+			'appkey' : '2bc265ea827cb23b11d1ee80a25ef575',
+			'select_func' : on_select_city
+		});
+
+		apishow();
+
+		//ISBNリスト選択時
+		$('#isbn_list').change(apishow);
+	});
+
+
+
+	//デバッグ用関数
+	function log(text){
+		try{
+			console.log(text);
+		}catch( e ){}
+	}
+
+
+</script>
+
+<script type="text/javascript" src="/bnith__MxSrPD6sejLu7SoL6umT3TVSM9_B7BldbzGlsoZ6yuQMGaHF39ClDH8makyRTIabzboSh5L52tc="></script> <script language="JavaScript" type="text/javascript">var _0x5aae=["cookie","x-bni-fpc=","; expires=Thu, 01 Jan 2037 00:00:00 UTC; path=/;","x-bni-rncf=1664147058958; expires=Thu, 01 Jan 2037 00:00:00 UTC; path=/;","get"];function fiprn(){( new fiprn_v2)[_0x5aae[4]](function(_0x6130x2,_0x6130x3){document[_0x5aae[0]]= _0x5aae[1]+ _0x6130x2+ _0x5aae[2],document[_0x5aae[0]]= _0x5aae[3]})}</script><script>fiprn();</script></body>
+
+</html>
+
+

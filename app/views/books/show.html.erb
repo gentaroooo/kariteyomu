@@ -24,7 +24,7 @@
                 <% end %>
               </li>
             </ul>
-          <% end %>
+          <% end  %>
         </div>
       </div>
       
@@ -32,14 +32,35 @@
         <div class="card-body">
           <div class='row'>
             <div class='col-md-9'>
-              貸出情報
-              <p id="kensaku"><button type="button" class="btn btn-secondary">検索中</button></p>
               <p id="choice"></p>
 
               <script>
+                $(function(){ 
+                  $.ajax({
+                    type: 'GET',
+                    url: 'https://api.calil.jp/check',
+                    data:{
+                      appkey: "<%= ENV['APP_KEY'] %>",
+                      isbn: Number("<%= @book.systemid %>"),
+                      systemid: 'Kanagawa_Hiratsuka',
+                    },
+                    dataType: 'jsonp',
+                    jsonp: 'callback',//コールバックパラメータ名の指定
+    
+                  })
+                  .done(function(data){
+                    console.log(data)
+                    const test = data.books[Number("<%= @book.systemid %>")].Kanagawa_Hiratsuka.libkey
+
+                    if (data.continue === 1) {
+                      console.log("取得に失敗");
+                    }else{
+                      console.log("取得に成功")
+                    }
+
                     function promiseFactory(count) {
                       return new Promise((resolve, reject) => {
-                         timer_id = setTimeout(() => {
+                        setTimeout(() => {
                             count++;
                             console.log(`${count}回目のコールです。時刻：[${new Date().toTimeString()}]`);
                           $.ajax({
@@ -57,49 +78,49 @@
                           .done(function(data){
                             console.log(data)
                             const test = data.books[Number("<%= @book.systemid %>")].Kanagawa_Hiratsuka.libkey
-
-                            if (data.continue === 0) {
-                              console.log("取得に成功")
-                              Object.keys(test).forEach( function(value) {
-                                $("#kensaku").remove();
-                                $("#choice").after(`<div>
-                                <button type="button" class="btn btn-success">${value} : ${this[value]}</button>
-                                </div>`)
-                              }, test)
-                              clearTimeout( timer_id );
-                            } else {
-                              if (count === 3 ) { // 3回目のコールでエラー
-                              reject(count);
-                              } else {
-                              resolve(count);
-                              }
+                                              
+                            if (data.continue === 1) {
+                            console.log("取得に失敗");
+                            }else{
+                            console.log("取得に成功")
                             }
+
+                            Object.keys(test).forEach( function(value) {
+                              $("#choice").after(`<div>${value} : ${this[value]} </div>`)
+                            }, test)
                            })
 
                           .fail(function(data){
                             $("#jsonp").append("エラーです");
                           });
-
+                          
+                          if (count === 3 ) { // 3回目のコールでエラー
+                            reject(count);
+                          } else {
+                            resolve(count);
+                          }
                         }, 2000);
                       });
                     }
-                        async function execute() { // awaitを内部で使っているためasyncをつける
-                          try {
-                              // promiseFactory内のresolveが呼び出されるまで次の処理を実行しない
-                              //awaitによってresolveの引数の値がcountに代入される
-                              let count = await promiseFactory(0);
-                              count = await promiseFactory(count);
-                              count = await promiseFactory(count);
-                              count = await promiseFactory(count);
-                          } catch (errorCount) {
-                              // Promiseがrejectedのステータスになった場合はcatchブロックに遷移する
-                              console.error(`エラーに飛びました。現在のカウントは ${errorCount} です。`);
-                          } finally {
-                              console.log("処理を終了します。");
-                          }
-                      }
-                      // execute()の実行
-                      execute();
+                    promiseFactory(0)
+                        .then(count => { return promiseFactory(count); })
+                        .then(count => { return promiseFactory(count); })
+                        .then(count => { return promiseFactory(count); })
+                        .then(count => { return promiseFactory(count); })
+                        .catch(errorCount => {
+                            console.error(`エラーに飛びました。現在のカウントは ${errorCount} です。`);
+                        }).finally(() => {
+                            console.log("処理を終了します。");
+                        });
+
+                    Object.keys(test).forEach( function(value) {
+                        $("#choice").after(`<div>${value} : ${this[value]} </div>`)
+                    }, test)
+                  })
+                  .fail(function(data){
+                    $("#jsonp").append("エラーです");
+                  });
+                });
               </script>   
             </div>
           </div>
