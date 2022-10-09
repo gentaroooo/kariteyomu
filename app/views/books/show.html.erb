@@ -24,7 +24,7 @@
                 <% end %>
               </li>
             </ul>
-          <% end  %>
+          <% end %>
         </div>
       </div>
       
@@ -32,6 +32,8 @@
         <div class="card-body">
           <div class='row'>
             <div class='col-md-9'>
+              貸出情報
+              <p id="kensaku"><button type="button" class="btn btn-secondary">検索中</button></p>
               <p id="choice"></p>
 
               <script>
@@ -59,7 +61,10 @@
                             if (data.continue === 0) {
                               console.log("取得に成功")
                               Object.keys(test).forEach( function(value) {
-                              $("#choice").after(`<div>${value} : ${this[value]} </div>`)
+                                $("#kensaku").remove();
+                                $("#choice").after(`<div>
+                                <button type="button" class="btn btn-success">${value} : ${this[value]}</button>
+                                </div>`)
                               }, test)
                               clearTimeout( timer_id );
                             } else {
@@ -95,7 +100,6 @@
                       }
                       // execute()の実行
                       execute();
-
               </script>   
             </div>
           </div>
