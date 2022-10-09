@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_26_012417) do
+ActiveRecord::Schema.define(version: 2022_10_09_035706) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name", null: false
@@ -57,6 +57,12 @@ ActiveRecord::Schema.define(version: 2022_09_26_012417) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "libraries", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "likes", force: :cascade do |t|
@@ -112,6 +118,16 @@ ActiveRecord::Schema.define(version: 2022_09_26_012417) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "user_libraries", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "ribrary_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index "\"user_id\", \"library_id\"", name: "index_user_libraries_on_user_id_and_library_id", unique: true
+    t.index ["ribrary_id"], name: "index_user_libraries_on_ribrary_id"
+    t.index ["user_id"], name: "index_user_libraries_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -143,4 +159,6 @@ ActiveRecord::Schema.define(version: 2022_09_26_012417) do
   add_foreign_key "posts", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
+  add_foreign_key "user_libraries", "ribraries"
+  add_foreign_key "user_libraries", "users"
 end
