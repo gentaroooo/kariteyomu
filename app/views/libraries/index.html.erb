@@ -54,8 +54,12 @@
                 console.log(data)
 
                 Object.keys(data).forEach( function(value) {
+                    // $("#library").after(`<div>
+                    // <button type="button" class="btn btn-success">${this[value].short}
+                    // </div>`)
+                
                     $("#library").after(`<div>
-                    <button type="button" class="btn btn-success">${this[value].short}
+                    <input type="checkbox" name="${this[value].short}" value="win7">${this[value].short}
                     </div>`)
                     console.log(this[value].short)
 
@@ -64,6 +68,8 @@
                 // $("#library").after(`<div>
                 //     <button type="button" class="btn btn-success">${data}</button>
                 // </div>`)
+
+
             })
 
             .fail(function(data){
