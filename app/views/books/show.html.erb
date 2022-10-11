@@ -48,7 +48,8 @@
                             data:{
                               appkey: "<%= ENV['APP_KEY'] %>",
                               isbn: Number("<%= @book.systemid %>"),
-                              systemid: 'Kanagawa_Hiratsuka',
+                              // systemid: 'Kanagawa_Hiratsuka',
+                              systemid: 'Tokyo_Setagaya',
                             },
                             dataType: 'jsonp',
                             jsonp: 'callback',//コールバックパラメータ名の指定
@@ -56,7 +57,7 @@
 
                           .done(function(data){
                             console.log(data)
-                            const test = data.books[Number("<%= @book.systemid %>")].Kanagawa_Hiratsuka.libkey
+                            const test = data.books[Number("<%= @book.systemid %>")].Tokyo_Setagaya.libkey
 
                             if (data.continue === 0) {
                               console.log("取得に成功")

@@ -12,6 +12,8 @@
         </div>
 
         <p id="library"></p>
+        <button>ボタン</button>
+
 
     </div>
     <script>
@@ -36,10 +38,8 @@
             $.ajax({
                 type: 'GET',
                 url: 'https://api.calil.jp/library',
-                // url: "https://api.calil.jp/library?appkey=<%= ENV['APP_KEY'] %>&geocode=136.7163027,35.390516&limit=10",
                 data:{
                     appkey: "<%= ENV['APP_KEY'] %>",
-                    // geocode: `${latitude},${longitude}`,
                     format: "json",
                     geocode: `${longitude},${latitude}`,
                     limit: 10,
@@ -54,22 +54,32 @@
                 console.log(data)
 
                 Object.keys(data).forEach( function(value) {
-                    // $("#library").after(`<div>
-                    // <button type="button" class="btn btn-success">${this[value].short}
-                    // </div>`)
-                
-                    $("#library").after(`<div>
-                    <input type="checkbox" name="${this[value].short}" value="win7">${this[value].short}
-                    </div>`)
-                    console.log(this[value].short)
-
+                    $("#library").after(`<input type="checkbox" name="chk1" value="${this[value].short}">${this[value].short}`)
+                    // console.log(this[value].short)
                 }, data)
+                    $('button').click(function() {
+                    //すべてのチェック済みvalue値を取得する
+                    $('input:checked').each(function() {
+                        var r = $(this).val();
+                        console.log(r);
+                    })
 
-                // $("#library").after(`<div>
-                //     <button type="button" class="btn btn-success">${data}</button>
-                // </div>`)
+                    
+                $.ajax({
+                    type: "POST",
+                    url: "form.php",
+                    data: {
+                        "checks":checks,
+                        "select":select
+                    },
+                    success: function(data){
+                        if(data != '') {
+                            alert(data);
+                        }
+                    }
+                });
 
-
+                })
             })
 
             .fail(function(data){
@@ -77,8 +87,6 @@
                 console.log(data)
                 $("#jsonp").append("エラーです");
             });
-
-
         };
        
 
@@ -86,7 +94,6 @@
         function errorCallback(error){
             alert("位置情報が取得できませんでした");
         };
-
 
         console.log(latitude)
     </script>
