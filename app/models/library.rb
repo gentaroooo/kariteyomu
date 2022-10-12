@@ -1,7 +1,7 @@
 class Library < ApplicationRecord
-  has_many :user_libraries, dependent: :destroy
-  has_many :users, through: :user_libraries, source: :user
-
+  has_many :users, dependent: :destroy
+    # belongs_to :user
+  # belongs_to :library
   validates :name, presence: true
 end
 
