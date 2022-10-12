@@ -62,15 +62,15 @@
                     $('input:checked').each(function() {
                         var r = $(this).val();
                         console.log(r);
-                    })
 
-                    
-                $.ajax({
+
+                    $.ajax({
                     type: "POST",
-                    url: "form.php",
+                    url: '/libraries/',
                     data: {
-                        "checks":checks,
-                        "select":select
+                        library: {
+                        name:r,
+                        }
                     },
                     success: function(data){
                         if(data != '') {
@@ -78,6 +78,10 @@
                         }
                     }
                 });
+                    })
+
+                    
+
 
                 })
             })
@@ -94,7 +98,36 @@
         function errorCallback(error){
             alert("位置情報が取得できませんでした");
         };
+        
 
         console.log(latitude)
     </script>
+
+      <%
+=begin%>
+ <%= form_with model: @post, local: true do |f| %>
+
+        <div class="mb-4">
+          <%= f.label :body %>
+          <%= f.text_area :body, class: 'form-control', rows: 10 %>
+        </div>
+
+        <div class='form-group'>
+          <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
+            <div class='form-check'>
+              <%= category.label class: 'form-check-label' do %>
+                <%= category.check_box class: 'form-check-input' %>
+                <%= category.text %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        
+        <%= f.submit class: 'btn btn-primary' %>
+      <% end %> 
+<%
+=end%>
+
+
+    
 </body>

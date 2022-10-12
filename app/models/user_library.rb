@@ -1,4 +1,4 @@
 class UserLibrary < ApplicationRecord
   belongs_to :user
-  belongs_to :ribrary
+  belongs_to :library
 end
