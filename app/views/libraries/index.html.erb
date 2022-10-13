@@ -34,7 +34,6 @@
             console.log(longitude)
             document.getElementById("longitude").innerHTML = longitude;
 
-            //  debugger
             $.ajax({
                 type: 'GET',
                 url: 'https://api.calil.jp/library',
@@ -44,7 +43,6 @@
                     geocode: `${longitude},${latitude}`,
                     limit: 10,
                 },
-                
                 dataType: 'jsonp',
                 jsonp: 'callback',//コールバックパラメータ名の指定
             })
@@ -54,8 +52,8 @@
                 console.log(data)
 
                 Object.keys(data).forEach( function(value) {
-                    $("#library").after(`<input type="checkbox" name="chk1" value="${this[value].short}">${this[value].short}`)
-                    // console.log(this[value].short)
+                    $("#library").after(`<input type="checkbox" name="chk1" value="${this[value].systemid}">${this[value].pref}${this[value].city}`)
+                    // console.log(this[value].formal)
                 }, data)
                     $('button').click(function() {
                     //すべてのチェック済みvalue値を取得する
@@ -63,26 +61,16 @@
                         var r = $(this).val();
                         console.log(r);
 
-
-                    $.ajax({
-                    type: "POST",
-                    url: '/libraries/',
-                    data: {
-                        library: {
-                        name:r,
-                        }
-                    },
-                    success: function(data){
-                        if(data != '') {
-                            alert(data);
-                        }
-                    }
-                });
+                        $.ajax({
+                            type: "POST",
+                            url: '/libraries/',
+                            data: {
+                                library: {
+                                name:r,
+                                }
+                            },
+                        });
                     })
-
-                    
-
-
                 })
             })
 
@@ -98,36 +86,6 @@
         function errorCallback(error){
             alert("位置情報が取得できませんでした");
         };
-        
-
         console.log(latitude)
     </script>
-
-      <%
-=begin%>
- <%= form_with model: @post, local: true do |f| %>
-
-        <div class="mb-4">
-          <%= f.label :body %>
-          <%= f.text_area :body, class: 'form-control', rows: 10 %>
-        </div>
-
-        <div class='form-group'>
-          <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
-            <div class='form-check'>
-              <%= category.label class: 'form-check-label' do %>
-                <%= category.check_box class: 'form-check-input' %>
-                <%= category.text %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-        
-        <%= f.submit class: 'btn btn-primary' %>
-      <% end %> 
-<%
-=end%>
-
-
-    
 </body>

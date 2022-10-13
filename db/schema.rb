@@ -122,11 +122,11 @@ ActiveRecord::Schema.define(version: 2022_10_09_035706) do
 
   create_table "user_libraries", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "ribrary_id", null: false
+    t.integer "library_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\"user_id\", \"library_id\"", name: "index_user_libraries_on_user_id_and_library_id", unique: true
-    t.index ["ribrary_id"], name: "index_user_libraries_on_ribrary_id"
+    t.index ["library_id"], name: "index_user_libraries_on_library_id"
+    t.index ["user_id", "library_id"], name: "index_user_libraries_on_user_id_and_library_id", unique: true
     t.index ["user_id"], name: "index_user_libraries_on_user_id"
   end
 
@@ -162,6 +162,6 @@ ActiveRecord::Schema.define(version: 2022_10_09_035706) do
   add_foreign_key "posts", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
-  add_foreign_key "user_libraries", "ribraries"
+  add_foreign_key "user_libraries", "libraries"
   add_foreign_key "user_libraries", "users"
 end

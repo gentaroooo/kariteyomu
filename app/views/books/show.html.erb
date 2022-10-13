@@ -35,6 +35,11 @@
               貸出情報
               <p id="kensaku"><button type="button" class="btn btn-secondary">検索中</button></p>
               <p id="choice"></p>
+    
+
+              <%= @library %>
+              
+                              
 
               <script>
                     function promiseFactory(count) {
@@ -49,7 +54,8 @@
                               appkey: "<%= ENV['APP_KEY'] %>",
                               isbn: Number("<%= @book.systemid %>"),
                               // systemid: 'Kanagawa_Hiratsuka',
-                              systemid: 'Tokyo_Setagaya',
+                              // systemid: 'Tokyo_Setagaya',
+                              systemid: "<%= @library %>",
                             },
                             dataType: 'jsonp',
                             jsonp: 'callback',//コールバックパラメータ名の指定
@@ -57,7 +63,7 @@
 
                           .done(function(data){
                             console.log(data)
-                            const test = data.books[Number("<%= @book.systemid %>")].Tokyo_Setagaya.libkey
+                            const test = data.books[Number("<%= @book.systemid %>")].<%= @library %>.libkey
 
                             if (data.continue === 0) {
                               console.log("取得に成功")
