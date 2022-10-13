@@ -32,4 +32,6 @@ Rails.application.routes.draw do
   resources :password_resets, only: %i[new create edit update]
 
   resources :relationships, only: [:create, :destroy]
+
+  resources :libraries, only: [:index, :create, :destroy]
 end

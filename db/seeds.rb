@@ -16,7 +16,7 @@ end
   )
 end
 
-90.times do |index|
+10.times do |index|
   Post.create(
     user: User.offset(rand(User.count)).first,
     title: Faker::Book.title,
