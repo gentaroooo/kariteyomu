@@ -1,5 +1,18 @@
 <h1>libraryのindexだよ！！</h1>
-	<body>
+
+    <% if @library.present? %>
+        <h1>存在してる</h1>
+        <%= @library.name %>
+        
+
+    
+
+
+
+
+
+    <% else %>
+    <h1>存在してないよ</h1>
     <div class="center">
         <div class="btn-margin">
             <button id="btn" class="btn btn-outline-primary btn-lg">
@@ -12,9 +25,7 @@
         </div>
 
         <p id="library"></p>
-        <button>ボタン</button>
-
-
+        <button>登録する</button>
     </div>
     <script>
         // ボタンを押した時の処理
@@ -34,6 +45,7 @@
             console.log(longitude)
             document.getElementById("longitude").innerHTML = longitude;
 
+            //取得した緯度経度から近隣の図書館を検索
             $.ajax({
                 type: 'GET',
                 url: 'https://api.calil.jp/library',
@@ -41,51 +53,72 @@
                     appkey: "<%= ENV['APP_KEY'] %>",
                     format: "json",
                     geocode: `${longitude},${latitude}`,
-                    limit: 10,
+                    limit: 20,
                 },
                 dataType: 'jsonp',
-                jsonp: 'callback',//コールバックパラメータ名の指定
+                jsonp: 'callback'
             })
-            
+
+            //図書館検索に成功した場合JSONをdataに格納
             .done(function(data){
                 console.log("成功")
                 console.log(data)
+                //dataの並び順を逆にする
+                data.reverse();
 
-                Object.keys(data).forEach( function(value) {
-                    $("#library").after(`<input type="checkbox" name="chk1" value="${this[value].systemid}">${this[value].pref}${this[value].city}`)
-                    // console.log(this[value].formal)
-                }, data)
+                const filterData = data.filter((item, index, self) => {
+                // systemidだけをリスト化する
+                
+                const nameList = self.map(item => item['systemid']);
+                // systemidの重複を削除する
+                    if (nameList.indexOf(item.systemid) === index) {
+                        return item;
+                    }
+                });
+
+                // 重複を削除した値
+                console.log(filterData)
+
+                //重複を削除したfilterDataをひとつずつvalueに格納
+                Object.keys(filterData).forEach( function(value) {
+                    //チェックボックスで地域名を表示する(valueはsystemid）
+                    $("#library").after(`<input type=radio name=chk1 value=${this[value].systemid}>
+                    ${this[value].systemname}`)
+                    
+                }, filterData)
+                    //チェックボックスをクリックしたら発火
                     $('button').click(function() {
                     //すべてのチェック済みvalue値を取得する
                     $('input:checked').each(function() {
-                        var r = $(this).val();
-                        console.log(r);
-
+                        //libraryNameにチェック済みの値を代入する
+                        var libraryName = $(this).val();
+                        console.log(libraryName);
+                        //libraryNameをlibrariesにPOSTする
                         $.ajax({
                             type: "POST",
                             url: '/libraries/',
                             data: {
                                 library: {
-                                name:r,
+                                name:libraryName,
                                 }
                             },
                         });
                     })
                 })
             })
-
+            //POSTに失敗した場合
             .fail(function(data){
                 console.log("失敗")
                 console.log(data)
                 $("#jsonp").append("エラーです");
             });
         };
-       
 
         // 取得に失敗した場合の処理
         function errorCallback(error){
             alert("位置情報が取得できませんでした");
         };
         console.log(latitude)
+    <% end %>
     </script>
 </body>

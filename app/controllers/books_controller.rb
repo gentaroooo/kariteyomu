@@ -24,11 +24,11 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @libraries = current_user.libraries
+    @library = current_user.library
 
-    @libraries.each do |library|
-      @library = library.name  
-    end
+    # @libraries.each do |library|
+    #   @library = library.name  
+    # end
     
 
     # uri = URI.parse("https://api.calil.jp/check")

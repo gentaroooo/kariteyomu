@@ -32,60 +32,64 @@
         <div class="card-body">
           <div class='row'>
             <div class='col-md-9'>
-              貸出情報
+              <%= @library.name%>貸出情報
               <p id="kensaku"><button type="button" class="btn btn-secondary">検索中</button></p>
               <p id="choice"></p>
     
-
-              <%= @library %>
-              
-                              
-
               <script>
                     function promiseFactory(count) {
                       return new Promise((resolve, reject) => {
                          timer_id = setTimeout(() => {
                             count++;
                             console.log(`${count}回目のコールです。時刻：[${new Date().toTimeString()}]`);
-                          $.ajax({
-                            type: 'GET',
-                            url: 'https://api.calil.jp/check',
-                            data:{
-                              appkey: "<%= ENV['APP_KEY'] %>",
-                              isbn: Number("<%= @book.systemid %>"),
-                              // systemid: 'Kanagawa_Hiratsuka',
-                              // systemid: 'Tokyo_Setagaya',
-                              systemid: "<%= @library %>",
-                            },
-                            dataType: 'jsonp',
-                            jsonp: 'callback',//コールバックパラメータ名の指定
-                          })
+                            //本の貸出情報をGETリクエストする
+                            $.ajax({
+                              type: 'GET',
+                              url: 'https://api.calil.jp/check',
+                              data:{
+                                appkey: "<%= ENV['APP_KEY'] %>",
+                                isbn: Number("<%= @book.systemid %>"),
+                                systemid: "<%= @library.name %>",
+                              },
+                              dataType: 'jsonp',
+                              jsonp: 'callback',
+                            })
 
-                          .done(function(data){
-                            console.log(data)
-                            const test = data.books[Number("<%= @book.systemid %>")].<%= @library %>.libkey
+                            // 成功した場合dataにJSONを格納
+                            .done(function(data){
+                              console.log(data)
+                              // JSONから図書館、貸出情報を取得してsituationに代入
+                              const situation = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.libkey
+                              // data.continueが0だった場合
+                              if (data.continue === 0) {
+                                console.log("取得に成功")
+                                // situationからひとづつ値を取り出してvalueに代入
+                                Object.keys(situation).forEach( function(value) {
+                                  //kensakuに値があれば削除からひとづつ値を取り出してvalueに代入
+                                  $("#kensaku").remove();
+                                  //choiceにvalue（図書館名）、this[value](貸出情報)を出力
+                                  $("#choice").after(`<div>
+                                  <button type="button" class="btn btn-success">${value} : ${this[value]}</button>
+                                  </div>`)
+                                }, situation)
+                                //data.continueが0だった場合にループ（setTimeout）を抜ける
+                                clearTimeout( timer_id );
 
-                            if (data.continue === 0) {
-                              console.log("取得に成功")
-                              Object.keys(test).forEach( function(value) {
-                                $("#kensaku").remove();
-                                $("#choice").after(`<div>
-                                <button type="button" class="btn btn-success">${value} : ${this[value]}</button>
-                                </div>`)
-                              }, test)
-                              clearTimeout( timer_id );
-                            } else {
-                              if (count === 3 ) { // 3回目のコールでエラー
-                              reject(count);
+                              //data.continueが0だった場合は3回リトライをする 
                               } else {
-                              resolve(count);
+                                // 3回目のコールでエラー
+                                if (count === 3 ) {
+                                reject(count);
+                                } else {
+                                resolve(count);
+                                }
                               }
-                            }
-                          })
+                            })
 
-                          .fail(function(data){
-                            $("#jsonp").append("エラーです");
-                          });
+                            //https://api.calil.jp/checkへのGETに失敗した場合
+                            .fail(function(data){
+                              $("#jsonp").append("エラーです");
+                            });
 
                         }, 2000);
                       });

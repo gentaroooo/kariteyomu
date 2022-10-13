@@ -1,5 +1,7 @@
 class LibrariesController < ApplicationController
-  def index; end
+  def index
+    @library = current_user.library
+  end
 
   def create
     @library = current_user.libraries.build(library_params)
