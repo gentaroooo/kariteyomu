@@ -1,18 +1,23 @@
 <h1>libraryのindexだよ！！</h1>
 
-    <% if @library.present? %>
-        <h1>存在してる</h1>
-        <%= @library.name %>
+
+        登録したエリア<%= @library.name %>
         
 
-    
+        <%= form_with model: @library, local: true do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control' %>
+        </div>
+
+        <%= f.submit class: 'btn btn-primary' %>
+        <% end %>
 
 
 
 
 
-    <% else %>
-    <h1>存在してないよ</h1>
     <div class="center">
         <div class="btn-margin">
             <button id="btn" class="btn btn-outline-primary btn-lg">
@@ -119,6 +124,5 @@
             alert("位置情報が取得できませんでした");
         };
         console.log(latitude)
-    <% end %>
     </script>
 </body>
