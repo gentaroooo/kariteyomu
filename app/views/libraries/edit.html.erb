@@ -1,20 +1,7 @@
 <body>
-    <% if @library.present? %>
         <h1><%= "登録しているエリアは#{@library.name}です" %></h1> 
 
-        <h2>エリアを変更する
-        <%= link_to edit_library_path(@library), id: "button-edit-#{@library.id}" do %>
-            <%= icon 'fa', 'pen' %>
-        <% end %>
-        </h2>
 
-        <h2>エリアを削除する
-        <%= link_to library_path(@library), id: "button-delete-#{@library.id}", method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
-            <%= icon 'fas', 'trash' %>
-        <% end %>
-        </h2>
-
-    <% else %>
         <h1><%= link_to "現在地を取得する", libraries_path, remote: true, class: 'btn btn-outline-primary btn-lg' %></h1>
         <div class="center">
             <div class="btn-margin">
@@ -28,5 +15,4 @@
                 <p class="library"></p>
             </div>
         </div>
-    <% end %>
 </body>
