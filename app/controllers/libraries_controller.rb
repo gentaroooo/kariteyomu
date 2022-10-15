@@ -23,8 +23,9 @@ class LibrariesController < ApplicationController
   end
 
   def destroy
-    @library = current_user.library.find(params[:id])
+    @library = current_user.library
     @library.destroy!
+    redirect_to libraries_path, success: ('図書館登録を削除しました')
   end
 
   private
