@@ -34,7 +34,8 @@
           <div class='row'>
             <div class='col-md-9'>
               <%= @library.name%>貸出情報
-              <p id="kensaku"><button type="button" class="btn btn-warning">検索中</button></p>
+              <p id="kensaku"><i class="fa fa-spinner fa-spin fa-4x fa-fw" style="color: orange"></i></p>
+              
               <p id="choice"></p>
               <p id="choice2"></p>
     
@@ -81,15 +82,9 @@
                                     $("#choice").prepend(`<div>
                                     <button type="button" class="btn btn-dark">本がないですよ〜</button>
                                     </div>`)
-                                    clearTimeout( timer_id )
+                                    clearTimeout( timer_id );
                                   
                                 } else {
-
-
-
-
-
-
 
                                   // situationからひとづつ値を取り出してvalueに代入
                                   Object.keys(situation).forEach( function(value) {
