@@ -19,7 +19,8 @@
           <% if current_user.own?(@book) %> 
             <ul class='crud-menu-btn list-inline float-right'>
               <li class="list-inline-item">
-                <%= link_to book_path(@book), id: "button-delete-#{@book.id}", method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
+                <%= link_to book_path(@book), id: "button-delete-#{@book.id}",
+                 method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
                   <%= icon 'fas', 'trash' %>
                 <% end %>
               </li>
@@ -35,6 +36,7 @@
               <%= @library.name%>貸出情報
               <p id="kensaku"><button type="button" class="btn btn-secondary">検索中</button></p>
               <p id="choice"></p>
+              <p id="choice2"></p>
     
               <script>
                     function promiseFactory(count) {
@@ -60,6 +62,11 @@
                               console.log(data)
                               // JSONから図書館、貸出情報を取得してsituationに代入
                               const situation = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.libkey
+
+                              const reserveurl = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.reserveurl
+
+                              console.log(situation)
+                              console.log(reserveurl)
                               // data.continueが0だった場合
                               if (data.continue === 0) {
                                 console.log("取得に成功")
@@ -68,10 +75,15 @@
                                   //kensakuに値があれば削除からひとづつ値を取り出してvalueに代入
                                   $("#kensaku").remove();
                                   //choiceにvalue（図書館名）、this[value](貸出情報)を出力
-                                  $("#choice").after(`<div>
+                                  $("#choice").prepend(`<div>
                                   <button type="button" class="btn btn-success">${value} : ${this[value]}</button>
                                   </div>`)
                                 }, situation)
+
+                                $("#choice2").prepend(`<div>
+                                  <button type="button" class="btn btn-outline-info"><a href="${reserveurl}">予約する</a></button>
+                                  </div>`)
+
                                 //data.continueが0だった場合にループ（setTimeout）を抜ける
                                 clearTimeout( timer_id );
 
