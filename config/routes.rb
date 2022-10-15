@@ -33,5 +33,5 @@ Rails.application.routes.draw do
 
   resources :relationships, only: [:create, :destroy]
 
-  resources :libraries, only: [:index, :create, :destroy]
+  resources :libraries, only: [:index, :create, :destroy, :edit, :update]
 end
