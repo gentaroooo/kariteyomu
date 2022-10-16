@@ -19,7 +19,8 @@
           <% if current_user.own?(@book) %> 
             <ul class='crud-menu-btn list-inline float-right'>
               <li class="list-inline-item">
-                <%= link_to book_path(@book), id: "button-delete-#{@book.id}", method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
+                <%= link_to book_path(@book), id: "button-delete-#{@book.id}",
+                 method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
                   <%= icon 'fas', 'trash' %>
                 <% end %>
               </li>
@@ -33,8 +34,10 @@
           <div class='row'>
             <div class='col-md-9'>
               <%= @library.name%>貸出情報
-              <p id="kensaku"><button type="button" class="btn btn-secondary">検索中</button></p>
+              <p id="kensaku"><i class="fa fa-spinner fa-spin fa-4x fa-fw" style="color: orange"></i></p>
+              
               <p id="choice"></p>
+              <p id="choice2"></p>
     
               <script>
                     function promiseFactory(count) {
@@ -60,25 +63,59 @@
                               console.log(data)
                               // JSONから図書館、貸出情報を取得してsituationに代入
                               const situation = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.libkey
+                              // JSONから予約情報を取得してreserveurlに代入
+                              const reserveurl = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.reserveurl
+
+                              console.log(situation)
+                              console.log(reserveurl)
                               // data.continueが0だった場合
                               if (data.continue === 0) {
                                 console.log("取得に成功")
-                                // situationからひとづつ値を取り出してvalueに代入
-                                Object.keys(situation).forEach( function(value) {
-                                  //kensakuに値があれば削除からひとづつ値を取り出してvalueに代入
-                                  $("#kensaku").remove();
-                                  //choiceにvalue（図書館名）、this[value](貸出情報)を出力
-                                  $("#choice").after(`<div>
-                                  <button type="button" class="btn btn-success">${value} : ${this[value]}</button>
-                                  </div>`)
-                                }, situation)
-                                //data.continueが0だった場合にループ（setTimeout）を抜ける
-                                clearTimeout( timer_id );
+
+                                // const isEmpty = Object.keys(situation).length === 0 && situation.constructor === Object;
+                                // console.log(isEmpty); // true
+
+                                if (Object.keys(situation).length === 0 && situation.constructor === Object) {
+                                  console.log("からですよ〜")
+
+                                    $("#kensaku").remove();
+                                    $("#choice").prepend(`<div>
+                                    <button type="button" class="btn btn-dark">本がないですよ〜</button>
+                                    </div>`)
+                                    clearTimeout( timer_id );
+                                  
+                                } else {
+
+                                  // situationからひとづつ値を取り出してvalueに代入
+                                  Object.keys(situation).forEach( function(value) {
+                                    //kensakuに値があれば削除からひとづつ値を取り出してvalueに代入
+                                    $("#kensaku").remove();
+                                    //choiceにvalue（図書館名）、this[value](貸出情報)を出力
+                                    if (this[value] === "貸出可") {
+                                      $("#choice").prepend(`<div>
+                                      <button type="button" class="btn btn-success">${value} : ${this[value]}</button>
+                                      </div>`)
+                                    } else {
+
+                                    
+                                    $("#choice").prepend(`<div>
+                                    <button type="button" class="btn btn-warning">${value} : ${this[value]}</button>
+                                    </div>`)
+                                    }
+                                  }, situation)
+
+                                  $("#choice2").prepend(`<div>
+                                    <button type="button" class="btn btn-outline-info"><a href="${reserveurl}">予約する</a></button>
+                                    </div>`)
+
+                                  //data.continueが0だった場合にループ（setTimeout）を抜ける
+                                  clearTimeout( timer_id );
+                                  }
 
                               //data.continueが0だった場合は3回リトライをする 
                               } else {
-                                // 3回目のコールでエラー
-                                if (count === 3 ) {
+                                // 10回目のコールでエラー
+                                if (count === 10 ) {
                                 reject(count);
                                 } else {
                                 resolve(count);
@@ -99,6 +136,13 @@
                               // promiseFactory内のresolveが呼び出されるまで次の処理を実行しない
                               //awaitによってresolveの引数の値がcountに代入される
                               let count = await promiseFactory(0);
+                              count = await promiseFactory(count);
+                              count = await promiseFactory(count);
+                              count = await promiseFactory(count);
+                              count = await promiseFactory(count);
+                              count = await promiseFactory(count);
+                              count = await promiseFactory(count);
+                              count = await promiseFactory(count);
                               count = await promiseFactory(count);
                               count = await promiseFactory(count);
                               count = await promiseFactory(count);
