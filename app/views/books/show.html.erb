@@ -72,8 +72,8 @@
                               if (data.continue === 0) {
                                 console.log("取得に成功")
 
-                                const isEmpty = Object.keys(situation).length === 0 && situation.constructor === Object;
-                                console.log(isEmpty); // true
+                                // const isEmpty = Object.keys(situation).length === 0 && situation.constructor === Object;
+                                // console.log(isEmpty); // true
 
                                 if (Object.keys(situation).length === 0 && situation.constructor === Object) {
                                   console.log("からですよ〜")
@@ -91,9 +91,17 @@
                                     //kensakuに値があれば削除からひとづつ値を取り出してvalueに代入
                                     $("#kensaku").remove();
                                     //choiceにvalue（図書館名）、this[value](貸出情報)を出力
+                                    if (this[value] === "貸出可") {
+                                      $("#choice").prepend(`<div>
+                                      <button type="button" class="btn btn-success">${value} : ${this[value]}</button>
+                                      </div>`)
+                                    } else {
+
+                                    
                                     $("#choice").prepend(`<div>
-                                    <button type="button" class="btn btn-success">${value} : ${this[value]}</button>
+                                    <button type="button" class="btn btn-warning">${value} : ${this[value]}</button>
                                     </div>`)
+                                    }
                                   }, situation)
 
                                   $("#choice2").prepend(`<div>
