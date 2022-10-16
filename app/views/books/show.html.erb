@@ -66,53 +66,67 @@
                               // JSONから予約情報を取得してreserveurlに代入
                               const reserveurl = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.reserveurl
 
+                              const status = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.status
+
                               console.log(situation)
                               console.log(reserveurl)
+                              console.log(status)
                               // data.continueが0だった場合
                               if (data.continue === 0) {
                                 console.log("取得に成功")
 
                                 // const isEmpty = Object.keys(situation).length === 0 && situation.constructor === Object;
                                 // console.log(isEmpty); // true
-
-                                if (Object.keys(situation).length === 0 && situation.constructor === Object) {
-                                  console.log("からですよ〜")
-
+                                if (status === 'Error') {
+                                  console.log("Errorですよ〜")
                                     $("#kensaku").remove();
                                     $("#choice").prepend(`<div>
-                                    <button type="button" class="btn btn-dark">本がないですよ〜</button>
+                                    <button type="button" class="btn btn-dark">システムエラーですよ〜</button>
                                     </div>`)
                                     clearTimeout( timer_id );
-                                  
+
                                 } else {
 
-                                  // situationからひとづつ値を取り出してvalueに代入
-                                  Object.keys(situation).forEach( function(value) {
-                                    //kensakuに値があれば削除からひとづつ値を取り出してvalueに代入
-                                    $("#kensaku").remove();
-                                    //choiceにvalue（図書館名）、this[value](貸出情報)を出力
-                                    if (this[value] === "貸出可") {
+                                
+
+                                  if (Object.keys(situation).length === 0 && situation.constructor === Object) {
+                                    console.log("からですよ〜")
+
+                                      $("#kensaku").remove();
                                       $("#choice").prepend(`<div>
-                                      <button type="button" class="btn btn-success">${value} : ${this[value]}</button>
+                                      <button type="button" class="btn btn-dark">本がないですよ〜</button>
                                       </div>`)
-                                    } else {
-
+                                      clearTimeout( timer_id );
                                     
-                                    $("#choice").prepend(`<div>
-                                    <button type="button" class="btn btn-warning">${value} : ${this[value]}</button>
-                                    </div>`)
+                                  } else {
+
+                                    // situationからひとづつ値を取り出してvalueに代入
+                                    Object.keys(situation).forEach( function(value) {
+                                      //kensakuに値があれば削除からひとづつ値を取り出してvalueに代入
+                                      $("#kensaku").remove();
+                                      //choiceにvalue（図書館名）、this[value](貸出情報)を出力
+                                      if (this[value] === "貸出可") {
+                                        $("#choice").prepend(`<div>
+                                        <button type="button" class="btn btn-success">${value} : ${this[value]}</button>
+                                        </div>`)
+                                      } else {
+
+                                      
+                                      $("#choice").prepend(`<div>
+                                      <button type="button" class="btn btn-warning">${value} : ${this[value]}</button>
+                                      </div>`)
+                                      }
+                                    }, situation)
+
+                                    $("#choice2").prepend(`<div>
+                                      <button type="button" class="btn btn-outline-info"><a href="${reserveurl}">予約する</a></button>
+                                      </div>`)
+
+                                    //data.continueが0だった場合にループ（setTimeout）を抜ける
+                                    clearTimeout( timer_id );
                                     }
-                                  }, situation)
-
-                                  $("#choice2").prepend(`<div>
-                                    <button type="button" class="btn btn-outline-info"><a href="${reserveurl}">予約する</a></button>
-                                    </div>`)
-
-                                  //data.continueが0だった場合にループ（setTimeout）を抜ける
-                                  clearTimeout( timer_id );
-                                  }
-
-                              //data.continueが0だった場合は3回リトライをする 
+                                }
+                              //data.continueが0だった場合は10回リトライをする 
                               } else {
                                 // 10回目のコールでエラー
                                 if (count === 10 ) {
