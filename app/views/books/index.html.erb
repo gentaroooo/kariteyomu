@@ -1,7 +1,6 @@
-<div class="container-fluid">
-  <p>
+<div class="container">
   <!-- 掲示板一覧 -->
-  <div class="row row-cols-1 row-cols-md-2">
+  <p><div class="row row-cols-1 row-cols-md-2"></p>
     <% if @book.present? %>
       <%= render @book %>
     <% else %>
@@ -9,7 +8,10 @@
     <% end %>
     </div>
   </div>
-  <p><div class="pagination"></p>
-   <%= paginate @book %>
+
+  <div class="row row-cols-1 row-cols-md-2">
+    <p><div class="pagination"></p>
+    <%= paginate @book %>
   </div> 
  </div>
+</div>
