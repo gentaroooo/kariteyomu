@@ -1,34 +1,32 @@
-<div class="container pt-5">
-  <div class="row mb-3">
-    <div class="col-lg-8 offset-lg-2">
-      <h1><%= t('.title') %></h1>
-      <!-- 掲示板内容 -->
-      <div class="card mb-4 p-3">
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <div class="card mb-3">
         <div class="row g-0">
-          <div class="col-5">
-            <%= image_tag @book.image_link.blank? ? 'sample.jpeg' : @book.image_link, class: 'img-fluid border' %>
+          <div class="col-md-4">
+            <%= image_tag @book.image_link.blank? ? 'sample.jpeg' : @book.image_link, class: 'book-img' %>
           </div>
-          <div class="col-7">
+          <div class="col">
             <div class="card-body">
-              <h5 class="card-title"><%= @book.title %></h5>
-              <p class="card-text mb-2"><%= @book.authors.pluck(:name).join(', ')&.truncate(50) %></p>
-              <p class="card-text"><small class="text-muted"><%= @book.published_date %></small></p>
-              <%= link_to '詳細を見る', @book.info_link, target: '_blank' %>
-            </div>
+            <h5 class="card-title"><%= @book.title %></h5>
+            <p class="card-text mb-2"><%= @book.authors.pluck(:name).join(', ')&.truncate(50) %></p>
+            <p class="card-text"><small class="text-muted"><%= @book.published_date %></small></p>
+            <%= link_to '詳細を見る', @book.info_link, target: '_blank' %>
+
+            <% if current_user.own?(@book) %> 
+              <h5><%= link_to book_path(@book), id: "button-delete-#{@book.id}",
+              method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
+                <i class="fa-solid fa-trash"></i>
+                </h5>
+              <% end %>
+            <% end %> 
+            
+            
           </div>
-          <% if current_user.own?(@book) %> 
-            <ul class='crud-menu-btn list-inline float-right'>
-              <li class="list-inline-item">
-                <%= link_to book_path(@book), id: "button-delete-#{@book.id}",
-                 method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
-                  <%= icon 'fas', 'trash' %>
-                <% end %>
-              </li>
-            </ul>
-          <% end %>
         </div>
       </div>
-      
+    </div>
+
       <article class="card">
         <div class="card-body">
           <div class='row'>
@@ -174,6 +172,8 @@
           </div>
         </div>
       </article>
+
+      
     </div>
   </div>
 </div>
