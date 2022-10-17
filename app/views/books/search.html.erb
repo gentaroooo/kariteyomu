@@ -36,20 +36,6 @@
                   <p class="card-text mb-2"><%= google_book['volumeInfo']['authors']&.join(', ')&.truncate(20) %></p>
                   <p class="card-text"><small class="text-muted"><%= google_book['volumeInfo']['publishedDate'] %></small></p>
                   
-                  <!-- 確認用 -->
-                  <% google_book_isbn(google_book) %>
-                  <%
-=begin%>
- <%= google_book['volumeInfo']['systemid1'] %>
-                  <%= google_book['volumeInfo']['systemid2'] %>  
-<%
-=end%>
-                  <%
-=begin%>
- <%= @hash %> 
-<%
-=end%>
-                  
                   <!-- 投稿フォーム -->
                   <%= form_with model: @book, local: true, id: "new_book" do |f| %>
                     <%= f.hidden_field :title, value: set_google_book_params(google_book)["title"] %>
