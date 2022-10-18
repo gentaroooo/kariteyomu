@@ -1,6 +1,6 @@
 <div class="container pt-3">
   <div class="row mb-3">
-    <div class="col-lg-10 offset-lg-1">
+    <div class="col">
       <!-- 検索フォーム -->
       <%= form_with url: search_books_path, local: true, method: :get do |f| %>
         <div class="mb-3">
@@ -8,7 +8,7 @@
           <%= f.search_field :search, class: "form-control", placeholder: '検索', value: params[:search] %>
           <p class=""><small class="text-secondary">書名・著者等で検索することができます。</small></p>
         </div>
-        <%= f.submit t('defaults.search'), class: "btn btn-primary" %>
+        <%= f.submit t('defaults.search'), class: "btn btn-success" %>
       <% end %>
     </div>
   </div>
@@ -25,29 +25,34 @@
             <div class="row g-0">
               <div class="col-5">
 
-                <%= link_to 'レビューする', new_post_path(volumeInfo: set_google_book_params(google_book)), id: "new_review" %>
-                <%= image_tag google_book_thumbnail(google_book), class: 'img-fluid ms-2 mt-2 border book-img' %>
+                <%= image_tag google_book_thumbnail(google_book), class: 'img-fluid ms-2 mt-2 border book-img m-1' %>
+
+                <!-- 投稿フォーム -->
+                <%= form_with model: @book, local: true, id: "new_book" do |f| %>
+                  <%= f.hidden_field :title, value: set_google_book_params(google_book)["title"] %>
+                  <%= f.hidden_field :published_date, value: set_google_book_params(google_book)["publishedDate"] %>
+                  <%= f.hidden_field :info_link, value: set_google_book_params(google_book)["infoLink"] %>
+                  <%= f.hidden_field :image_link, value: set_google_book_params(google_book)["bookImage"] %>
+                  <%= f.hidden_field :systemid, value: set_google_book_params(google_book)["systemid"] %>
+                  <% set_google_book_params(google_book)["authors"]&.each do |author| %>
+                    <%= hidden_field_tag 'book[authors][]', author %>
+                  <% end %>
+                  <%= f.submit "読んでみたい", class: 'btn btn-success btn-sm m-1' %>
+                <% end %>
+
+                <%= link_to 'レビューする', new_post_path(volumeInfo: set_google_book_params(google_book)), class: "btn btn-info btn-sm m-1" %>
+
 
 
               </div>
               <div class="col-7">
                 <div class="card-body">
-                  <h5 class="card-title"><%= google_book['volumeInfo']['title'].truncate(30) %></h5>
+                  <h5 class="card-title"><%= google_book['volumeInfo']['title'].truncate(20) %></h5>
                   <p class="card-text mb-2"><%= google_book['volumeInfo']['authors']&.join(', ')&.truncate(20) %></p>
                   <p class="card-text"><small class="text-muted"><%= google_book['volumeInfo']['publishedDate'] %></small></p>
                   
-                  <!-- 投稿フォーム -->
-                  <%= form_with model: @book, local: true, id: "new_book" do |f| %>
-                    <%= f.hidden_field :title, value: set_google_book_params(google_book)["title"] %>
-                    <%= f.hidden_field :published_date, value: set_google_book_params(google_book)["publishedDate"] %>
-                    <%= f.hidden_field :info_link, value: set_google_book_params(google_book)["infoLink"] %>
-                    <%= f.hidden_field :image_link, value: set_google_book_params(google_book)["bookImage"] %>
-                    <%= f.hidden_field :systemid, value: set_google_book_params(google_book)["systemid"] %>
-                    <% set_google_book_params(google_book)["authors"]&.each do |author| %>
-                      <%= hidden_field_tag 'book[authors][]', author %>
-                    <% end %>
-                    <%= f.submit "読んでみたい" %>
-                  <% end %>
+
+                  
                 </div>
               </div>
             </div>
