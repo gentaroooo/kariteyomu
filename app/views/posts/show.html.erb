@@ -1,24 +1,19 @@
-<div class="container pt-5">
-  <div class="row mb-3">
-    <div class="col-lg-8 offset-lg-2">
-      <h1><%= t('.title') %></h1>
-      <!-- 掲示板内容 -->
-      <div class="card mb-4 p-3">
-        <div class="row g-0">
-          <div class="col-5">
-            <%= image_tag @post.image_link.blank? ? 'sample.jpeg' : @post.image_link, class: 'img-fluid border' %>
-          </div>
-          <div class="col-7">
-            <div class="card-body">
+<div class="col row-cols-1 row-cols-md-2 p-2">
+  <div class="card mx-auto">
+    <div class="row g-0">
+      <div class="col-5">
+        <%= image_tag @post.image_link.blank? ? 'sample.jpeg' : @post.image_link, class: 'img-fluid border m-4' %>
+      </div>
   
-              <h5 class="card-title"><%= @post.title %></h5>
-              <p class="card-text mb-2"><%= @post.authors.pluck(:name).join(', ')&.truncate(50) %></p>
-              <p class="card-text"><small class="text-muted"><%= @post.published_date %></small></p>
-              <%= link_to '詳細を見る', @post.info_link, target: '_blank' %>
-            </div>
-          </div>
+      <div class="col-7">
+        <div class="card-body">
+          <h5 class="card-title"><%= @post.title %></h5>
+          <p class="card-text mb-2"><%= @post.authors.pluck(:name).join(', ')&.truncate(50) %></p>
+          <p class="card-text"><small class="text-muted"><%= @post.published_date %></small></p>
         </div>
       </div>
+    </div>
+  </div>
       
       <article class="card">
         <div class="card-body">
@@ -40,18 +35,18 @@
             <div class="d-flex">
               <div>
                 <% @post.categories.each do |category| %>
-                  <div class="badge rounded-pill bg-primary text-decoration-none text-white"><%= category.name %></div> 
+                  <div class="badge bg-info text-white"><%= category.name %></div> 
                 <% end %>
               </div>
             </div>
           </div>
         </div>
       </article>
-    </div>
-  </div>
 
+  <p>
   <!-- コメントフォーム -->
   <%= render 'comments/form', { post: @post, comment: @comment } %> 
   <!-- コメントエリア -->
   <%= render 'comments/comments', { comments: @comments } %> 
+  </p>
 </div>
