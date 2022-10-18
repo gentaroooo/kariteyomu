@@ -1,32 +1,47 @@
-<body>
-    <% if @library.present? %>
-        <h1><%= "登録しているエリアは#{@library.name}です" %></h1> 
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-2 p-2">
+        <% if @library.present? %>
+            <h5><%= "登録しているエリアは#{@library.name}です" %></h5> 
 
-        <h2>エリアを変更する
-        <%= link_to edit_library_path(@library), id: "button-edit-#{@library.id}" do %>
-            <%= icon 'fa', 'pen' %>
+             <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h4>
+                            エリアを変更する
+                            <%= link_to edit_library_path(@library), id: "button-edit-#{@library.id}" do %>
+                                <%= icon 'fa', 'pen' %>
+                            <% end %>
+                        </h4>
+                        <h5 class="text-secondary">現在地を取得して近隣のエリアを再び選択できます</h5>
+                    </li>
+                    <li class="list-group-item">
+                        <h4>
+                            エリアを削除する
+                            <%= link_to library_path(@library), id: "button-delete-#{@library.id}", method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
+                                <%= icon 'fas', 'trash' %>
+                            <% end %>
+                        </h4>
+                        <h5 class="text-secondary">登録した図書館エリアを削除します</h5>
+                    </li>
+                </ul>
+            </div>   
+
+            
+
+        <% else %>
+            <h1><%= link_to "現在地を取得する", libraries_path, remote: true, class: 'btn btn-outline-primary btn-lg' %></h1>
+            <div class="center">
+                <div class="btn-margin">
+
+                </div>
+                <div class="txt-margin">
+                    <p>緯度：<span id="latitude">???</span><span>度</span></p>
+                    <p>経度：<span id="longitude">???</span><span>度</span></p>
+                </div>
+                <div id="parent">
+                    <p class="library"></p>
+                </div>
+            </div>
         <% end %>
-        </h2>
-
-        <h2>エリアを削除する
-        <%= link_to library_path(@library), id: "button-delete-#{@library.id}", method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
-            <%= icon 'fas', 'trash' %>
-        <% end %>
-        </h2>
-
-    <% else %>
-        <h1><%= link_to "現在地を取得する", libraries_path, remote: true, class: 'btn btn-outline-primary btn-lg' %></h1>
-        <div class="center">
-            <div class="btn-margin">
-
-            </div>
-            <div class="txt-margin">
-                <p>緯度：<span id="latitude">???</span><span>度</span></p>
-                <p>経度：<span id="longitude">???</span><span>度</span></p>
-            </div>
-            <div id="parent">
-                <p class="library"></p>
-            </div>
-        </div>
-    <% end %>
-</body>
+    </div>
+</div>
