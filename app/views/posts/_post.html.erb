@@ -5,7 +5,7 @@
         <%= image_tag post.image_link.blank? ? 'sample.jpeg' : post.image_link, class: 'img-fluid border m-3' %>
         <div class="d-flex pt-2">
           <% post.categories.each do |category| %>
-            <div class="badge bg-info text-white"><%= category.name %></div> 
+            <div class="badge bg-info text-white m-0"><%= category.name %></div> 
           <% end %>
         </div>
       </div>
