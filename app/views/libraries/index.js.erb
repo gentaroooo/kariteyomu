@@ -10,11 +10,9 @@ function successCallback(position){
   // 緯度を取得し画面に表示
   var latitude = position.coords.latitude;
   console.log(latitude)
-  document.getElementById("latitude").innerHTML = latitude;
   // 経度を取得し画面に表示
   var longitude = position.coords.longitude;
   console.log(longitude)
-  document.getElementById("longitude").innerHTML = longitude;
 
   //取得した緯度経度から近隣の図書館を検索
   $.ajax({
@@ -51,9 +49,8 @@ function successCallback(position){
     console.log(filterData)
 
     $(".library").remove()
-    $('#parent').html('<p class="library"></p>')
-
-    $('.library').after('<button>登録する</button>')
+    $('#parent').html('<p class="library m-3"></p>')
+    $('.library').after('<button type="button" class="btn btn-success m-3">登録する</button>')
 
     //重複を削除したfilterDataをひとつずつvalueに格納
     Object.keys(filterData).forEach( function(value) {
