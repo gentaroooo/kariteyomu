@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
+  skip_before_action :require_login, only: %i[index]
 
   def index
     @posts = Post.all.includes([:user, :authors, :categories, :likes]).order(created_at: :desc).page(params[:page])

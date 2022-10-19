@@ -1,37 +1,5 @@
-<div class="container">
-   <%
-=begin%>
- <div class="row">
-     <div class="col-lg-10 offset-lg-1">
-       <!-- 検索フォーム -->
-       <form>
-         <div class="input-group mb-3">
-           <input class="form-control" placeholder="検索ワード" type="search" />
-           <div class="input-group-append">
-             <input type="submit" value="検索" class="btn btn-primary" />
-           </div>
-         </div>
-       </form>
-     </div>
-   </div> 
-<%
-=end%>
-  <%
-=begin%>
- <%= form_tag posts_path, method: :get, class: 'boards__searchForm' do %>
-      <%= select_tag :category_id,
-                     options_from_collection_for_select(Category.all, :id, :name, params[:category_id]),
-                     {
-                       prompt: 'タグで絞り込み検索',
-                       onchange: 'submit(this.form);'
-                     }
-      %>
-    <% end %> 
-<%
-=end%>
-
- 
-   <!-- 掲示板一覧 -->
+<% if logged_in? %>
+  <div class="container">
    <p><div class="row row-cols-1 row-cols-md-2"></p>
       <% if @posts.present? %>
         <%= render @posts %>
@@ -42,3 +10,10 @@
      <%= paginate @posts %> 
    </div>
  </div>
+<% else %>
+  <div class="top-wrapper">
+  <div class="top-inner-text">
+    <h1>かりてよむ</h1>
+  </div>
+</div>
+<% end %>
