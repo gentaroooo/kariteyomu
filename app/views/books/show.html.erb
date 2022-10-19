@@ -1,165 +1,169 @@
-<div class="container pt-5">
-  <div class="row mb-3">
-    <div class="col-lg-8 offset-lg-2">
-      <h1><%= t('.title') %></h1>
-      <!-- 掲示板内容 -->
-      <div class="card mb-4 p-3">
+   <div class="container p-1">   
+    <div class="col text-center">
+      <div class="card mb-3">
         <div class="row g-0">
-          <div class="col-5">
-            <%= image_tag @book.image_link.blank? ? 'sample.jpeg' : @book.image_link, class: 'img-fluid border' %>
+          <div class="col-md-4">
+            <%= image_tag @book.image_link.blank? ? 'sample.jpeg' : @book.image_link, class: 'book-img m-2' %>
           </div>
-          <div class="col-7">
+          <div class="col">
             <div class="card-body">
-              <h5 class="card-title"><%= @book.title %></h5>
-              <p class="card-text mb-2"><%= @book.authors.pluck(:name).join(', ')&.truncate(50) %></p>
-              <p class="card-text"><small class="text-muted"><%= @book.published_date %></small></p>
-              <%= link_to '詳細を見る', @book.info_link, target: '_blank' %>
-            </div>
-          </div>
-          <% if current_user.own?(@book) %> 
-            <ul class='crud-menu-btn list-inline float-right'>
-              <li class="list-inline-item">
+            <h5 class="card-title"><%= @book.title %></h5>
+            <p class="card-text mb-2"><%= @book.authors.pluck(:name).join(', ')&.truncate(50) %></p>
+            <p class="card-text"><small class="text-muted"><%= @book.published_date %></small></p>
+            <h5><%= link_to 'Googleで見る', @book.info_link, class: "badge bg-light" %></h5>
+            <% if current_user.own?(@book) %> 
+              <div class test>
                 <%= link_to book_path(@book), id: "button-delete-#{@book.id}",
-                 method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
-                  <%= icon 'fas', 'trash' %>
-                <% end %>
-              </li>
-            </ul>
-          <% end %>
+                method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
+                <i class="fa-solid fa-trash"></i>
+              </div>
+              <% end %>
+            <% end %> 
+          </div>
         </div>
       </div>
-      
-      <article class="card">
+    </div>
+  </div>
+
+<div class="container">
+  <% if @library.present? %>
+    <div class="low text-center">
+      <article class="card mb-3">
         <div class="card-body">
-          <div class='row'>
-            <div class='col-md-9'>
-              <%= @library.name%>貸出情報
-              <p id="kensaku"><i class="fa fa-spinner fa-spin fa-4x fa-fw" style="color: orange"></i></p>
-              
+            <div class='col'>
+              <h5><%= @library.name%>貸出情報</h5>
+              <p><div id="kensaku"><i class="fa fa-spinner fa-spin fa-4x fa-fw" style="color: orange"></i></div></p>
               <p id="choice"></p>
               <p id="choice2"></p>
     
-              <script>
-                    function promiseFactory(count) {
-                      return new Promise((resolve, reject) => {
-                         timer_id = setTimeout(() => {
-                            count++;
-                            console.log(`${count}回目のコールです。時刻：[${new Date().toTimeString()}]`);
-                            //本の貸出情報をGETリクエストする
-                            $.ajax({
-                              type: 'GET',
-                              url: 'https://api.calil.jp/check',
-                              data:{
-                                appkey: "<%= ENV['APP_KEY'] %>",
-                                isbn: Number("<%= @book.systemid %>"),
-                                systemid: "<%= @library.name %>",
-                              },
-                              dataType: 'jsonp',
-                              jsonp: 'callback',
-                            })
+                <script>
+                      function promiseFactory(count) {
+                        return new Promise((resolve, reject) => {
+                          timer_id = setTimeout(() => {
+                              count++;
+                              console.log(`${count}回目のコールです。時刻：[${new Date().toTimeString()}]`);
+                              //本の貸出情報をGETリクエストする
+                              $.ajax({
+                                type: 'GET',
+                                url: 'https://api.calil.jp/check',
+                                data:{
+                                  appkey: "<%= ENV['APP_KEY'] %>",
+                                  isbn: Number("<%= @book.systemid %>"),
+                                  systemid: "<%= @library.name %>",
+                                },
+                                dataType: 'jsonp',
+                                jsonp: 'callback',
+                              })
 
-                            // 成功した場合dataにJSONを格納
-                            .done(function(data){
-                              console.log(data)
-                              // JSONから図書館、貸出情報を取得してsituationに代入
-                              const situation = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.libkey
-                              // JSONから予約情報を取得してreserveurlに代入
-                              const reserveurl = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.reserveurl
+                              // 成功した場合dataにJSONを格納
+                              .done(function(data){
+                                console.log(data)
+                                // JSONから図書館、貸出情報を取得してsituationに代入
+                                const situation = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.libkey
+                                // JSONから予約情報を取得してreserveurlに代入
+                                const reserveurl = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.reserveurl
 
-                              console.log(situation)
-                              console.log(reserveurl)
-                              // data.continueが0だった場合
-                              if (data.continue === 0) {
-                                console.log("取得に成功")
+                                const status = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.status
 
-                                // const isEmpty = Object.keys(situation).length === 0 && situation.constructor === Object;
-                                // console.log(isEmpty); // true
+                                console.log(situation)
+                                console.log(reserveurl)
+                                console.log(status)
+                                // data.continueが0だった場合
+                                if (data.continue === 0) {
+                                  console.log("取得に成功")
 
-                                if (Object.keys(situation).length === 0 && situation.constructor === Object) {
-                                  console.log("からですよ〜")
-
-                                    $("#kensaku").remove();
-                                    $("#choice").prepend(`<div>
-                                    <button type="button" class="btn btn-dark">本がないですよ〜</button>
-                                    </div>`)
-                                    clearTimeout( timer_id );
-                                  
-                                } else {
-
-                                  // situationからひとづつ値を取り出してvalueに代入
-                                  Object.keys(situation).forEach( function(value) {
-                                    //kensakuに値があれば削除からひとづつ値を取り出してvalueに代入
-                                    $("#kensaku").remove();
-                                    //choiceにvalue（図書館名）、this[value](貸出情報)を出力
-                                    if (this[value] === "貸出可") {
+                                  // const isEmpty = Object.keys(situation).length === 0 && situation.constructor === Object;
+                                  // console.log(isEmpty); // true
+                                  if (status === 'Error') {
+                                    console.log("Errorですよ〜")
+                                      $("#kensaku").remove();
                                       $("#choice").prepend(`<div>
-                                      <button type="button" class="btn btn-success">${value} : ${this[value]}</button>
+                                      <button type="button" class="btn btn-dark">システムエラーですよ〜</button>
                                       </div>`)
+                                      clearTimeout( timer_id );
+                                  } else {
+                                    if (Object.keys(situation).length === 0 && situation.constructor === Object) {
+                                      console.log("からですよ〜")
+                                        $("#kensaku").remove();
+                                        $("#choice").prepend(`<h5>
+                                        <button type="button" class="badge bg-secondary btn-block">図書館に本がありません</button>
+                                        </h5>`)
+                                        clearTimeout( timer_id );
                                     } else {
+                                      // situationからひとづつ値を取り出してvalueに代入
+                                      Object.keys(situation).forEach( function(value) {
+                                        //kensakuに値があれば削除からひとづつ値を取り出してvalueに代入
+                                        $("#kensaku").remove();
+                                        //choiceにvalue（図書館名）、this[value](貸出情報)を出力
+                                        if (this[value] === "貸出可") {
+                                          $("#choice").prepend(`<h5>
+                                          <span class="badge bg-success btn-block">${value} : ${this[value]}</span>
+                                          </h5>`)
+                                        } else {
 
-                                    
-                                    $("#choice").prepend(`<div>
-                                    <button type="button" class="btn btn-warning">${value} : ${this[value]}</button>
-                                    </div>`)
-                                    }
-                                  }, situation)
+                                        $("#choice").prepend(`<h5>
+                                        <span class="badge bg-info btn-block">${value} : ${this[value]}</span>
+                                        </h5>`)
+                                        }
+                                      }, situation)
 
-                                  $("#choice2").prepend(`<div>
-                                    <button type="button" class="btn btn-outline-info"><a href="${reserveurl}">予約する</a></button>
-                                    </div>`)
+                                      $("#choice2").prepend(`<h5>
+                                        <button type="button" class="badge bg-outline-info btn-block"><a href="${reserveurl}">予約する</a></button>
+                                        </h5>`)
 
-                                  //data.continueが0だった場合にループ（setTimeout）を抜ける
-                                  clearTimeout( timer_id );
+                                      //data.continueが0だった場合にループ（setTimeout）を抜ける
+                                      clearTimeout( timer_id );
+                                      }
                                   }
-
-                              //data.continueが0だった場合は3回リトライをする 
-                              } else {
-                                // 10回目のコールでエラー
-                                if (count === 10 ) {
-                                reject(count);
+                                //data.continueが0だった場合は10回リトライをする 
                                 } else {
-                                resolve(count);
+                                  // 10回目のコールでエラー
+                                  if (count === 10 ) {
+                                  reject(count);
+                                  } else {
+                                  resolve(count);
+                                  }
                                 }
-                              }
-                            })
+                              })
 
-                            //https://api.calil.jp/checkへのGETに失敗した場合
-                            .fail(function(data){
-                              $("#jsonp").append("エラーです");
-                            });
+                              //https://api.calil.jp/checkへのGETに失敗した場合
+                              .fail(function(data){
+                                $("#jsonp").append("エラーです");
+                              });
 
-                        }, 2000);
-                      });
-                    }
-                        async function execute() { // awaitを内部で使っているためasyncをつける
-                          try {
-                              // promiseFactory内のresolveが呼び出されるまで次の処理を実行しない
-                              //awaitによってresolveの引数の値がcountに代入される
-                              let count = await promiseFactory(0);
-                              count = await promiseFactory(count);
-                              count = await promiseFactory(count);
-                              count = await promiseFactory(count);
-                              count = await promiseFactory(count);
-                              count = await promiseFactory(count);
-                              count = await promiseFactory(count);
-                              count = await promiseFactory(count);
-                              count = await promiseFactory(count);
-                              count = await promiseFactory(count);
-                              count = await promiseFactory(count);
-                          } catch (errorCount) {
-                              // Promiseがrejectedのステータスになった場合はcatchブロックに遷移する
-                              console.error(`エラーに飛びました。現在のカウントは ${errorCount} です。`);
-                          } finally {
-                              console.log("処理を終了します。");
-                          }
+                          }, 2000);
+                        });
                       }
-                      // execute()の実行
-                      execute();
+                          async function execute() { // awaitを内部で使っているためasyncをつける
+                            try {
+                                // promiseFactory内のresolveが呼び出されるまで次の処理を実行しない
+                                //awaitによってresolveの引数の値がcountに代入される
+                                let count = await promiseFactory(0);
+                                count = await promiseFactory(count);
+                                count = await promiseFactory(count);
+                                count = await promiseFactory(count);
+                                count = await promiseFactory(count);
+                                count = await promiseFactory(count);
+                                count = await promiseFactory(count);
+                                count = await promiseFactory(count);
+                                count = await promiseFactory(count);
+                                count = await promiseFactory(count);
+                                count = await promiseFactory(count);
+                            } catch (errorCount) {
+                                // Promiseがrejectedのステータスになった場合はcatchブロックに遷移する
+                                console.error(`エラーに飛びました。現在のカウントは ${errorCount} です。`);
+                            } finally {
+                                console.log("処理を終了します。");
+                            }
+                        }
+                        // execute()の実行
+                        execute();
               </script>   
             </div>
-          </div>
         </div>
       </article>
     </div>
-  </div>
+  <% else %>
+     <h5><%= link_to '図書館登録をすると表示されます', libraries_path, class: "btn bg-danger text-white btn-sm m-3" %></h5> 
+  <% end %>
 </div>

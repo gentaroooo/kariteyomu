@@ -1,18 +1,8 @@
-<body>
-        <h1><%= "登録しているエリアは#{@library.name}です" %></h1> 
-
-
-        <h1><%= link_to "現在地を取得する", libraries_path, remote: true, class: 'btn btn-outline-primary btn-lg' %></h1>
-        <div class="center">
-            <div class="btn-margin">
-
-            </div>
-            <div class="txt-margin">
-                <p>緯度：<span id="latitude">???</span><span>度</span></p>
-                <p>経度：<span id="longitude">???</span><span>度</span></p>
-            </div>
-            <div id="parent">
-                <p class="library"></p>
-            </div>
-        </div>
-</body>
+<div class="center">
+    <h5 class="text-info p-3"><%= "登録しているエリアは#{@library.name}です" %></h5> 
+    <h5 class="text-secondary m-3">現在地を取得すると近郊のエリアが表示されます</h5>
+    <h1><%= link_to "現在地を取得する", libraries_path, remote: true, class: 'btn btn-danger btn-lg m-2' %></h1>
+    <div id="parent">
+        <p class="library"></p>
+    </div>
+</div>
