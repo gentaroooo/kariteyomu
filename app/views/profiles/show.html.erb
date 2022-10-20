@@ -2,7 +2,9 @@
   <div class="row">
     <div class="col-md-10 offset-md-1">
       <h3 class="text-center top-text p-1"><%= t('.title') %></h3>
-      <%= link_to t('defaults.edit'), edit_profile_path, class: 'btn btn-success float-right' %>
+      <h4 class="text-center top-text p-1"><%= link_to edit_profile_path do %>
+        <i class="fa-solid fa-user-gear"></i>アカウント編集
+      <% end %></h4>
       <table class="table">
         <tr>
           <th scope="row"><%= t(User.human_attribute_name(:email)) %></th>
@@ -16,11 +18,43 @@
           <th scope="row"><%= t(User.human_attribute_name(:introduction)) %></th>
           <td><%= current_user.introduction %></td>
         </tr>
+
         <tr>
           <th scope="row"><%= t(User.human_attribute_name(:avatar)) %></th>
           <td><%= image_tag current_user.avatar.url, class: 'rounded-circle', size: '50x50' %></td>
         </tr>
       </table>
+
+      <% if current_user.library.present? %>
+        <h4 class="text-center top-text p-1"><%= link_to edit_library_path(current_user) do %>
+          <i class="fa-solid fa-map-location-dot"></i>エリア編集
+        <% end %></h4>
+      <% else %>
+        <h4 class="text-center top-text p-1"><%= link_to libraries_path(current_user) do %>
+          <i class="fa-solid fa-map-location-dot"></i>エリア登録
+        <% end %></h4>
+      <% end %>
+
+      <table class="table">
+      <tr>
+        <th scope="row">図書館エリア</th>
+        <% if current_user.library.present? %>
+          <td><%= current_user.library.name %></td>
+        <% else %>
+         <td>登録がありません</td>
+        <% end %>
+        
+      </tr>
+      </table>
     </div>
+
+    <div class="col-md-10 offset-md-1 text-center">
+      <%= link_to '自分のレビュー', show_post_user_path(current_user), class: 'btn btn-success m-1' %>
+      <%= link_to '読みたい', books_path(current_user), class: 'btn btn-success' %>
+      <%= link_to 'いいね', likes_posts_path(current_user), class: 'btn btn-success' %>
+      <%= link_to 'フォロー', following_user_path(current_user), class: 'btn btn-info' %>
+      <%= link_to 'フォロワー', follower_user_path(current_user), class: 'btn btn-info' %>
+    </div>
+    
   </div>
 </div>

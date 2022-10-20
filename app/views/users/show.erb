@@ -1,13 +1,12 @@
-<div class="col row-cols-1 row-cols-md-2 p-2">
+<div class="col row-cols-1 row-cols-md-2 p-2 ">
   <div class="bg-white border rounded-2 p-3" style="min-width: 300px;">
     <div class="d-flex align-items-center">
       <div class="d-md-flex">
-        <td><%= image_tag @user.avatar.url, class: 'rounded-circle m-2', size: '120x100' %></td>
-        <h3 class="m-2"><%= @user.name %></h3>
+        <td><%= image_tag @user.avatar.url, class: 'rounded-circle m-2', size: '120x120' %></td>
+        <h3 class="m-2 "><%= @user.name %></h3>
         <div class="pt-2"><%= render 'relationships/follow_button', user: @user %></div> 
       </div>
     </div>
-  
 
     <div class="pt-3">
       <% if @user.introduction.present? %>
@@ -24,8 +23,8 @@
         <span class="text-dark"><%= @user.followers.length %></span><small class="text-secondary"> フォロワー</small>
       <% end %>
     </div> 
-    <div class="pt-3">
-      <%= link_to 'レビューした投稿',show_post_user_path(@user), class: 'btn btn-success' %>
+    <div class="pt-3 text-left">
+      <%= link_to 'レビュー内容',show_post_user_path(@user), class: 'btn btn-success' %>
       <%= link_to '読みたい絵本',show_book_user_path(@user), class: 'btn btn-info' %> 
     </div>  
 </div>
