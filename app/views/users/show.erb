@@ -1,24 +1,36 @@
-<div class="bg-white border rounded-2 p-3" style="min-width: 300px;">
-  <div class="d-flex align-items-center">
-    <div class="d-md-flex">
-      <h3><%= @user.name %></h3>
-      <td><%= image_tag @user.avatar.url, class: 'rounded-circle', size: '100x100' %></td>
-      <%= render 'relationships/follow_button', user: @user %> 
+<div class="col row-cols-1 row-cols-md-2 p-2">
+  <div class="bg-white border rounded-2 p-3" style="min-width: 300px;">
+    <div class="d-flex align-items-center">
+      <div class="d-md-flex">
+        <td><%= image_tag @user.avatar.url, class: 'rounded-circle m-2', size: '120x100' %></td>
+        <h3 class="m-2"><%= @user.name %></h3>
+        <div class="pt-2"><%= render 'relationships/follow_button', user: @user %></div> 
+      </div>
     </div>
-  </div>
-  <div class="pt-3">
-    <% if  @user.introduction.present? %>
-      <p class="border-bottom fs-7 fw-bolder mb-2">自己紹介</p>
-      <p class=""><%= simple_format @user.introduction, sanitize: true %></p>
-    <% end %>
+  
+
+    <div class="pt-3">
+      <% if @user.introduction.present? %>
+        <p class="border-bottom fs-7 fw-bolder mb-2">自己紹介</p>
+        <p class=""><%= simple_format @user.introduction, sanitize: true %></p>
+      <% end %>
+    </div>
     
-  </div>
- <div class="d-flex">
-    <%= link_to following_user_path(@user), class: 'me-3 mb-0 text-decoration-none', id: 'follow-count' do %>
-      <span class="text-dark"><%= @user.followings.length %></span><small class="text-secondary"> フォロー中</small>
-    <% end %>
-    <%= link_to follower_user_path(@user), class: 'mb-0 text-decoration-none', id: 'follower-count' do %>
-      <span class="text-dark"><%= @user.followers.length %></span><small class="text-secondary"> フォロワー</small>
-    <% end %>
-  </div> 
+    <div class="d-flex">
+      <%= link_to following_user_path(@user), class: 'me-3 mb-0 text-decoration-none', id: 'follow-count' do %>
+        <span class="text-dark"><%= @user.followings.length %></span><small class="text-secondary"> フォロー中</small>
+      <% end %>
+      <%= link_to follower_user_path(@user), class: 'mb-0 text-decoration-none', id: 'follower-count' do %>
+        <span class="text-dark"><%= @user.followers.length %></span><small class="text-secondary"> フォロワー</small>
+      <% end %>
+    </div> 
+    <div class="pt-3">
+      <%= link_to 'レビューした投稿',show_post_user_path(@user), class: 'btn btn-success' %>
+      <%= link_to '読みたい絵本',show_book_user_path(@user), class: 'btn btn-info' %> 
+    </div>  
 </div>
+
+
+
+
+

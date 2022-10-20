@@ -1,13 +1,13 @@
-<div class="text-center top-text p-1">レビュー</div>
-<% content_for(:title, t('.title')) %>
+<% if @like_posts.present? %>
+  <div class="text-center top-text p-1">いいね</div>
   <div class="container">
-    <div class="row row-cols-1 row-cols-md-2"></p>
-      <% if @like_posts.present? %>
-        <%= render @like_posts %>
-      <% else %>
-        <p><%= t('.no_result') %></p>
-      <% end %>
+    <div class="row row-cols-1 row-cols-md-2">
+      <%= render @like_posts %>
     </div>
     <%= paginate @like_posts %>
-  </div>
 </div>
+</div>
+<% else %>
+  <h5 class="m-4"><%= t('.no_result') %></h5>
+<% end %>
+

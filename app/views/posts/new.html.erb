@@ -42,6 +42,7 @@
         <%= f.hidden_field :published_date, value: @volume_info[:publishedDate] %>
         <%= f.hidden_field :info_link, value: @volume_info[:infoLink] %>
         <%= f.hidden_field :image_link, value: @volume_info[:bookImage] %>
+        <%= f.hidden_field :systemid, value: @volume_info[:systemid] %>
         <% @volume_info[:authors]&.each do |author| %>
           <%= hidden_field_tag 'book[authors][]', author %>
         <% end %>
