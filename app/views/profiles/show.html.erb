@@ -49,8 +49,11 @@
     </div>
 
     <div class="col-md-10 offset-md-1 text-center">
-      <%= link_to '自分の投稿', show_post_user_path(current_user), class: 'btn btn-success' %>
-      <%= link_to '読みたいリスト', books_path(current_user), class: 'btn btn-info' %>
+      <%= link_to '自分のレビュー', show_post_user_path(current_user), class: 'btn btn-success m-1' %>
+      <%= link_to '読みたい', books_path(current_user), class: 'btn btn-success' %>
+      <%= link_to 'いいね', likes_posts_path(current_user), class: 'btn btn-success' %>
+      <%= link_to 'フォロー', following_user_path(current_user), class: 'btn btn-info' %>
+      <%= link_to 'フォロワー', follower_user_path(current_user), class: 'btn btn-info' %>
     </div>
     
   </div>
