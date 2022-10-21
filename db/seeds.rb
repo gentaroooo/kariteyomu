@@ -75,12 +75,13 @@
 # end
 
 Category.create([
-  { name: '0歳' },
-  { name: '1歳' },
-  { name: '2歳' },
-  { name: '3歳' },
-  { name: '4歳' },
-  { name: '5歳' },
-  { name: '6歳' },
-  { name: '大人' },
+  { name: '笑える' },
+  { name: 'たのしい' },
+  { name: 'おばけ' },
+  { name: 'かわいい' },
+  { name: 'かなしい' },
+  { name: 'ともだち' },
+  { name: 'かぞく' },
+  { name: 'しぜん' },
+  { name: '知育' },
 ])
