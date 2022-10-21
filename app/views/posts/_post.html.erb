@@ -2,17 +2,18 @@
   <div class="card mx-auto" style="width: 18rem; height: 19rem">
     <div class="row g-0", style="height: 270px">
       <div class="col-5">
-        <%= image_tag post.image_link.blank? ? 'sample.jpeg' : post.image_link, class: 'img-fluid border m-3' %>
-        <div class="d-flex pt-2">
+        <%= image_tag post.image_link.present? ? post.image_link : 'sample.jpeg', class: 'img-fluid border m-3' %>
+        
+        <div class="d-flex">
           <% post.categories.each do |category| %>
-            <div class="badge bg-info text-white m-0"><%= category.name %></div> 
+            <div class="badge bg-info text-white m-1"><%= category.name %></div> 
           <% end %>
         </div>
       </div>
       <div class="col-7">
         <div class="card-body">
-          <h5 class="card-title"><%= post.title.truncate(20) %></h5>
-          <p class="card-text mb-2"><%= post.authors.pluck(:name).join(', ')&.truncate(15) %></p>  
+          <h5 class="card-title"><%= post.title.truncate(13) %></h5>
+          <p class="card-text mb-2"><%= post.authors.pluck(:name).join(', ')&.truncate(7) %></p>  
         </div>
       </div>
     </div>
