@@ -2,7 +2,7 @@
   <div class="card mx-auto" style="width: 18rem; height: 19rem">
     <div class="row g-0", style="height: 270px">
       <div class="col-5">
-        <%= image_tag post.image_link.present? ? post.image_link : 'sample.jpeg', class: 'img-fluid border m-3' %>
+        <%= image_tag post.image_link.present? ? post.image_link : 'sample.jpg', class: 'img-fluid border m-3' %>
         
         <div class="d-flex">
           <% post.categories.each do |category| %>
