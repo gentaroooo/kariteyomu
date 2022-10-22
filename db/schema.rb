@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_09_035706) do
+ActiveRecord::Schema.define(version: 2022_10_22_112124) do
+
+  create_table "ages", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_Ages_on_name", unique: true
+  end
 
   create_table "authors", force: :cascade do |t|
     t.string "name", null: false
@@ -75,6 +82,16 @@ ActiveRecord::Schema.define(version: 2022_10_09_035706) do
     t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["user_id", "post_id"], name: "index_likes_on_user_id_and_post_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "post_ages", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "age_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["age_id", "post_id"], name: "index_post_ages_on_age_id_and_post_id", unique: true
+    t.index ["age_id"], name: "index_post_ages_on_age_id"
+    t.index ["post_id"], name: "index_post_ages_on_post_id"
   end
 
   create_table "post_authors", force: :cascade do |t|
@@ -155,6 +172,8 @@ ActiveRecord::Schema.define(version: 2022_10_09_035706) do
   add_foreign_key "libraries", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "post_ages", "ages"
+  add_foreign_key "post_ages", "posts"
   add_foreign_key "post_authors", "authors"
   add_foreign_key "post_authors", "posts"
   add_foreign_key "post_categories", "categories"
