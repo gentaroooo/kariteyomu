@@ -6,7 +6,7 @@
       <div class="card mb-4 p-3">
         <div class="row g-0">
           <div class="col-5">
-            <%= image_tag @volume_info[:bookImage].blank? ? 'sample.jpeg' : @volume_info[:bookImage], class: 'img-fluid border' %>
+            <%= image_tag @volume_info[:bookImage].present? ? @volume_info[:bookImage] : 'sample.jpg', class: 'img-fluid border' %>
           </div>
           <div class="col-7">
             <div class="card-body">
