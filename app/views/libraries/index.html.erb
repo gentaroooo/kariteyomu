@@ -5,9 +5,8 @@
              <div class="card m-2">
                 <div class="card-body">
                     <h5>
-                        エリアを変更する
                         <%= link_to edit_library_path(@library), class: "button-edit-#{@library.id}" do %>
-                            <%= icon 'fa', 'pen' %>
+                            エリアを変更する<%= icon 'fa', 'pen' %>
                         <% end %>
                     </h5>
                     <h5 class="text-secondary">現在地を取得して近隣のエリアを再び選択できます</h5>
@@ -16,9 +15,8 @@
             <div class="card m-2">
                 <div class="card-body">
                     <h5>
-                        エリアを削除する
                         <%= link_to library_path(@library), id: "button-delete-#{@library.id}", method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
-                            <%= icon 'fas', 'trash' %>
+                             エリアを削除する<%= icon 'fas', 'trash' %>
                         <% end %>
                     </h5>
                     <h5 class="text-secondary">登録した図書館エリアを削除します</h5>

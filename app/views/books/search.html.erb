@@ -4,7 +4,7 @@
       <!-- 検索フォーム -->
       <%= form_with url: search_books_path, local: true, method: :get do |f| %>
         <div class="mb-3">
-          <p class="fw-bolder">絵本を検索してください</p>
+          <h6 class="fw-bolder">絵本を検索してください</h6>
           <%= f.search_field :search, class: "form-control", placeholder: '検索', value: params[:search] %>
           <p class=""><small class="text-secondary">書名・著者等で検索することができます。</small></p>
         </div>
