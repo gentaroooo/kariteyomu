@@ -1,31 +1,21 @@
-   <div class="container p-1">   
-    <div class="col text-center">
-      <div class="card mb-3">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <%= image_tag @book.image_link.present? ? @book.image_link : 'sample.jpg', class: 'book-img m-2' %>
-          </div>
-          <div class="col">
-            <div class="card-body">
-            <h5 class="card-title"><%= @book.title %></h5>
-            <p class="card-text mb-2"><%= @book.authors.pluck(:name).join(', ')&.truncate(50) %></p>
-            <p class="card-text"><small class="text-muted"><%= @book.published_date %></small></p>
-            <h5><%= link_to 'Googleで見る', @book.info_link, class: "badge bg-light" %></h5>
-            <% if current_user.own?(@book) %> 
-              <div class test>
-                <%= link_to book_path(@book), id: "button-delete-#{@book.id}",
-                method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
-                <i class="fa-solid fa-trash"></i>
-              </div>
-              <% end %>
-            <% end %> 
-          </div>
+  <div class="card mx-auto">
+    <div class="row g-0">
+      <div class="col-5">
+        <%= image_tag @book.image_link.present? ? @book.image_link : 'sample.jpg', class: 'img-fluid border m-3' %>
+      </div>
+  
+      <div class="col-7">
+        <div class="card-body">
+          <h5 class="card-title"><%= @book.title %></h5>
+          <p class="card-text mb-2"><%= @book.authors.pluck(:name).join(', ')&.truncate(50) %></p>
+          <p class="card-text"><small class="text-muted"><%= @book.published_date %></small></p>
+          <h5><%= link_to 'Googleで見る', @book.info_link, class: "badge bg-light" %></h5>
         </div>
       </div>
     </div>
   </div>
 
-<div class="container">
+
   <% if @library.present? %>
     <div class="low text-center">
       <article class="card mb-3">
@@ -78,16 +68,16 @@
                                     console.log("Errorですよ〜")
                                       $("#kensaku").remove();
                                       $("#choice").prepend(`<div>
-                                      <button type="button" class="btn btn-dark">システムエラーですよ〜</button>
+                                      <button type="button" class="btn btn-dark">システムエラーです</button>
                                       </div>`)
                                       clearTimeout( timer_id );
                                   } else {
                                     if (Object.keys(situation).length === 0 && situation.constructor === Object) {
                                       console.log("からですよ〜")
                                         $("#kensaku").remove();
-                                        $("#choice").prepend(`<h5>
+                                        $("#choice").prepend(`<h3>
                                         <button type="button" class="badge bg-secondary btn-block">図書館に本がありません</button>
-                                        </h5>`)
+                                        </h3>`)
                                         clearTimeout( timer_id );
                                     } else {
                                       // situationからひとづつ値を取り出してvalueに代入
@@ -96,20 +86,20 @@
                                         $("#kensaku").remove();
                                         //choiceにvalue（図書館名）、this[value](貸出情報)を出力
                                         if (this[value] === "貸出可") {
-                                          $("#choice").prepend(`<h5>
+                                          $("#choice").prepend(`<h4>
                                           <span class="badge bg-success btn-block">${value} : ${this[value]}</span>
-                                          </h5>`)
+                                          </h4>`)
                                         } else {
 
-                                        $("#choice").prepend(`<h5>
+                                        $("#choice").prepend(`<h4>
                                         <span class="badge bg-info btn-block">${value} : ${this[value]}</span>
-                                        </h5>`)
+                                        </h4>`)
                                         }
                                       }, situation)
 
-                                      $("#choice2").prepend(`<h5>
+                                      $("#choice2").prepend(`<h4>
                                         <button type="button" class="badge bg-outline-info btn-block"><a href="${reserveurl}">予約する</a></button>
-                                        </h5>`)
+                                        </h4>`)
 
                                       //data.continueが0だった場合にループ（setTimeout）を抜ける
                                       clearTimeout( timer_id );
@@ -166,4 +156,3 @@
   <% else %>
      <h5><%= link_to '図書館登録をすると表示されます', libraries_path, class: "btn bg-danger text-white btn-sm m-3" %></h5> 
   <% end %>
-</div>
