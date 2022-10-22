@@ -12,11 +12,11 @@ class Post < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
+  has_many :post_ages, dependent: :destroy
+  has_many :ages, through: :post_ages
+
   validates :title, presence: true, length: { maximum: 255 }
   validates :body, presence: true, length: { maximum: 65_535 }
-
-
-
   validate :check_number_of_categories
 
   def check_number_of_categories
@@ -24,7 +24,6 @@ class Post < ApplicationRecord
     errors.add(:base,"カテゴリーは5個以内にしてください")
    end
   end
- 
 
   def save_with_author(authors)
     ActiveRecord::Base.transaction do
