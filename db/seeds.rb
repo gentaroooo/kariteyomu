@@ -85,3 +85,15 @@ Category.create([
   { name: 'しぜん' },
   { name: '知育' },
 ])
+
+Age.create([
+  { name: '0歳' },
+  { name: '1〜2歳' },
+  { name: '2〜3歳' },
+  { name: '3〜4歳' },
+  { name: '4〜5歳' },
+  { name: '5〜6歳' },
+  { name: '小学生' },
+  { name: '中高生' },
+  { name: '大人' },
+])
