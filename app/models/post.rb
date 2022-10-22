@@ -18,6 +18,7 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :body, presence: true, length: { maximum: 65_535 }
   validate :check_number_of_categories
+  validate :check_number_of_ages
 
   def check_number_of_categories
    if categories && post_categories.count > 5
@@ -25,6 +26,12 @@ class Post < ApplicationRecord
    end
   end
 
+  def check_number_of_ages
+   if ages && post_ages.count > 5
+    errors.add(:base,"年齢は5個以内にしてください")
+   end
+  end
+  
   def save_with_author(authors)
     ActiveRecord::Base.transaction do
       self.save!

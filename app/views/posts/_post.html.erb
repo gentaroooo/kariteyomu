@@ -3,20 +3,29 @@
     <div class="row g-0", style="height: 270px">
       <div class="col-5">
         <%= image_tag post.image_link.present? ? post.image_link : 'sample.jpg', class: 'img-fluid border m-3' %>
-        
-        <div class="d-flex">
-          <% post.categories.each do |category| %>
-            <div class="badge bg-info text-white m-1"><%= category.name %></div> 
-          <% end %>
-        </div>
       </div>
+
       <div class="col-7">
         <div class="card-body">
           <h5 class="card-title"><%= post.title.truncate(13) %></h5>
           <p class="card-text mb-2"><%= post.authors.pluck(:name).join(', ')&.truncate(7) %></p>  
         </div>
       </div>
+
+      <div class="col">
+        <% post.categories.each do |category| %>
+          <div class="badge bg-info text-white"><%= category.name %></div> 
+        <% end %>
+      
+
+      
+        <% post.ages.each do |age| %>
+          <div class="badge bg-success text-white"><%= age.name %></div> 
+        <% end %>
+      </div>
+
     </div>
+    
     <div class="d-flex border-top pt-2">
       <div>
         <%= image_tag post.user.avatar.url, class: 'rounded-circle m-2', size: '40x40' %>

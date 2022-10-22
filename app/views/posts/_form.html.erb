@@ -1,10 +1,10 @@
 <%= form_with model: post, local: true do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
    <div class="form-group">
-     <%= f.label :body %>
+     <%= f.label "レビュー内容" %>
      <%= f.text_area :body, class: 'form-control', rows: 8 %>
    </div>
-
+  <h6><%= f.label "カテゴリー選択" %></h6>
   <div class='form-group'>
     <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
       <div class="form-check form-check-inline">
@@ -15,5 +15,18 @@
       </div>
     <% end %>
   </div>
+
+  <h6><%= f.label "年齢選択" %></h6>
+  <div class='form-group'>
+    <%= f.collection_check_boxes(:age_ids, Age.all, :id, :name) do |age| %>
+      <div class="form-check form-check-inline">
+        <%= age.label class: 'form-check-label' do %>
+          <%= age.check_box class: 'form-check-input' %>
+          <%= age.text %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
    <%= f.submit class: 'btn btn-success' %>
  <% end %>
