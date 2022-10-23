@@ -9,6 +9,8 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import '@fortawesome/fontawesome-free/js/all';
 
+import "./preview_image";
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

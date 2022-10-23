@@ -10,18 +10,16 @@
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control mb-3' %>
 
-        <%= f.label :avatar %>
-        <%= f.file_field :avatar, onchange: 'previewFileWithId(preview)', class: 'form-control mb-3', accept: 'image/*' %>
-        <%= f.hidden_field :avatar_cache %>
+        <div class="mb-2">
+          <%= f.label :avatar, class: 'form-label fw-bolder' %><br>
+          <%= image_tag @user.avatar.url, id: 'preview', class: 'rounded-circle mr15', size: '80x80' %>
+          <%= f.file_field :avatar, class: 'border rounded-3 p-1 m-3', accept: 'image/*' , id: 'file-field' %> 
+          <%= f.hidden_field :avatar_cache %>
+        </div>
 
-        <%= f.label :introduction, class: 'form-label' %>
-        <%= f.text_area :introduction, class: 'form-control', placeholder: '自己紹介を入力しよう！' %>
-
-        <div class='mt-3 mb-3'>
-          <%= image_tag @user.avatar.url,
-                        class: 'rounded-circle',
-                        id: 'preview',
-                        size: '100x100' %>
+        <div class="mb-4">
+          <%= f.label :introduction, class: 'form-label' %>
+          <%= f.text_area :introduction, class: 'form-control', placeholder: '自己紹介を入力しよう！' %>
         </div>
         <%= f.submit class: 'btn btn-success' %>
       <% end %>
