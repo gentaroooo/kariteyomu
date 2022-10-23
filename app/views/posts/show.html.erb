@@ -33,13 +33,13 @@
 
         <div class='col-md-12 p-1'>
           <% @post.categories.each do |category| %>
-            <div class="badge bg-info text-white p-2"><%= category.name %></div> 
+            <%= link_to category.name, posts_path(category_id: category.id), class: "badge bg-info text-white p-2" %>
           <% end %>
         </div>
 
         <div class='col-md-12 p-1'>
           <% @post.ages.each do |age| %>
-            <div class="badge bg-success text-white p-2"><%= age.name %></div> 
+            <%= link_to age.name, posts_path(age_id: age.id), class: "badge bg-success text-white p-2" %>
           <% end %>
         </div>
         

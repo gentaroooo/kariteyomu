@@ -3,10 +3,17 @@ class PostsController < ApplicationController
   skip_before_action :require_login, only: %i[index]
 
   def index
-    @posts = Post.all.includes([:user, :authors, :categories, :likes, :relationships]).order(created_at: :desc).page(params[:page])
-    @posts = params[:category_id].present? ? Category.find(params[:category_id])
-    .posts.page(params[:page]) : Post.all.includes([:user, :authors, :categories, :likes])
-    .order(created_at: :desc).page(params[:page]).page(params[:page])
+    @ages = Age.all
+    @categories = Category.all
+    if params[:age_id]
+      @age = Age.find(params[:age_id])
+      @posts = @age.posts.includes([:user, :authors, :categories, :likes, :ages]).order(created_at: :desc).page(params[:page])
+    elsif params[:category_id]
+      @category = Category.find(params[:category_id])
+      @posts = @category.posts.includes([:user, :authors, :categories, :likes, :ages]).order(created_at: :desc).page(params[:page])
+    else
+      @posts = Post.all.includes([:user, :authors, :categories, :likes, :ages]).order(created_at: :desc).page(params[:page])
+    end
   end
 
   def new
