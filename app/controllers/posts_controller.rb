@@ -5,12 +5,17 @@ class PostsController < ApplicationController
   def index
     @ages = Age.all
     @categories = Category.all
+    @authors = Author.all
+
     if params[:age_id]
       @age = Age.find(params[:age_id])
       @posts = @age.posts.includes([:user, :authors, :categories, :likes, :ages]).order(created_at: :desc).page(params[:page])
     elsif params[:category_id]
       @category = Category.find(params[:category_id])
       @posts = @category.posts.includes([:user, :authors, :categories, :likes, :ages]).order(created_at: :desc).page(params[:page])
+    elsif params[:author_id]
+      @author = Author.find(params[:author_id])
+      @posts = @author.posts.includes([:user, :authors, :categories, :likes, :ages]).order(created_at: :desc).page(params[:page])
     else
       @posts = Post.all.includes([:user, :authors, :categories, :likes, :ages]).order(created_at: :desc).page(params[:page])
     end
