@@ -1,4 +1,13 @@
+/*****************************************
+  ヘッダー
+******************************************/
+header .dropdown:hover > .dropdown-menu{
+  display: block;
+}
 
+header .dropdown:hover > .dropdown-menu{
+  right: 0;
+}
 
 /*****************************************
   サイドバー
