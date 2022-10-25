@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
   get 'relationships/create'
   get 'relationships/destroy'
+  get '/terms' => 'static_pages#terms'
 
   resource :profile, only: %i[show edit update]
   
