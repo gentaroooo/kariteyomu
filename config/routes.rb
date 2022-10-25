@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'relationships/create'
   get 'relationships/destroy'
   get '/terms' => 'static_pages#terms'
+  get '/privacy' => 'static_pages#privacy'
 
   resource :profile, only: %i[show edit update]
   
