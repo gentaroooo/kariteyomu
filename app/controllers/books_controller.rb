@@ -3,7 +3,7 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all.includes([:authors, :user]).order(created_at: :desc).page(params[:page])
-    @book = current_user.books.includes([:authors, :user]).order(created_at: :desc).page(params[:page])
+    @book = current_user.books.includes([:authors, :user]).order(created_at: :desc).page(params[:page]).per(12)
   end
 
   def new
@@ -55,7 +55,7 @@ class BooksController < ApplicationController
     else
       url = "https://www.googleapis.com/books/v1/volumes"
       text = params[:search]
-      res = Faraday.get(url, q: text, langRestrict: 'ja', maxResults: 30)
+      res = Faraday.get(url, q: text, langRestrict: 'ja', maxResults: 40)
       @google_books = JSON.parse(res.body)
     end
   end

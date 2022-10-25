@@ -21,7 +21,7 @@
       <% @google_books['items']&.each do |google_book| %>
       
         <div class="col-lg-4 col-md-6 col-sm-12">
-          <div class="card mb-3", style="height: 390px; min-width: 300px;">
+          <div class="card mb-3", style="height: 270px; min-width: 300px;">
             <div class="row g-0">
               <div class="col-5">
 
@@ -47,7 +47,7 @@
               </div>
               <div class="col-7">
                 <div class="card-body">
-                  <h5 class="card-title"><%= google_book['volumeInfo']['title'].truncate(20) %></h5>
+                  <h5 class="card-title"><%= google_book['volumeInfo']['title'].truncate(17) %></h5>
                   <p class="card-text mb-2"><%= google_book['volumeInfo']['authors']&.join(', ')&.truncate(20) %></p>
                   <p class="card-text"><small class="text-muted"><%= google_book['volumeInfo']['publishedDate'] %></small></p>
                   
