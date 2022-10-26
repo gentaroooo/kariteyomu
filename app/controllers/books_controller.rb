@@ -3,7 +3,7 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all.includes([:authors, :user]).order(created_at: :desc).page(params[:page])
-    @book = current_user.books.includes([:authors, :user]).order(created_at: :desc).page(params[:page]).per(12)
+    @book = current_user.books.includes([:authors, :user]).order(created_at: :desc).page(params[:page]).per(8)
   end
 
   def new

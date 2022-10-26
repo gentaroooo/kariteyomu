@@ -22,13 +22,9 @@
       <%= render 'shared/before_login_header' %>
     <% end %>
       <%= render 'shared/flash_message' %>
-    <%= yield %>
-      <%= render 'shared/footer' %>
-      
+    <div class="mb-5">
+      <%= yield %>
+    </div>
+    <%= render 'shared/footer' %> 
   </body>
-  <%
-=begin%>
- <%= render 'shared/bottom_navbar' %> 
-<%
-=end%>
 </html>
