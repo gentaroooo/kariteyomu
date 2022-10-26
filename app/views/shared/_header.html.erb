@@ -1,49 +1,25 @@
 <header>
-  <nav class="navbar navbar-expand-lg navigation navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navigation navbar-center bg-light p-1">
     <div class="container-fluid">
 
-      <%= link_to root_path, class: 'navbar-brand' do %>
-        <%= image_tag 'logo.png', size: '200x40' %>
+      <%= link_to root_path, class: 'navbar-brand col-3' do %>
+        <%= image_tag 'logo.png', size: '100x20' %>
       <% end %>
-  
-      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-              <%= link_to '絵本を探す', search_books_path, class: 'dropdown-item' %>
-          </li>
-          
-          <li class="nav-item">
-              <%= link_to '読みたいリスト', books_path, class: 'dropdown-item' %>
-          </li>
+      <%= link_to profile_path, class: 'dropdown-item col-3' do %>
+        <div class="text-cente">
+          <i class="fa-solid fa-circle-user"></i>
+          <div class="icon-text">ユーザー</div>
+        </div>
+      <% end %> 
 
-          <li class="nav-item">
-              <%= link_to 'レビューリスト', posts_path, class: 'dropdown-item' %>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="header-profile">
-              <%= image_tag current_user.avatar_url, size: '40x40', class: 'rounded-circle'%>
-            </a>
-            <div class="dropdown-menu">
-              <div class="dropdown-item"><%= current_user.name %>さんログイン中
-              </div>
-              <div class="dropdown-divider"></div>
-              <%= link_to '図書館登録', libraries_path, class: 'dropdown-item' %>
-              <%= link_to (t 'profiles.show.title'), profile_path, class: 'dropdown-item' %>
-            
-              <%= link_to 'いいねリスト', likes_posts_path, class: 'dropdown-item' %>
-              <%= link_to 'ユーザーリスト', users_path, class: 'dropdown-item' %>
-              
-
-              <%= link_to (t 'defaults.logout'), logout_path, class: 'dropdown-item', method: :delete %>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <%= link_to logout_path, class: 'dropdown-item col-3', method: :delete do %>
+        <div class="text-center">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <div class="icon-text">ログアウト</div>
+        </div>
+      <% end %> 
+      
     </div>
   </nav>
 </header>
