@@ -1,11 +1,10 @@
-<footer class="mt-3">
   <div class="container">
-    <div class="nav justify-content-center fixed-bottom bg-light">
-     <%= link_to root_path do %>
-      <div class="text-center m-2">
-        <i class="fa-solid fa-house"></i>
-        <p class="icon-text">ほーむ</p>
-      </div>
+    <nav class="justify-content-center bg-primary"> 
+      <%= link_to root_path do %>
+        <div class="text-center m-2">
+          <i class="fa-solid fa-house"></i>
+          <p class="icon-text">ほーむ</p>
+        </div>
       <% end %>
 
       <%= link_to search_books_path do %>
@@ -27,6 +26,6 @@
           <i class="fa-solid fa-circle-user"></i>
           <p class="icon-text">マイページ</p>
         </div>
-      <% end %> 
-    </div>
-</footer>
+      <% end %>
+    </nav>
+  </div>

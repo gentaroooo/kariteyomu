@@ -46,7 +46,7 @@ footer{
   position: sticky;
   position: -webkit-sticky;
   top: 100vh;
-  background-color: #ddd;
+  background-color: #fafafa;
 }
 
 .copyright{
@@ -205,4 +205,11 @@ a.hover-decoration:hover{
 
 .top-text{
   color: #95a5a6;
+}
+
+.bottom_navbar{
+  position: sticky;
+  position: -webkit-sticky;
+  top: 100vh;
+  background-color: #95a5a6;
 }
