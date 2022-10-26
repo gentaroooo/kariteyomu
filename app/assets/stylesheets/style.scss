@@ -44,14 +44,15 @@ header .dropdown:hover > .dropdown-menu{
   フッター
 ******************************************/
 footer{
-  position: sticky;
-  position: -webkit-sticky;
+  // position: sticky;
+  // position: -webkit-sticky;
   top: 100vh;
   background-color: #fafafa;
+  height: 100px
 }
 
 .copyright{
-  font-size: 12px;
+  font-size: 14px;
 }
 
 /*****************************************
