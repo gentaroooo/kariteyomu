@@ -4,6 +4,11 @@ const locationButton = document.createElement('button');
 $(".library").remove()
 $('#parent').html('<p class="library"></p>')
 
+
+$("#library").prepend(`<div>
+<button type="button" class="btn btn-dark">図書館から応答がありません<p>時間を空けてお試しください</button>
+</div>`)
+
 if( navigator.geolocation )
 {
 

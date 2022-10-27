@@ -25,12 +25,12 @@
         <% else %>
             <div class="center">
                 <h5 class="text-secondary m-3">現在地を取得すると近郊のエリアが表示されます</h5>
-                <%= javascript_pack_tag 'geolocation' %>
                 <%
 =begin%>
- <h1><%= link_to "現在地を取得する", libraries_path, remote: true, class: 'btn btn-danger btn-lg m-2' %></h1> 
+ <%= javascript_pack_tag 'geolocation' %> 
 <%
 =end%>
+                <h1><%= link_to "現在地を取得する", libraries_path, remote: true, class: 'btn btn-danger btn-lg m-2' %></h1>
                 <div id="parent">
                     <p class="library"></p>
                 </div>
