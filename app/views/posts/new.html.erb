@@ -10,7 +10,7 @@
           <div class="col-7">
             <div class="card-body">
               <h5 class="card-title"><%= @volume_info[:title].truncate(30) %></h5>
-              <p class="card-text mb-2"><%= @volume_info[:authors]&.join(', ').truncate(30) %></p>
+              <p class="card-text mb-2"><%= @volume_info[:authors].present? ? @volume_info[:authors]&.join(', ').truncate(30) : "著者不明" %></p>
               <p class="card-text"><small class="text-muted"><%= @volume_info[:publishedDate] %></small></p>
               <%= link_to 'Googleで詳細を見る', @volume_info[:canonicalVolumeLink], target: '_blank' %>
             </div>
