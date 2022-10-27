@@ -93,6 +93,7 @@ function successCallback(position){
 // 取得に失敗した場合の処理
 function errorCallback(error){
   alert("位置情報が取得できませんでした")
+  window.alert('位置情報の取得に失敗しました。エラーコード：' + error.code)
 }
 
 }
