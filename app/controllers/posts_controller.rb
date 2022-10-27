@@ -38,6 +38,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @book = Book.new
     @post = Post.find(params[:id])
     @comment = Comment.new
     @comments = @post.comments.includes(:user).order(created_at: :desc)
@@ -91,12 +92,11 @@ class PostsController < ApplicationController
   end
 
   def authors_params
-      if params.dig(:book).nil?
-        params.permit(authors: ['著者不明'])
-      else
-        params.require(:book).permit(authors: [])
-      end
-       
+    if params.dig(:book).nil?
+      params.permit(authors: ['著者不明'])
+    else
+      params.require(:book).permit(authors: [])
+    end       
   end
 
   def set_volume_info
