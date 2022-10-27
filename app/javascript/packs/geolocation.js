@@ -1,17 +1,3 @@
-const locationButton = document.createElement('button');
-
-//前回の図書館情報を削除してlibraryを追加
-$(".library").remove()
-$('#parent').html('<p class="library"></p>')
-
-
-$("#library").prepend(`<div>
-<button type="button" class="btn btn-dark">図書館から応答がありません<p>時間を空けてお試しください</button>
-</div>`)
-
-if( navigator.geolocation )
-{
-
 // 位置情報を取得する
 navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
@@ -102,7 +88,6 @@ function errorCallback(error){
   window.alert('位置情報の取得に失敗しました。エラーコード：' + error.code)
 }
 
-}
 
 else
 {
