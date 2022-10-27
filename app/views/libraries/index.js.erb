@@ -5,14 +5,13 @@ $('#parent').html('<p class="library"></p>')
 // 位置情報を取得する
 navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
+
 // 取得に成功した場合の処理
 function successCallback(position){
   // 緯度を取得し画面に表示
   var latitude = position.coords.latitude;
-  console.log(latitude)
   // 経度を取得し画面に表示
   var longitude = position.coords.longitude;
-  console.log(longitude)
 
   //取得した緯度経度から近隣の図書館を検索
   $.ajax({
@@ -90,4 +89,3 @@ function successCallback(position){
 function errorCallback(error){
   alert("位置情報が取得できませんでした")
 }
-console.log(latitude)

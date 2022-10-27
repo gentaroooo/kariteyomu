@@ -42,6 +42,7 @@
                         return new Promise((resolve, reject) => {
                           timer_id = setTimeout(() => {
                               count++;
+                              // デバック用
                               console.log(`${count}回目のコールです。時刻：[${new Date().toTimeString()}]`);
                               //本の貸出情報をGETリクエストする
                               $.ajax({
@@ -63,32 +64,29 @@
                                 const situation = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.libkey
                                 // JSONから予約情報を取得してreserveurlに代入
                                 const reserveurl = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.reserveurl
-
+                                // JSONからリクエスト結果を取得してstatusに代入
                                 const status = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.status
-
+                                // デバック用
                                 console.log(situation)
                                 console.log(reserveurl)
                                 console.log(status)
                                 // data.continueが0だった場合
                                 if (data.continue === 0) {
                                   console.log("取得に成功")
-
-                                  // const isEmpty = Object.keys(situation).length === 0 && situation.constructor === Object;
-                                  // console.log(isEmpty); // true
                                   if (status === 'Error') {
                                     console.log("Errorですよ〜")
                                       $("#kensaku").remove();
                                       $("#choice").prepend(`<div>
-                                      <button type="button" class="btn btn-dark">システムエラーです</button>
+                                      <button type="button" class="btn btn-dark">図書館から応答がありません<p>時間を空けてお試しください</button>
                                       </div>`)
                                       clearTimeout( timer_id );
                                   } else {
                                     if (Object.keys(situation).length === 0 && situation.constructor === Object) {
                                       console.log("からですよ〜")
                                         $("#kensaku").remove();
-                                        $("#choice").prepend(`<h3>
+                                        $("#choice").prepend(`<h4>
                                         <button type="button" class="badge bg-secondary btn-block">図書館に本がありません</button>
-                                        </h3>`)
+                                        </h4>`)
                                         clearTimeout( timer_id );
                                     } else {
                                       // situationからひとづつ値を取り出してvalueに代入
