@@ -34,6 +34,21 @@
           <p class="card-text mb-2">投稿日：<%= l @post.created_at, format: :long  %></p>
           <p class="card-text mb-2"><%= simple_format(@post.body) %></p>
         </div>
+        
+        <!-- 投稿フォーム -->
+        <%= form_with model: @book, local: true, id: "new_book" do |f| %>
+          <%= f.hidden_field :title, value: @post.title %>
+          <%= f.hidden_field :published_date, value: @post.published_date %>
+          <%= f.hidden_field :info_link, value: @post.info_link %>
+          <%= f.hidden_field :image_link, value: @post.image_link %>
+          <%= f.hidden_field :systemid, value: @post.systemid %>
+          
+          <% @post.authors&.each do |author| %>
+            <%= hidden_field_tag 'book[authors][]', author.name %>
+          <% end %>
+
+          <%= f.submit "読んでみたい", class: 'btn btn-success btn-sm m-1' %>
+        <% end %>
 
         <div class='col-md-12 p-1'>
           <% @post.categories.each do |category| %>
