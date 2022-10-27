@@ -2,6 +2,10 @@
 $(".library").remove()
 $('#parent').html('<p class="library"></p>')
 
+if( navigator.geolocation )
+{
+
+
 // 位置情報を取得する
 navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
@@ -82,10 +86,19 @@ function successCallback(position){
       console.log("失敗")
       console.log(data)
       $("#jsonp").append("エラーです")
+      window.alert('位置情報の取得に失敗しました。エラーコード：' + error.code)
   })
 }
 
 // 取得に失敗した場合の処理
 function errorCallback(error){
   alert("位置情報が取得できませんでした")
+}
+
+}
+
+else
+{
+	// 現在位置を取得できない場合の処理
+	alert( "あなたの端末では、現在位置を取得できません。" ) ;
 }
