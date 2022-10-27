@@ -13,7 +13,7 @@
               <h5 class="card-title"><%= @volume_info[:title] %></h5>
               <p class="card-text mb-2"><%= @volume_info[:authors]&.join(', ') %></p>
               <p class="card-text"><small class="text-muted"><%= @volume_info[:publishedDate] %></small></p>
-              <%= link_to '詳細を見る', @volume_info[:infoLink], target: '_blank' %>
+              <%= link_to '詳細を見る', @volume_info[:canonicalVolumeLink], target: '_blank' %>
             </div>
           </div>
         </div>
@@ -23,7 +23,7 @@
         <%= render 'shared/error_messages', object: f.object %>
         <%= f.hidden_field :title, value: @volume_info[:title] %>
         <%= f.hidden_field :published_date, value: @volume_info[:publishedDate] %>
-        <%= f.hidden_field :info_link, value: @volume_info[:infoLink] %>
+        <%= f.hidden_field :info_link, value: @volume_info[:canonicalVolumeLink] %>
         <%= f.hidden_field :image_link, value: @volume_info[:bookImage] %>
         <% @volume_info[:authors]&.each do |author| %>
           <%= hidden_field_tag 'book[authors][]', author %>

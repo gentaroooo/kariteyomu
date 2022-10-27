@@ -31,7 +31,7 @@
                 <%= form_with model: @book, local: true, id: "new_book" do |f| %>
                   <%= f.hidden_field :title, value: set_google_book_params(google_book)["title"] %>
                   <%= f.hidden_field :published_date, value: set_google_book_params(google_book)["publishedDate"] %>
-                  <%= f.hidden_field :info_link, value: set_google_book_params(google_book)["infoLink"] %>
+                  <%= f.hidden_field :info_link, value: set_google_book_params(google_book)["canonicalVolumeLink"] %>
                   <%= f.hidden_field :image_link, value: set_google_book_params(google_book)["bookImage"] %>
                   <%= f.hidden_field :systemid, value: set_google_book_params(google_book)["systemid"] %>
                   <% set_google_book_params(google_book)["authors"]&.each do |author| %>

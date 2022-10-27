@@ -79,7 +79,7 @@ class BooksController < ApplicationController
     @volume_info[:title] = params[:book][:title]
     @volume_info[:authors] = params[:book][:authors]
     @volume_info[:bookImage] = params[:book][:image_link]
-    @volume_info[:infoLink] = params[:book][:info_link]
+    @volume_info[:canonicalVolumeLink] = params[:book][:info_link]
     @volume_info[:publishedDate] = params[:book][:published_date]
     @volume_info[:systemid] = params[:book][:systemid]
   end

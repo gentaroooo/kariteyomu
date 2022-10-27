@@ -13,10 +13,13 @@ module ApplicationHelper
   
     def set_google_book_params(google_book)
       google_book['volumeInfo']['bookImage'] = google_book.dig('volumeInfo', 'imageLinks', 'thumbnail')
+      if google_book['volumeInfo']['bookImage'].present?
+        google_book['volumeInfo']['bookImage'] = google_book['volumeInfo']['bookImage'].gsub("http", "https")
+      end
 
       if google_book['volumeInfo']['industryIdentifiers']&.select{|h| h["type"].include?("ISBN") }.present?
         google_book['volumeInfo']['systemid'] = google_book['volumeInfo']['industryIdentifiers'].select{|h| h["type"].include?("ISBN") }.first["identifier"]
       end
-      google_book['volumeInfo'].slice('title', 'authors', 'publishedDate', 'infoLink', 'bookImage', 'systemid')
+      google_book['volumeInfo'].slice('title', 'authors', 'publishedDate', 'infoLink', 'bookImage', 'systemid', 'canonicalVolumeLink')
     end
 end
