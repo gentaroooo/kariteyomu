@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
     flash[:warning] = t('defaults.message.require_login')
     redirect_to login_path
   end
+
+  def js_environment
+    gon.calil_key = ENV['APP_KEY']
+  end
 end
