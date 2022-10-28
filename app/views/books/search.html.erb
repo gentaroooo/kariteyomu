@@ -37,7 +37,7 @@
                   <% set_google_book_params(google_book)["authors"]&.each do |author| %>
                     <%= hidden_field_tag 'book[authors][]', author %>
                   <% end %>
-                  <%= f.submit "読んでみたい", class: 'btn btn-success btn-sm m-1' %>
+                  <%= f.submit "よみたい", class: 'btn btn-success btn-sm m-1' %>
                 <% end %>
 
                 <%= link_to 'レビューする', new_post_path(volumeInfo: set_google_book_params(google_book)), class: "btn btn-info btn-sm m-1" %>

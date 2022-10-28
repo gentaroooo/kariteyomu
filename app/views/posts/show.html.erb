@@ -2,7 +2,8 @@
   <div class="card mx-auto">
     <div class="row g-0">
       <div class="col-5">
-        <%= image_tag @post.image_link.present? ? @post.image_link : 'sample.jpg', class: 'img-fluid border m-3' %>
+        <%= image_tag @post.image_link.present? ? @post.image_link : 'sample.jpg', class: 'img-fluid border m-2' %>
+        <h6><%= link_to 'Google', @post.info_link, class: "btn-success btn-sm m-3" %></h6>
       </div>
   
       <div class="col-7">
@@ -14,7 +15,27 @@
           <% end %>
 
           <p class="card-text"><small class="text-muted"><%= @post.published_date %></small></p>
-          <h5><%= link_to 'Googleで見る', @post.info_link, class: "badge bg-light" %></h5>
+          
+
+          <!-- 投稿フォーム -->
+          <%= form_with model: @book, local: true, id: "new_book" do |f| %>
+            <%= f.hidden_field :title, value: @post.title %>
+            <%= f.hidden_field :published_date, value: @post.published_date %>
+            <%= f.hidden_field :info_link, value: @post.info_link %>
+            <%= f.hidden_field :image_link, value: @post.image_link %>
+            <%= f.hidden_field :systemid, value: @post.systemid %>
+            
+            <% @post.authors&.each do |author| %>
+              <%= hidden_field_tag 'book[authors][]', author.name %>
+            <% end %>
+
+            <%= button_tag type: "f.submit", class: "btn btn-info btn-sm" do %>
+            <i class="fa-regular fa-square-plus"></i>よみたいに追加
+            <% end %>
+
+          <% end %>
+
+
         </div>
       </div>
     </div>
@@ -35,20 +56,7 @@
           <p class="card-text mb-2"><%= simple_format(@post.body) %></p>
         </div>
         
-        <!-- 投稿フォーム -->
-        <%= form_with model: @book, local: true, id: "new_book" do |f| %>
-          <%= f.hidden_field :title, value: @post.title %>
-          <%= f.hidden_field :published_date, value: @post.published_date %>
-          <%= f.hidden_field :info_link, value: @post.info_link %>
-          <%= f.hidden_field :image_link, value: @post.image_link %>
-          <%= f.hidden_field :systemid, value: @post.systemid %>
-          
-          <% @post.authors&.each do |author| %>
-            <%= hidden_field_tag 'book[authors][]', author.name %>
-          <% end %>
 
-          <%= f.submit "読んでみたい", class: 'btn btn-success btn-sm m-1' %>
-        <% end %>
 
         <div class='col-md-12 p-1'>
           <% @post.categories.each do |category| %>
