@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Books', type: :system do
-  describe '読みたいのCRUD' do
+  describe 'よみたいのCRUD' do
     let(:me) { create(:user) }
     let(:book) { create(:book) }
     let(:book_by_me) { create(:book, user: me) }
     let(:author) { create(:author) }
 
-      describe '読みたいリスト' do
+      describe 'よみたいリスト' do
         context 'ログインしていない場合' do
           it 'ログインページにリダイレクトされること' do
             visit books_path
@@ -17,32 +17,32 @@ RSpec.describe 'Books', type: :system do
         end
 
         context 'ログインしている場合' do
-          it 'ヘッダーのリンクから読みたい一覧へ遷移できること' do
+          it 'ヘッダーのリンクからよみたい一覧へ遷移できること' do
             login_as(me)
-            click_on('読みたいリスト')
-            expect(current_path).to eq(books_path), 'ヘッダーのリンクから読みたい一覧画面へ遷移できません'
+            click_on('よみたいリスト')
+            expect(current_path).to eq(books_path), 'ヘッダーのリンクからよみたい一覧画面へ遷移できません'
           end
         end
 
-        context '読みたいが一件もない場合' do
+        context 'よみたいが一件もない場合' do
           it '何もない旨のメッセージが表示されること' do
             login_as(me)
             visit books_path
-            expect(page).to have_content('読みたいリストがありません'), '読みたいが一件もない場合、「読みたいリストがありません」というメッセージが表示されていません'
+            expect(page).to have_content('よみたいリストがありません'), 'よみたいが一件もない場合、「よみたいリストがありません」というメッセージが表示されていません'
           end
         end
 
-        context '読みたいがある場合' do
-          it '読みたいの一覧が表示されること' do
+        context 'よみたいがある場合' do
+          it 'よみたいの一覧が表示されること' do
             book_by_me
             login_as(me)
             visit books_path
-            expect(page).to have_content(book_by_me.title), '読みたいリストがありません'
+            expect(page).to have_content(book_by_me.title), 'よみたいリストがありません'
           end
         end
       end
 
-    describe '読みたいの作成' do
+    describe 'よみたいの作成' do
       context 'ログインしていない場合' do
         it 'ログインページにリダイレクトされること' do
           visit new_book_path
@@ -59,7 +59,7 @@ RSpec.describe 'Books', type: :system do
           click_button '検索'
           first('#new_book').click 
           expect(current_path).to eq books_path
-          expect(page).to have_content '読みたいに登録しました'
+          expect(page).to have_content 'よみたいに登録しました'
         end
 
         it '本の詳細が表示される' do
@@ -82,7 +82,7 @@ RSpec.describe 'Books', type: :system do
         #   expect{
         #     click_link '削除' 
         #     page.accept_confirm
-        #     expect(page).to have_content '読みたいを削除しました'
+        #     expect(page).to have_content 'よみたいを削除しました'
         #   }.to change{ book.count }.by(-1)
         #   expect(current_path).to eq books_path
         #   expect(page).not_to have_content title

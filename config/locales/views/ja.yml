@@ -35,10 +35,10 @@ ja:
       success: 'ログアウトしました'
   books:
     index:
-      title: '読みたいリスト'
-      no_result: '読みたいリストがありません。'
+      title: 'よみたいリスト'
+      no_result: 'よみたいリストがありません。'
     new:
-      title: '読みたいリスト作成'
+      title: 'よみたいリスト作成'
     bookmarks:
       title: 'ブックマーク一覧'
     show:
@@ -47,8 +47,8 @@ ja:
       title: '絵本編集'
       password_reset: 'パスワードリセット'
     create:
-      success: '読みたいに登録しました'
-      fail: '読みたい登録に失敗しました'
+      success: 'よみたいに登録しました'
+      fail: 'よみたい登録に失敗しました'
   profiles:
     show:
       title: 'プロフィール'
