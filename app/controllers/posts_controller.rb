@@ -17,7 +17,7 @@ class PostsController < ApplicationController
       @author = Author.find(params[:author_id])
       @posts = @author.posts.includes([:user, :authors, :categories, :likes, :ages]).order(created_at: :desc).page(params[:page])
     else
-      @posts = Post.all.includes([:user, :authors, :categories, :likes, :ages]).order(created_at: :desc).page(params[:page])
+      @posts = Post.all.includes([:user, :authors, :categories, :likes, :ages]).order(created_at: :desc).page(params[:page]).per(6)
     end
   end
 

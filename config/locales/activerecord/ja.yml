@@ -2,7 +2,7 @@ ja:
   activerecord:
     models:
       user: 'ユーザー'
-      book: '読みたい'
+      book: 'よみたい'
       post: 'レビュー'
       comment: 'コメント'
     attributes:
