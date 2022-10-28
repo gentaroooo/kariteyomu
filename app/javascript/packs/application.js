@@ -8,10 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import '@fortawesome/fontawesome-free/js/all';
-
 import "./preview_image";
-// import "./geolocation.js";
-
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

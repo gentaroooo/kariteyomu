@@ -1,167 +1,46 @@
-  <div class="card mx-auto">
-    <div class="row g-0">
-      <div class="col-5">
-        <%= image_tag @book.image_link.present? ? @book.image_link : 'sample.jpg', class: 'img-fluid border m-3' %>
-      </div>
-  
-      <div class="col">
-        <div class="card-body">
-          <h5 class="card-title"><%= @book.title %></h5>
-          <p class="card-text mb-2"><%= @book.authors.pluck(:name).join(', ')&.truncate(50) %></p>
-          <% if current_user.own?(@book) %> 
-            <h3 class="float-right">
-              <%= link_to book_path(@book), id: "button-delete-#{@book.id}",
-                method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
-                <i class="fa-solid fa-trash"></i>
-              <% end %>
-            </h3>
-          <% end %> 
-          <p class="card-text mb-2"><small class="text-muted"><%= @book.published_date %></small></p>
-          
-          <h5 class="float-left"><%= link_to 'Googleで見る', @book.info_link, class: "badge bg-light" %></h5>
-
-
-        </div>
+<div class="card mx-auto">
+  <div class="row g-0">
+    <div class="col-5">
+      <%= image_tag @book.image_link.present? ? @book.image_link : 'sample.jpg', class: 'img-fluid border m-3' %>
+    </div>
+    <div class="col">
+      <div class="card-body">
+        <h5 class="card-title"><%= @book.title %></h5>
+        <p class="card-text mb-2"><%= @book.authors.pluck(:name).join(', ')&.truncate(50) %></p>
+        <% if current_user.own?(@book) %> 
+          <h3 class="float-right">
+            <%= link_to book_path(@book), id: "button-delete-#{@book.id}",
+              method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+          </h3>
+        <% end %> 
+        <p class="card-text mb-2"><small class="text-muted"><%= @book.published_date %></small></p>
+        <h5 class="float-left"><%= link_to 'Googleで見る', @book.info_link, class: "badge bg-light" %></h5>
       </div>
     </div>
   </div>
+</div>
 
 
-  <% if @library.present? %>
-    <div class="low text-center">
-      <article class="card mb-3">
-        <div class="card-body">
-            <div class='col'>
-              <h5><%= @library.name%>貸出情報</h5>
+<% if @library.present? %>
+  <div class="low text-center">
+    <article class="card mb-3">
+      <div class="card-body">
+          <div class='col'>
+            <h5><%= @library.name%>貸出情報</h5>
+            <% if @book.systemid.present?%>
               <p><div id="kensaku"><i class="fa fa-spinner fa-spin fa-4x fa-fw" style="color: orange"></i></div></p>
               <p id="choice"></p>
               <p id="choice2"></p>
-    
-                <script>
-                      function promiseFactory(count) {
-                        return new Promise((resolve, reject) => {
-                          timer_id = setTimeout(() => {
-                              count++;
-                              // デバック用
-                              console.log(`${count}回目のコールです。時刻：[${new Date().toTimeString()}]`);
-                              //本の貸出情報をGETリクエストする
-                              $.ajax({
-                                type: 'GET',
-                                url: 'https://api.calil.jp/check',
-                                data:{
-                                  appkey: "<%= ENV['APP_KEY'] %>",
-                                  isbn: Number("<%= @book.systemid %>"),
-                                  systemid: "<%= @library.name %>",
-                                },
-                                dataType: 'jsonp',
-                                jsonp: 'callback',
-                              })
-
-                              // 成功した場合dataにJSONを格納
-                              .done(function(data){
-                                console.log(data)
-                                // JSONから図書館、貸出情報を取得してsituationに代入
-                                const situation = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.libkey
-                                // JSONから予約情報を取得してreserveurlに代入
-                                const reserveurl = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.reserveurl
-                                // JSONからリクエスト結果を取得してstatusに代入
-                                const status = data.books[Number("<%= @book.systemid %>")].<%= @library.name %>.status
-                                // デバック用
-                                console.log(situation)
-                                console.log(reserveurl)
-                                console.log(status)
-                                // data.continueが0だった場合
-                                if (data.continue === 0) {
-                                  console.log("取得に成功")
-                                  if (status === 'Error') {
-                                    console.log("Errorですよ〜")
-                                      $("#kensaku").remove();
-                                      $("#choice").prepend(`<div>
-                                      <button type="button" class="btn btn-dark">図書館から応答がありません<p>時間を空けてお試しください</button>
-                                      </div>`)
-                                      clearTimeout( timer_id );
-                                  } else {
-                                    if (Object.keys(situation).length === 0 && situation.constructor === Object) {
-                                      console.log("からですよ〜")
-                                        $("#kensaku").remove();
-                                        $("#choice").prepend(`<h4>
-                                        <button type="button" class="badge bg-secondary btn-block">図書館に本がありません</button>
-                                        </h4>`)
-                                        clearTimeout( timer_id );
-                                    } else {
-                                      // situationからひとづつ値を取り出してvalueに代入
-                                      Object.keys(situation).forEach( function(value) {
-                                        //kensakuに値があれば削除からひとづつ値を取り出してvalueに代入
-                                        $("#kensaku").remove();
-                                        //choiceにvalue（図書館名）、this[value](貸出情報)を出力
-                                        if (this[value] === "貸出可") {
-                                          $("#choice").prepend(`<h4>
-                                          <span class="badge bg-success btn-block">${value} : ${this[value]}</span>
-                                          </h4>`)
-                                        } else {
-
-                                        $("#choice").prepend(`<h4>
-                                        <span class="badge bg-info btn-block">${value} : ${this[value]}</span>
-                                        </h4>`)
-                                        }
-                                      }, situation)
-
-                                      $("#choice2").prepend(`<h4>
-                                        <button type="button" class="badge bg-outline-info btn-block"><a href="${reserveurl}">予約する</a></button>
-                                        </h4>`)
-
-                                      //data.continueが0だった場合にループ（setTimeout）を抜ける
-                                      clearTimeout( timer_id );
-                                      }
-                                  }
-                                //data.continueが0だった場合は10回リトライをする 
-                                } else {
-                                  // 10回目のコールでエラー
-                                  if (count === 10 ) {
-                                  reject(count);
-                                  } else {
-                                  resolve(count);
-                                  }
-                                }
-                              })
-
-                              //https://api.calil.jp/checkへのGETに失敗した場合
-                              .fail(function(data){
-                                $("#jsonp").append("エラーです");
-                              });
-
-                          }, 2000);
-                        });
-                      }
-                          async function execute() { // awaitを内部で使っているためasyncをつける
-                            try {
-                                // promiseFactory内のresolveが呼び出されるまで次の処理を実行しない
-                                //awaitによってresolveの引数の値がcountに代入される
-                                let count = await promiseFactory(0);
-                                count = await promiseFactory(count);
-                                count = await promiseFactory(count);
-                                count = await promiseFactory(count);
-                                count = await promiseFactory(count);
-                                count = await promiseFactory(count);
-                                count = await promiseFactory(count);
-                                count = await promiseFactory(count);
-                                count = await promiseFactory(count);
-                                count = await promiseFactory(count);
-                                count = await promiseFactory(count);
-                            } catch (errorCount) {
-                                // Promiseがrejectedのステータスになった場合はcatchブロックに遷移する
-                                console.error(`エラーに飛びました。現在のカウントは ${errorCount} です。`);
-                            } finally {
-                                console.log("処理を終了します。");
-                            }
-                        }
-                        // execute()の実行
-                        execute();
-              </script>   
-            </div>
-        </div>
-      </article>
-    </div>
-  <% else %>
-     <h5><%= link_to '図書館登録をすると表示されます', libraries_path, class: "btn bg-danger text-white btn-sm m-3" %></h5> 
-  <% end %>
+              <%= javascript_pack_tag "calil" %>
+            <% else %>
+              <button type="button" class="btn btn-dark">検索できません<p>Googleに本NOの登録がありませんでした</button>
+            <% end %>
+          </div>
+      </div>
+    </article>
+  </div>
+<% else %>
+    <h5><%= link_to '図書館登録をすると表示されます', libraries_path, class: "btn bg-danger text-white btn-sm m-3" %></h5> 
+<% end %>
