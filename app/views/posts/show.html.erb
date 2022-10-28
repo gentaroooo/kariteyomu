@@ -5,26 +5,22 @@
         <%= image_tag @post.image_link.present? ? @post.image_link : 'sample.jpg', class: 'img-fluid border m-2' %>
         <h6><%= link_to 'Google', @post.info_link, class: "btn-success btn-sm m-3" %></h6>
       </div>
-  
+
       <div class="col-7">
         <div class="card-body">
           <h5 class="card-title"><%= @post.title %></h5>
-
           <% @post.authors.each do |author| %>
             <%= link_to author.name, posts_path(author_id: author.id), class: "link-success" %>
           <% end %>
-
           <p class="card-text"><small class="text-muted"><%= @post.published_date %></small></p>
-          
 
-          <!-- 投稿フォーム -->
           <%= form_with model: @book, local: true, id: "new_book" do |f| %>
             <%= f.hidden_field :title, value: @post.title %>
             <%= f.hidden_field :published_date, value: @post.published_date %>
             <%= f.hidden_field :info_link, value: @post.info_link %>
             <%= f.hidden_field :image_link, value: @post.image_link %>
             <%= f.hidden_field :systemid, value: @post.systemid %>
-            
+           
             <% @post.authors&.each do |author| %>
               <%= hidden_field_tag 'book[authors][]', author.name %>
             <% end %>
@@ -32,9 +28,7 @@
             <%= button_tag type: "f.submit", class: "btn btn-info btn-sm" do %>
             <i class="fa-regular fa-square-plus"></i>よみたいに追加
             <% end %>
-
           <% end %>
-
 
         </div>
       </div>
@@ -45,7 +39,7 @@
     <div class="card-body">
       <div class='row'>
         <div class='col-md-9'>
-          <% if current_user.own?(@post) %>
+          <% if logged_in? && current_user.own?(@post) %>
             <%= render 'crud_menus', post: @post %>
           <% else %>
             <%= render 'like_button', post: @post  %>
@@ -56,8 +50,6 @@
           <p class="card-text mb-2"><%= simple_format(@post.body) %></p>
         </div>
         
-
-
         <div class='col-md-12 p-1'>
           <% @post.categories.each do |category| %>
             <%= link_to category.name, posts_path(category_id: category.id), class: "badge bg-info text-white p-2" %>
@@ -74,9 +66,9 @@
     </div>
   </article>
   <p>
-  <!-- コメントフォーム -->
-  <%= render 'comments/form', { post: @post, comment: @comment } %> 
-  <!-- コメントエリア -->
-  <%= render 'comments/comments', { comments: @comments } %> 
+  <% if logged_in? && current_user.own?(@post) %>
+    <%= render 'comments/form', { post: @post, comment: @comment } %>
+    <%= render 'comments/comments', { comments: @comments } %> 
+  <% end %>
   </p>
 </div>
