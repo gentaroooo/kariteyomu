@@ -36,7 +36,7 @@ ja:
   books:
     index:
       title: 'よみたいリスト'
-      no_result: 'よみたいリストがありません。'
+      no_result: 'よみたいリストがまだありません'
     new:
       title: 'よみたいリスト作成'
     bookmarks:
