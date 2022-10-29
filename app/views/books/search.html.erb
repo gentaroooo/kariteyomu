@@ -27,6 +27,10 @@
 
                 <%= image_tag google_book_thumbnail(google_book), class: 'img-fluid ms-2 mt-2 border book-img m-1' %>
 
+                <%= link_to new_post_path(volumeInfo: set_google_book_params(google_book)), class: "btn btn-success btn-sm m-1" do %>
+                    <i class="fa-solid fa-pen-to-square"></i>レビューする
+                <% end %>
+
                 <!-- 投稿フォーム -->
                 <%= form_with model: @book, local: true, id: "new_book" do |f| %>
                   <%= f.hidden_field :title, value: set_google_book_params(google_book)["title"] %>
@@ -37,10 +41,12 @@
                   <% set_google_book_params(google_book)["authors"]&.each do |author| %>
                     <%= hidden_field_tag 'book[authors][]', author %>
                   <% end %>
-                  <%= f.submit "よみたい", class: 'btn btn-success btn-sm m-1' %>
-                <% end %>
 
-                <%= link_to 'レビューする', new_post_path(volumeInfo: set_google_book_params(google_book)), class: "btn btn-info btn-sm m-1" %>
+                  <%= button_tag type: "f.submit", class: "btn btn-info btn-sm m-1" do %>
+                    <i class="fa-regular fa-square-plus"></i>よみたいに追加
+                  <% end %>
+                
+                <% end %>
 
               </div>
               <div class="col-7">
