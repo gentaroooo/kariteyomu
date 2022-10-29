@@ -25,7 +25,9 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @library = current_user.library
-    gon.library = @library.name
+    if @library.present?
+      gon.library = @library.name
+    end
     gon.book = @book
   end
 
