@@ -25,7 +25,7 @@
       </table>
 
       <% if current_user.library.present? %>
-        <h4 class="text-center top-text p-1"><%= link_to edit_library_path(current_user) do %>
+        <h4 class="text-center top-text p-1"><%= link_to libraries_path(current_user) do %>
           <i class="fa-solid fa-map-location-dot"></i>エリア編集
         <% end %></h4>
       <% else %>
