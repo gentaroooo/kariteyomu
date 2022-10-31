@@ -6,8 +6,10 @@
       <% end %></h4>
       <table class="table">
         <tr>
-          <th scope="row"><%= t(User.human_attribute_name(:email)) %></th>
-          <td><%= current_user.email %></td>
+          <% if current_user.role != 'guest' %>
+            <th scope="row"><%= t(User.human_attribute_name(:email)) %></th>
+            <td><%= current_user.email %></td>
+           <% end %>
         </tr>
         <tr>
           <th scope="row"><%= t(User.human_attribute_name(:name)) %></th>

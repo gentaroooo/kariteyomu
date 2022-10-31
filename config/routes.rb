@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'relationships/destroy'
   get '/terms' => 'static_pages#terms'
   get '/privacy' => 'static_pages#privacy'
+  post '/guest_login', to: 'user_sessions#guest_login'
 
   resource :profile, only: %i[show edit update]
 

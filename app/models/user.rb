@@ -25,6 +25,8 @@ class User < ApplicationRecord
   validates :reset_password_token, presence: true, uniqueness: true, allow_nil: true
   validates :introduction, length: { maximum: 1000 }
 
+  enum role: { general: 0, admin: 1, guest: 2 }
+
   def own?(object)
     id == object.user_id
   end
