@@ -17,10 +17,10 @@ RSpec.describe 'Books', type: :system do
         end
 
         context 'ログインしている場合' do
-          it 'ヘッダーのリンクからよみたい一覧へ遷移できること' do
+          it 'フッターのリンクからよみたい一覧へ遷移できること' do
             login_as(me)
-            click_on('よみたいリスト')
-            expect(current_path).to eq(books_path), 'ヘッダーのリンクからよみたい一覧画面へ遷移できません'
+            click_on('よみたい')
+            expect(current_path).to eq(books_path), 'フッターのリンクからよみたい一覧画面へ遷移できません'
           end
         end
 
@@ -28,7 +28,7 @@ RSpec.describe 'Books', type: :system do
           it '何もない旨のメッセージが表示されること' do
             login_as(me)
             visit books_path
-            expect(page).to have_content('よみたいリストがありません'), 'よみたいが一件もない場合、「よみたいリストがありません」というメッセージが表示されていません'
+            expect(page).to have_content('よみたいリストがまだありません'), 'よみたいが一件もない場合、「よみたいリストがありません」というメッセージが表示されていません'
           end
         end
 
