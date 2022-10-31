@@ -8,21 +8,20 @@ RSpec.describe 'Posts', type: :system do
     let(:author) { create(:author) }
 
       describe 'レビューリスト' do
-        # context 'ログインしていない場合' do
-        #   it 'ログインページにリダイレクトされること' do
-        #     visit books_path
-        #     expect(current_path).to eq(login_path), 'ログインページにリダイレクトされていません'
-        #     expect(page).to have_content('ログインしてください'), 'フラッシュメッセージ「ログインしてください」が表示されていません'
-        #   end
-        # end
+        context 'ログインしていない場合' do
+          it 'ログしてなくてもレビュー一覧が表示されること' do
+            visit posts_path
+            expect(current_path).to eq(posts_path), 'レビュー一覧が表示されていません'
+          end
+        end
 
-        # context 'ログインしている場合' do
-        #   it 'フッターのリンクからレビュー一覧へ遷移できること' do
-        #     login_as(me)
-        #     click_on('ホーム')
-        #     expect(current_path).to eq(posts_path), 'フッターのリンクからレビュー一覧画面へ遷移できません'
-        #   end
-        # end
+        context 'ログインしている場合' do
+          it 'フッターのリンクからレビュー一覧へ遷移できること' do
+            login_as(me)
+            click_on('ホーム')
+            expect(current_path).to eq(root_path), 'フッターのリンクからレビュー一覧画面へ遷移できません'
+          end
+        end
 
         context 'レビューが一件もない場合' do
           it '何もない旨のメッセージが表示されること' do
@@ -93,32 +92,6 @@ RSpec.describe 'Posts', type: :system do
             expect(page).to have_content 'レビューを更新しました'
             expect(page).to have_content 'レビュー編集'
           end
-
-          # it '本の削除ができる' do
-          #   visit post_path(post_by_me)
-          #   title = post_by_me.title
-          #   binding.pry
-          #   find('#button-delete-#{post.id}').click
-          #   link = find('#settings-link')
-          #   link = find('.settings-link')
-          #   expect{
-          #     click_link '削除' 
-          #     page.accept_confirm
-          #     expect(page).to have_content 'レビューを削除しました'
-          #   }.to change{ Post.count }.by(-1)
-          #   expect(current_path).to eq posts_path
-          #   expect(page).not_to have_content title
-          # end
-
-          # it '自分が追加した本には編集アイコンが表示される' do
-          #   visit post_path(post_by_me)
-          #   expect(page).to have_css '.fa-trash:before'
-          # end
-
-          # it '他人が追加した本には歯車アイコンが表示されない' do
-          #   visit post_path(post)
-          #   expect(page).not_to have_css '.fa-trash:before' 
-          # end
         end
 
         context '異常系' do

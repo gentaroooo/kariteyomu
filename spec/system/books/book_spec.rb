@@ -68,32 +68,6 @@ RSpec.describe 'Books', type: :system do
           expect(page).to have_content book.title
           expect(page).to have_content book.published_date
         end
-
-        # it '本の削除ができる' do
-        #   visit book_path(book_by_me)
-        #   title = book_by_me.title
-        #   binding.pry
-        #   find('#button-delete-#{book.id}').click
-        #   link = find('#settings-link')
-        #   link = find('.settings-link')
-        #   expect{
-        #     click_link '削除' 
-        #     page.accept_confirm
-        #     expect(page).to have_content 'よみたいを削除しました'
-        #   }.to change{ book.count }.by(-1)
-        #   expect(current_path).to eq books_path
-        #   expect(page).not_to have_content title
-        # end
-
-        # it '自分が追加した本には編集アイコンが表示される' do
-        #   visit book_path(book_by_me)
-        #   expect(page).to have_css '.fa-trash:before'
-        # end
-
-        # it '他人が追加した本には歯車アイコンが表示されない' do
-        #   visit book_path(book)
-        #   expect(page).not_to have_css '.fa-trash:before' 
-        # end
       end
 
       context '異常系' do
