@@ -1,1 +1,2 @@
-document.querySelector("#js-follow-button-<%= @other_user.id %>").innerHTML = ("<%= j(render 'follow', user: @other_user) %>")
+$("#js-follow-button-<%= @other_user.id %>").html("<%= j(render('follow', user: @other_user)) %>")
+$("#follower-count").html("<span class='text-info'><%= @other_user.followers.length %></span>" + "<small class='text-info'> フォロワー</small>")
