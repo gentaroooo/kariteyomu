@@ -1,1 +1,2 @@
 $("#js-follow-button-<%= @other_user.id %>").html("<%= j(render 'unfollow', user: @other_user) %>")
+$("#follower-count").html("<span class='text-dark'><%= @other_user.followers.length %></span>" + "<small class='text-secondary'> フォロワー</small>")
