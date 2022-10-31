@@ -59,17 +59,14 @@ RSpec.describe 'Books', type: :system do
           click_button '検索'
           first('#new_book').click 
           expect(current_path).to eq books_path
-          expect(page).to have_content 'よみたいに登録しました'
+          expect(page).to have_content 'よみたいリストに登録しました'
         end
 
         it '本の詳細が表示される' do
           create(:book_author, author: author, book: book)
           visit book_path(book)
           expect(page).to have_content book.title
-          expect(page).to have_content book.user.name
           expect(page).to have_content book.published_date
-          expect(page).to have_content author.name
-          expect(page).to have_link '詳細を見る', href: book.info_link
         end
 
         # it '本の削除ができる' do

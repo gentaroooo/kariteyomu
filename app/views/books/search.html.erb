@@ -27,7 +27,7 @@
 
                 <%= image_tag google_book_thumbnail(google_book), class: 'img-fluid ms-2 mt-2 border book-img m-1' %>
 
-                <%= link_to new_post_path(volumeInfo: set_google_book_params(google_book)), class: "btn btn-success btn-sm m-1" do %>
+                <%= link_to new_post_path(volumeInfo: set_google_book_params(google_book)), class: "btn btn-success btn-sm m-1 review" do %>
                     <i class="fa-solid fa-pen-to-square"></i>レビューする
                 <% end %>
 

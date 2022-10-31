@@ -8,27 +8,27 @@ RSpec.describe 'Posts', type: :system do
     let(:author) { create(:author) }
 
       describe 'レビューリスト' do
-        context 'ログインしていない場合' do
-          it 'ログインページにリダイレクトされること' do
-            visit books_path
-            expect(current_path).to eq(login_path), 'ログインページにリダイレクトされていません'
-            expect(page).to have_content('ログインしてください'), 'フラッシュメッセージ「ログインしてください」が表示されていません'
-          end
-        end
+        # context 'ログインしていない場合' do
+        #   it 'ログインページにリダイレクトされること' do
+        #     visit books_path
+        #     expect(current_path).to eq(login_path), 'ログインページにリダイレクトされていません'
+        #     expect(page).to have_content('ログインしてください'), 'フラッシュメッセージ「ログインしてください」が表示されていません'
+        #   end
+        # end
 
-        context 'ログインしている場合' do
-          it 'ヘッダーのリンクからレビュー一覧へ遷移できること' do
-            login_as(me)
-            click_on('レビューリスト')
-            expect(current_path).to eq(posts_path), 'ヘッダーのリンクからレビュー一覧画面へ遷移できません'
-          end
-        end
+        # context 'ログインしている場合' do
+        #   it 'フッターのリンクからレビュー一覧へ遷移できること' do
+        #     login_as(me)
+        #     click_on('ホーム')
+        #     expect(current_path).to eq(posts_path), 'フッターのリンクからレビュー一覧画面へ遷移できません'
+        #   end
+        # end
 
         context 'レビューが一件もない場合' do
           it '何もない旨のメッセージが表示されること' do
             login_as(me)
             visit posts_path
-            expect(page).to have_content('レビューがありません'), 'レビューが一件もない場合、「レビューがありません」というメッセージが表示されていません'
+            expect(page).to have_content('まだレビューがありません'), 'レビューが一件もない場合、「レビューがありません」というメッセージが表示されていません'
           end
         end
 
@@ -58,9 +58,9 @@ RSpec.describe 'Posts', type: :system do
             visit search_books_path
             fill_in 'search', with: 'apple'
             click_button '検索'
-            first('#new_review').click
+            first(".review").click
             expect(current_path).to eq new_post_path
-            fill_in '本文', with: 'レビュー内容'
+            fill_in 'post_body', with: 'レビューした内容'
             expect{ click_button '登録する' }.to change{ Post.count }.by(1)
             expect(current_path).to eq posts_path
             expect(page).to have_content 'レビューを投稿しました'
@@ -82,12 +82,12 @@ RSpec.describe 'Posts', type: :system do
             expect(page).to have_content post.user.name
             expect(page).to have_content post.published_date
             expect(page).to have_content author.name
-            expect(page).to have_link '詳細を見る', href: post.info_link
+            expect(page).to have_link 'Googleで見る', href: post.info_link
           end
 
           it '本の編集ができる' do
             visit edit_post_path(post_by_me)
-            fill_in '本文', with: 'レビュー編集'
+            fill_in 'post_body', with: 'レビュー編集'
             click_button '更新する'
             expect(current_path).to eq post_path(post_by_me)
             expect(page).to have_content 'レビューを更新しました'
@@ -134,9 +134,8 @@ RSpec.describe 'Posts', type: :system do
             visit search_books_path
             fill_in 'search', with: 'はらぺこあおむし'
             click_button '検索'
-            first('#new_review').click
-            # expect(current_path).to eq new_post_path
-            fill_in '本文', with: ''
+            first(".review").click
+            fill_in 'post_body', with: ''
             click_button '登録する'
             expect(page).to have_content 'レビューの投稿に失敗しました'
             expect(page).to have_content '本文を入力してください'
@@ -144,7 +143,7 @@ RSpec.describe 'Posts', type: :system do
 
           it '入力が不足している場合、本の編集ができない' do
             visit edit_post_path(post_by_me)
-            fill_in '本文', with: ''
+            fill_in 'post_body', with: ''
             click_button '更新する'
             expect(page).to have_content 'レビューを更新できませんでした'
             expect(page).to have_content '本文を入力してください'
