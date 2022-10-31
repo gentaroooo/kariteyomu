@@ -5,6 +5,7 @@ ja:
       book: 'よみたい'
       post: 'レビュー'
       comment: 'コメント'
+      library: '図書館'
     attributes:
       user:
         email: 'メールアドレス'

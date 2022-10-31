@@ -60,7 +60,7 @@ RSpec.describe 'Posts', type: :system do
             first(".review").click
             expect(current_path).to eq new_post_path
             fill_in 'post_body', with: 'レビューした内容'
-            expect{ click_button '登録する' }.to change{ Post.count }.by(1)
+            expect { click_button '登録する' }.to change { Post.count }.by(1)
             expect(current_path).to eq posts_path
             expect(page).to have_content 'レビューを投稿しました'
           end

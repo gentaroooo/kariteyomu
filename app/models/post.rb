@@ -21,15 +21,15 @@ class Post < ApplicationRecord
   validate :check_number_of_ages
 
   def check_number_of_categories
-   if categories && post_categories.count > 5
-    errors.add(:base,"カテゴリーは5個以内にしてください")
-   end
+    if categories && post_categories.count > 5
+      errors.add(:base, "カテゴリーは5個以内にしてください")
+    end 
   end
 
   def check_number_of_ages
-   if ages && post_ages.count > 5
-    errors.add(:base,"年齢は5個以内にしてください")
-   end
+    if ages && post_ages.count > 5
+      errors.add(:base, "年齢は5個以内にしてください")
+    end
   end
   
   def save_with_author(authors)

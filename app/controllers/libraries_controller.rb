@@ -7,8 +7,12 @@ class LibrariesController < ApplicationController
 
   def create
     @library = current_user.build_library(library_params)
-    @library.save
-    redirect_to libraries_path, success: ('図書館登録しました')
+    if @library.save
+      redirect_to libraries_path, success: t('defaults.message.updated', item: Library.model_name.human)
+    else
+      flash.now['danger'] = t('defaults.message.not_updated', item: Library.model_name.human)
+      redirect_to libraries_path
+    end
   end
 
   def edit; end
@@ -25,7 +29,7 @@ class LibrariesController < ApplicationController
   def destroy
     @library = current_user.library
     @library.destroy!
-    redirect_to libraries_path, success: ('図書館登録を削除しました')
+    redirect_to libraries_path, success: t('defaults.message.deleted', item: Library.model_name.human)
   end
 
   private
