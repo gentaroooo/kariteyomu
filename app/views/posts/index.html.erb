@@ -5,7 +5,7 @@
         <% if @posts.present? %>
           <%= render @posts %>
         <% else %>
-          <p><%= t('.no_result') %></p>
+          <h3 class="text-center top-text p-3"><%= t('.no_result') %></h3>
         <% end %>
       </div>
       <%= paginate @posts %> 
@@ -15,7 +15,7 @@
 <div class="top-wrapper">
   <div class="top-inner-text text-white">
     <h3>次は何をかりますか？</h3>
-    <h5>近くの図書館にある本を探せます</h5>
+    <h5>お気に入りの絵本が近くの図書館でかりられるか分かります</h5>
   </div>
 </div>
 <div class="text-center top-text p-1">最近の投稿</div>

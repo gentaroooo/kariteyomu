@@ -47,20 +47,5 @@ RSpec.describe 'Users', type: :system do
     let(:me) { create(:user) }
     let(:others) { create(:user) }
     before { login_as(me) }
-
-    context '正常系' do
-      # it 'ユーザー情報が表示される' do
-      #   visit user_path(others)
-      #   expect(page).to have_content others.name
-      # end
-
-      # it 'ユーザーが投稿した本の一覧が表示される' do
-      #   book_1 = create(:book, user: others)
-      #   book_2 = create(:book, user: others)
-      #   visit user_path(others)
-      #   expect(page).to have_content book_1.title
-      #   expect(page).to have_content book_2.title
-      # end
-    end
   end
 end

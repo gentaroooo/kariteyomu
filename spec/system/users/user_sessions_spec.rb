@@ -30,7 +30,6 @@ RSpec.describe 'UserSessions', type: :system do
     context '正常系' do
       it 'ログアウトができる' do
         login_as(user)
-        find('.dropdown').hover
         click_link 'ログアウト'
         expect(current_path).to eq root_path
         expect(page).to  have_content 'ログアウトしました'

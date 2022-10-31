@@ -47,8 +47,8 @@ ja:
       title: '絵本編集'
       password_reset: 'パスワードリセット'
     create:
-      success: 'よみたいに登録しました'
-      fail: 'よみたい登録に失敗しました'
+      success: 'よみたいリストに登録しました'
+      fail: 'よみたいリストの登録に失敗しました'
   profiles:
     show:
       title: 'プロフィール'
@@ -68,12 +68,12 @@ ja:
   posts:
     index:
       title: 'レビューリスト'
-      no_result: 'レビューがありません。'
+      no_result: 'まだレビューがありません'
     new:
       title: 'レビュー作成'
     likes:
       title: 'いいねリスト'
-      no_result: 'いいねリストがありません。'
+      no_result: 'まだいいねをしていません'
     show:
       title: 'レビュー詳細'
     edit:
