@@ -67,9 +67,9 @@
     </div>
   </article>
   <p>
-  <% if logged_in? && current_user.own?(@post) %>
-    <%= render 'comments/form', { post: @post, comment: @comment } %>
-    <%= render 'comments/comments', { comments: @comments } %> 
-  <% end %>
+    <% if logged_in? %>
+      <%= render 'comments/form', { post: @post, comment: @comment } %>
+    <% end %>
+    <p><%= render 'comments/comments', { comments: @comments } %></p>
   </p>
 </div>
