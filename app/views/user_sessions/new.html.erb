@@ -2,21 +2,35 @@
   <div class="row">
     <div class=" col-md-10 offset-md-1 col-lg-8 offset-lg-2">
      <div class="text-center top-text p-1"><%= t '.title' %></div>
-      <%= form_with url: login_path, local: true do |f| %>
-        <div class="form-group">
-          <%= f.label :email, User.human_attribute_name(:email) %>
-          <%= f.text_field :email, class: 'form-control' %>
+      <div class="d-md-flex">
+        <div class="bg-white border rounded-2 p-4 pb-5 flex-fill me-md-3 mb-3 mb-md-0">
+          <%= form_with url: login_path do |f| %>
+            <div class="mb-4">
+              <%= f.label :email, User.human_attribute_name(:email), class: 'form-label' %>
+              <%= f.text_field :email, class: 'form-control', placeholder: 'メールアドレスを入力' %>
+            </div>
+            <div class="mb-3">
+              <%= f.label :password, User.human_attribute_name(:password), class: 'form-label' %>
+              <%= f.password_field :password, class: 'form-control', placeholder: 'パスワードを入力' %>
+            </div>
+            <div class="actions">
+              <%= f.submit t('defaults.login'), class: 'btn btn-success w-100' %>
+            </div>
+          <% end %>
         </div>
-        <div class="form-group">
-          <%= f.label :password, User.human_attribute_name(:password) %>
-          <%= f.password_field :password, class: 'form-control' %>
+        <div class="bg-white border rounded-2 p-4 pb-5 flex-fill d-flex flex-column">
+          <p class="fw-bolder mb-4 pb-2 text-center">アカウントをお持ちでない方へ</p>
+          <div class="mb-5">
+            <p class="mb-2 fs-3 text-center">ゲストユーザとしてログインする</p>
+            <%= button_to 'ゲストログイン', guest_login_path, class: 'btn btn-info w-100 ' %>
+          </div>
+          
+          <div class="mb-4">
+            <p class="mb-2 fs-3 text-center">新しくアカウントを作成する</p>
+            <%= link_to t('.to_register_page'), new_user_path, class: 'btn btn-outline-info w-100' %>
+          </div>
         </div>
-        <div class="actions">
-          <%= f.submit (t 'defaults.login'), class: 'btn btn-success' %>
-        </div>
-      <% end %>
-        <p>
-        <p class><%= link_to (t '.to_register_page'), new_user_path, class: "btn btn-outline-success btn-sm" %></p>
+      </div>
     </div>
   </div>
 </div>

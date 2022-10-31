@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(version: 2022_10_22_112124) do
     t.string "salt"
     t.string "name", null: false
     t.string "introduction"
+    t.integer "role", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "avatar"
