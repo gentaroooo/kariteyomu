@@ -89,3 +89,9 @@ ja:
       success: 'いいねしました'
     destroy:
       success: 'いいねを外しました'
+  libraries:
+    create:
+      success: '図書館登録を更新しました'
+      fail: '図書館登録に失敗しました'
+    deleted:
+      success: '図書館登録を削除しました'
