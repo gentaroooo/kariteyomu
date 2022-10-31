@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 2022_10_22_112124) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
-    t.text "body"
     t.text "info_link"
     t.string "published_date"
     t.string "image_link"
