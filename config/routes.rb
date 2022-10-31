@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   root 'posts#index'
-
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
@@ -12,7 +11,7 @@ Rails.application.routes.draw do
   get '/privacy' => 'static_pages#privacy'
 
   resource :profile, only: %i[show edit update]
-  
+
   resources :users, only: %i[new create index show] do
     member do
       get :following, :follower, :show_post, :show_book
@@ -30,10 +29,9 @@ Rails.application.routes.draw do
         get :likes
       end
   end
+
   resources :likes, only: %i[create destroy]
   resources :password_resets, only: %i[new create edit update]
-
   resources :relationships, only: [:create, :destroy]
-
   resources :libraries, only: [:index, :create, :destroy, :edit, :update]
 end

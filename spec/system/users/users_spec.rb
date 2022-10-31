@@ -47,6 +47,5 @@ RSpec.describe 'Users', type: :system do
     let(:me) { create(:user) }
     let(:others) { create(:user) }
     before { login_as(me) }
-    end
   end
 end

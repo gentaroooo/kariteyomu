@@ -1,4 +1,4 @@
-<% if logged_in? && current_user.own?(post) %>
+<% if logged_in? && current_user.like?(post) %>
   <%= render 'unlike', { post: post } %>
 <% else %>
   <%= render 'like', { post: post } %>
