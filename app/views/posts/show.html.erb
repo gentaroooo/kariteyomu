@@ -3,7 +3,7 @@
     <div class="row g-0">
       <div class="col-5">
         <%= image_tag @post.image_link.present? ? @post.image_link : 'sample.jpg', class: 'img-fluid border m-1' %>
-        <h6><%= link_to 'Googleで見る', @post.info_link, class: "btn-outline-success btn-sm m-1" %></h6>
+        <h6><%= link_to 'Google', @post.info_link, class: "btn-outline-success btn-sm m-3" %></h6>
       </div>
 
       <div class="col-7">
@@ -53,7 +53,7 @@
         
         <div class='col-md-12 p-1'>
           <% @post.categories.each do |category| %>
-            <%= link_to category.name, posts_path(category_id: category.id), class: "badge bg-info text-white p-2" %>
+            <%= link_to category.name, posts_path(category_id: category.id), class: "badge bg-info text-white p-1" %>
           <% end %>
         </div>
 
