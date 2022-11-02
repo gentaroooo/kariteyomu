@@ -1,20 +1,17 @@
 //前回の図書館情報を削除してlibraryを追加
 $(".library").remove()
 $('#parent').html('<p class="library"></p>')
-
 if( navigator.geolocation ){
-
   // 位置情報を取得する
   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-
   // 取得に成功した場合の処理
   function successCallback(position){
     // 緯度を取得
     var latitude = position.coords.latitude;
     // 経度を取得
     var longitude = position.coords.longitude;
-
     //取得した緯度経度から近隣の図書館を検索
+
     $.ajax({
         type: 'GET',
         url: 'https://api.calil.jp/library',

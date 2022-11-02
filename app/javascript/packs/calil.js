@@ -2,8 +2,6 @@ function promiseFactory(count) {
   return new Promise((resolve, reject) => {
     timer_id = setTimeout(() => {
         count++;
-        // デバック用
-        console.log(`${count}回目のコールです。時刻：[${new Date().toTimeString()}]`);
         //本の貸出情報をGETリクエストする
         $.ajax({
           type: 'GET',
@@ -19,23 +17,16 @@ function promiseFactory(count) {
 
         // 成功した場合dataにJSONを格納
         .done(function(data){
-          console.log(data)
           // JSONから図書館、貸出情報を取得してsituationに代入
-          // [Number(gon.library)]
           const situation = data.books[Number(gon.book.systemid)][gon.library].libkey
           // JSONから予約情報を取得してreserveurlに代入
           const reserveurl = data.books[Number(gon.book.systemid)][gon.library].reserveurl
           // JSONからリクエスト結果を取得してstatusに代入
           const status = data.books[Number(gon.book.systemid)][gon.library].status
-          // デバック用
-          console.log(situation)
-          console.log(reserveurl)
-          console.log(status)
           // data.continueが0だった場合
           if (data.continue === 0) {
             console.log("取得に成功")
             if (status === 'Error') {
-              console.log("Errorですよ〜")
                 $("#kensaku").remove();
                 $("#choice").prepend(`<div>
                 <button type="button" class="btn btn-dark">図書館から応答がありません<p>時間を空けてお試しください</button>
@@ -90,10 +81,8 @@ function promiseFactory(count) {
     }, 2000);
   });
 }
-    async function execute() { // awaitを内部で使っているためasyncをつける
+    async function execute() {
       try {
-          // promiseFactory内のresolveが呼び出されるまで次の処理を実行しない
-          //awaitによってresolveの引数の値がcountに代入される
           let count = await promiseFactory(0);
           count = await promiseFactory(count);
           count = await promiseFactory(count);
@@ -106,11 +95,9 @@ function promiseFactory(count) {
           count = await promiseFactory(count);
           count = await promiseFactory(count);
       } catch (errorCount) {
-          // Promiseがrejectedのステータスになった場合はcatchブロックに遷移する
           console.error(`エラーに飛びました。現在のカウントは ${errorCount} です。`);
       } finally {
           console.log("処理を終了します。");
       }
   }
-  // execute()の実行
   execute();

@@ -83,7 +83,7 @@ README〜ER図作成：9/8 〆切
 [draw.io](https://drive.google.com/file/d/1WuTZqHH_nXiTfN0qo9pbr6GssDpsccwP/view?usp=sharing)
 
 ## 使用技術
-### バッグエンド ###
+### バックエンド ###
  - Ruby 3.1.2
  - Rails 6.1.7
 ### フロントエンド ###
