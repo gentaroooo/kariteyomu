@@ -1,3 +1,6 @@
+  # Kariteyomu
+[https://www.kariteyomu.net/](https://www.kariteyomu.net/)
+  
   ## ■ サービス概要
 　最適な絵本を見つけ、図書館で貸出可能かを確認する
 「絵本検索」と「図書館検索」を掛け合わせたサービスです。
@@ -78,3 +81,15 @@ README〜ER図作成：9/8 〆切
 [figma](https://www.figma.com/file/A1eFk16SlsYSZO32imTql0/Kariteyomu?node-id=0%3A1)
 ## ER図
 [draw.io](https://drive.google.com/file/d/1WuTZqHH_nXiTfN0qo9pbr6GssDpsccwP/view?usp=sharing)
+
+## 使用技術
+**バッグエンド**
+- Ruby 3.1.2
+- Rails 6.1.7
+**フロントエンド**
+- JavaScript
+- jQuery
+- Bootstrap
+**インフラ**
+- Heroku
+- AWS(S3)
