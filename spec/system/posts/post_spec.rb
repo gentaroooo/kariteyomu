@@ -81,7 +81,7 @@ RSpec.describe 'Posts', type: :system do
             expect(page).to have_content post.user.name
             expect(page).to have_content post.published_date
             expect(page).to have_content author.name
-            expect(page).to have_link 'Googleで見る', href: post.info_link
+            expect(page).to have_link 'Google', href: post.info_link
           end
 
           it '本の編集ができる' do

@@ -1,25 +1,21 @@
 <header>
   <nav class="navbar navbar-expand-lg navigation navbar-center bg-light p-1">
     <div class="container-fluid">
-
       <%= link_to root_path, class: 'navbar-brand col-3' do %>
         <%= image_tag 'logo.png', size: '100x20' %>
       <% end %>
-
       <%= link_to profile_path, class: 'dropdown-item col-3' do %>
         <div class="text-cente">
           <i class="fa-solid fa-circle-user"></i>
           <div class="icon-text">ユーザー</div>
         </div>
       <% end %> 
-
       <%= link_to logout_path, class: 'dropdown-item col-3', method: :delete do %>
         <div class="text-center">
           <i class="fa-solid fa-right-from-bracket"></i>
           <div class="icon-text">ログアウト</div>
         </div>
       <% end %> 
-      
     </div>
   </nav>
 </header>

@@ -24,13 +24,10 @@
           <div class="card mb-3", style="height: 270px; min-width: 300px;">
             <div class="row g-0">
               <div class="col-5">
-
                 <%= image_tag google_book_thumbnail(google_book), class: 'img-fluid ms-2 mt-2 border book-img m-1' %>
-
                 <%= link_to new_post_path(volumeInfo: set_google_book_params(google_book)), class: "btn btn-success btn-sm m-1 review" do %>
-                    <i class="fa-solid fa-pen-to-square"></i>レビューする
+                  <i class="fa-solid fa-pen-to-square"></i>レビューする
                 <% end %>
-
                 <!-- 投稿フォーム -->
                 <%= form_with model: @book, local: true, id: "new_book" do |f| %>
                   <%= f.hidden_field :title, value: set_google_book_params(google_book)["title"] %>
@@ -41,20 +38,16 @@
                   <% set_google_book_params(google_book)["authors"]&.each do |author| %>
                     <%= hidden_field_tag 'book[authors][]', author %>
                   <% end %>
-
                   <%= button_tag type: "f.submit", class: "btn btn-info btn-sm m-1" do %>
                     <i class="fa-regular fa-square-plus"></i>よみたいに追加
                   <% end %>
-                
                 <% end %>
-
               </div>
               <div class="col-7">
                 <div class="card-body">
                   <h5 class="card-title"><%= google_book['volumeInfo']['title'].truncate(17) %></h5>
                   <p class="card-text mb-2"><%= google_book['volumeInfo']['authors']&.join(', ')&.truncate(20) %></p>
                   <p class="card-text"><small class="text-muted"><%= google_book['volumeInfo']['publishedDate'] %></small></p>
-                  
                 </div>
               </div>
             </div>
@@ -64,5 +57,3 @@
     </div>
   <% end %>
 </div>
-
-
