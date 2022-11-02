@@ -84,12 +84,12 @@ README〜ER図作成：9/8 〆切
 
 ## 使用技術
 **バッグエンド**
-- Ruby 3.1.2
-- Rails 6.1.7
+ - Ruby 3.1.2
+ - Rails 6.1.7
 **フロントエンド**
-- JavaScript
-- jQuery
-- Bootstrap
+ - JavaScript
+ - jQuery
+ - Bootstrap
 **インフラ**
-- Heroku
-- AWS(S3)
+ - Heroku
+ - AWS(S3)
