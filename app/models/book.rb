@@ -18,3 +18,4 @@ class Book < ApplicationRecord
       false
   end
 end
+
