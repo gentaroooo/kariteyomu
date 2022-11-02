@@ -25,7 +25,6 @@ function promiseFactory(count) {
           const status = data.books[Number(gon.book.systemid)][gon.library].status
           // data.continueが0だった場合
           if (data.continue === 0) {
-            console.log("取得に成功")
             if (status === 'Error') {
                 $("#kensaku").remove();
                 $("#choice").prepend(`<div>
@@ -34,7 +33,6 @@ function promiseFactory(count) {
                 clearTimeout( timer_id );
             } else {
               if (Object.keys(situation).length === 0 && situation.constructor === Object) {
-                console.log("からですよ〜")
                   $("#kensaku").remove();
                   $("#choice").prepend(`<h4>
                   <button type="button" class="badge bg-secondary btn-block">図書館に本がありません</button>
