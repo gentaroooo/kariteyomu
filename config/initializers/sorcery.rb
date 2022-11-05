@@ -112,7 +112,8 @@ Rails.application.config.sorcery.configure do |config|
    
   # config.twitter.key = Rails.application.credentials.dig(:twitter, :key)
   # config.twitter.secret = Rails.application.credentials.dig(:twitter, :secret_key)
-  config.twitter.callback_url = Settings.sorcery[:callback_url]
+  # config.twitter.callback_url = Settings.sorcery[:callback_url]
+  config.twitter.callback_url = "https://www.kariteyomu.net/oauth/callback?provider=twitter"
   config.twitter.user_info_path = "/1.1/account/verify_credentials.json?include_email=true"
   
   config.twitter.user_info_mapping = {
