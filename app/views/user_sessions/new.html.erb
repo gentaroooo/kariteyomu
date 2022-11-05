@@ -17,10 +17,14 @@
               <%= f.submit t('defaults.login'), class: 'btn btn-success w-100' %>
             </div>
           <% end %>
-          <p class="text-center fw-bolder fs-3 my-3 mt-4 text-border">または</p>
+          <%
+=begin%>
+ <p class="text-center fw-bolder fs-3 my-3 mt-4 text-border">または</p>
           <%= link_to auth_at_provider_path(provider: :twitter), class: 'btn w-100 twitter' do %>
             <i class="bi bi-twitter"></i> Twitterでログイン
-          <% end %>
+          <% end %> 
+<%
+=end%>
         </div>
         <div class="bg-white border rounded-2 p-4 pb-5 flex-fill d-flex flex-column">
           <p class="fw-bolder mb-4 pb-2">アカウントをお持ちでない方へ</p>
