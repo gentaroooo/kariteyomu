@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get '/privacy' => 'static_pages#privacy'
   post '/guest_login', to: 'user_sessions#guest_login'
 
+  post "oauth/callback", to: "oauths#callback"
+  get "oauth/callback", to: "oauths#callback"
+  get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
+
   resource :profile, only: %i[show edit update]
 
   resources :users, only: %i[new create index show] do
