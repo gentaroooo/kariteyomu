@@ -18,7 +18,7 @@
             </div>
           <% end %>
           <p class="text-center fw-bolder fs-3 my-3 mt-4 text-border">または</p>
-          <%= button_to '/auth/twitter', class: 'btn w-100 twitter' do %>
+          <%= link_to auth_at_provider_path(provider: :twitter), class: 'btn w-100 twitter' do %>
             <i class="bi bi-twitter"></i> Twitterでログイン
           <% end %>
         </div>
