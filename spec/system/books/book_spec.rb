@@ -6,6 +6,7 @@ RSpec.describe 'Books', type: :system do
     let(:book) { create(:book) }
     let(:book_by_me) { create(:book, user: me) }
     let(:author) { create(:author) }
+    let(:library) { create(:library, user: me) }
 
       describe 'よみたいリスト' do
         context 'ログインしていない場合' do
@@ -52,7 +53,10 @@ RSpec.describe 'Books', type: :system do
       end
 
       context 'ログインしている場合' do
-        before { login_as(me) }
+        before do
+          login_as(me)
+          library
+        end
         it '検索した本を新規追加できる' do
           visit search_books_path
           fill_in 'search', with: 'はらぺこあおむし'
@@ -60,6 +64,15 @@ RSpec.describe 'Books', type: :system do
           first('#new_book').click 
           expect(current_path).to eq books_path
           expect(page).to have_content 'よみたいリストに登録しました'
+        end
+
+        it '検索した本の詳細を選択すると図書館情報が表示される' do
+          visit search_books_path
+          fill_in 'search', with: 'はらぺこあおむし'
+          click_button '検索'
+          first('#new_book').click
+          visit book_path(1)
+          expect(page).to have_no_content('予約する')
         end
 
         it '本の詳細が表示される' do
