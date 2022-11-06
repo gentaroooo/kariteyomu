@@ -72,7 +72,9 @@ RSpec.describe 'Books', type: :system do
           click_button '検索'
           first('#new_book').click
           visit book_path(1)
-          expect(page).to have_no_content('予約する')
+          sleep 5
+          expect(page).to have_content '予約する'
+
         end
 
         it '本の詳細が表示される' do
