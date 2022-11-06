@@ -6,6 +6,9 @@ RSpec.describe 'Posts', type: :system do
     let(:post) { create(:post) }
     let(:post_by_me) { create(:post, user: me) }
     let(:author) { create(:author) }
+    let(:age) { create(:age) }
+    let(:category) { create(:category) }
+    let(:category_b) { create(:category_2) }
 
       describe 'レビューリスト' do
         context 'ログインしていない場合' do
@@ -52,8 +55,53 @@ RSpec.describe 'Posts', type: :system do
         end
 
         context 'ログインしている場合' do
-          before { login_as(me) }
-          it '検索した本を新規追加できる' do
+          before do
+            login_as(me)
+            category
+            age
+          end
+
+          it '検索した本を新規追加できる（カテゴリー1、年齢1）' do
+            visit search_books_path
+            fill_in 'search', with: 'apple'
+            click_button '検索'
+            first(".review").click
+            expect(current_path).to eq new_post_path
+            fill_in 'post_body', with: 'レビューした内容'
+            check '0〜1歳'
+            check '幼稚園保育園'
+            expect { click_button '登録する' }.to change { Post.count }.by(1)
+            expect(current_path).to eq posts_path
+            expect(page).to have_content 'レビューを投稿しました'
+          end
+
+          it '検索した本を新規追加できる（カテゴリー0、年齢1）' do
+            visit search_books_path
+            fill_in 'search', with: 'apple'
+            click_button '検索'
+            first(".review").click
+            expect(current_path).to eq new_post_path
+            fill_in 'post_body', with: 'レビューした内容'
+            check '0〜1歳'
+            expect { click_button '登録する' }.to change { Post.count }.by(1)
+            expect(current_path).to eq posts_path
+            expect(page).to have_content 'レビューを投稿しました'
+          end
+
+          it '検索した本を新規追加できる（カテゴリー1、年齢0）' do
+            visit search_books_path
+            fill_in 'search', with: 'apple'
+            click_button '検索'
+            first(".review").click
+            expect(current_path).to eq new_post_path
+            fill_in 'post_body', with: 'レビューした内容'
+            check '幼稚園保育園'
+            expect { click_button '登録する' }.to change { Post.count }.by(1)
+            expect(current_path).to eq posts_path
+            expect(page).to have_content 'レビューを投稿しました'
+          end
+
+          it '検索した本を新規追加できる（カテゴリー0、年齢0）' do
             visit search_books_path
             fill_in 'search', with: 'apple'
             click_button '検索'

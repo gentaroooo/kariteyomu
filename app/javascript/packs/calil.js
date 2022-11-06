@@ -56,7 +56,7 @@ function promiseFactory(count) {
                   }
                 }, situation)
                 $("#choice2").prepend(`<h4>
-                  <button type="button" class="badge bg-outline-info btn-block"><a href="${reserveurl}">予約する</a></button>
+                  <button type="button" class="badge bg-outline-info btn-block reserve"><a href="${reserveurl}">予約する</a></button>
                   </h4>`)
                 //data.continueが0だった場合にループ（setTimeout）を抜ける
                 clearTimeout( timer_id );
