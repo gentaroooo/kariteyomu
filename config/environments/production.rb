@@ -77,8 +77,8 @@ Rails.application.configure do
   }
 
     # Herokuを使っていたら、Herokuに環境変数を設定する必要があります。
-  # $ heroku config:set MAIL_ADDRESS = メールアドレス
-  # $ heroku config:set MAIL_PASSWORD = パスワード
+  # $ heroku config:set MAIL_ADDRESS=メールアドレス
+  # $ heroku config:set MAIL_PASSWORD=パスワード
 
   
 
