@@ -86,7 +86,7 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
   # config.action_mailer.default_url_options = Settings.default_url_options.to_h
-  config.action_mailer.default_url_options = { protocol: 'https',host:'www.kariteyomu.net'}
+  config.action_mailer.default_url_options = { protocol: 'https',host: 'www.kariteyomu.net'}
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
