@@ -50,6 +50,8 @@ ja:
     create:
       success: 'よみたいリストに登録しました'
       fail: 'よみたいリストの登録に失敗しました'
+    search:
+      title: '検索'
   profiles:
     show:
       title: 'プロフィール'
@@ -91,6 +93,10 @@ ja:
     destroy:
       success: 'いいねを外しました'
   libraries:
+    index:
+      title: '図書館リスト'
+    edit:
+      title: '図書館編集'
     create:
       success: '図書館登録を更新しました'
       fail: '図書館登録に失敗しました'
