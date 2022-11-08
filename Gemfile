@@ -60,4 +60,5 @@ gem 'rails-i18n'
 gem 'ancestry'
 gem 'gon'
 gem 'fog-aws'
-gem "aws-sdk-s3", require: false 
+gem "aws-sdk-s3", require: false
+gem 'meta-tags'
