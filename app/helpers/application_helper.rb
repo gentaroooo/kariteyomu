@@ -1,4 +1,10 @@
 module ApplicationHelper
+  def page_title(page_title = '')
+    base_title = 'Kariteyomu'
+
+    page_title.empty? ? base_title : page_title + ' | ' + base_title
+  end
+
   def google_book_thumbnail(google_book)
     google_book['volumeInfo']['imageLinks'].nil? ? 'sample.jpg' : google_book['volumeInfo']['imageLinks']['thumbnail']
   end

@@ -1,3 +1,4 @@
+<% content_for(:title, @post.title) %>
 <div class="col row-cols-1 row-cols-md-2 p-2">
   <div class="card mx-auto">
     <div class="row g-0">
@@ -42,6 +43,17 @@
           <% else %>
             <%= render 'like_button', post: @post  %>
           <% end %>
+          
+          
+
+          <%= link_to "https://twitter.com/share?url=https://www.kariteyomu.net&text=【おすすめの絵本】%0a%0a&url=#{ @post.image_link }、シェアさいこう〜", target: '_blank' do %>
+            <i class="fab fa-twitter" style='color: #3399FF;'></i>シェア
+          <% end %>
+
+
+
+          
+
           <%= link_to image_tag(@post.user.avatar.url, class:"rounded-circle m-1 user-image", size: '60x60'), user_path(@post.user) %>
           <%= link_to @post.user.name, user_path(@post.user) %>
           <p class="card-text mb-2">投稿日：<%= l @post.created_at, format: :long  %></p>
