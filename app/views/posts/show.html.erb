@@ -42,20 +42,7 @@
             <%= render 'crud_menus', post: @post %>
           <% else %>
             <%= render 'like_button', post: @post  %>
-            <%= link_to "https://twitter.com/share?url=#{request.url}
-            %0a&text=【#{ @post.user.name.truncate(15) }さんのおすすめの絵本は%0a#{ @post.title.truncate(20) }です】
-            %0a%0a#{ @post.body.truncate(30) }%0a&hashtags=Kariteyomu",
-            target: '_blank' do %>
-              <i class="fab fa-twitter" style='color: #3399FF;'></i>シェア
-          <% end %> 
           <% end %>
-          
-          <%= link_to "https://twitter.com/share?url=#{request.url}
-          %0a&text=【#{ @post.user.name.truncate(15) }さんのおすすめの絵本は%0a#{ @post.title.truncate(20) }です】
-          %0a%0a#{ @post.body.truncate(30) }%0a&hashtags=Kariteyomu",
-           target: '_blank' do %>
-            <i class="fab fa-twitter" style='color: #3399FF;'></i>シェア
-          <% end %> 
 
           <%= link_to image_tag(@post.user.avatar.url, class:"rounded-circle m-1 user-image", size: '60x60'), user_path(@post.user) %>
           <%= link_to @post.user.name, user_path(@post.user) %>

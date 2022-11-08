@@ -1,5 +1,13 @@
 <ul class='crud-menu-btn list-inline float-right'>
   <li class="list-inline-item">
+    <%= link_to "https://twitter.com/share?url=#{request.url}
+    %0a&text=【#{ @post.user.name.truncate(15) }さんのおすすめの絵本は#{ @post.title.truncate(20) }です】
+    %0a%0a#{ @post.body.truncate(30) }%0a&hashtags=Kariteyomu",
+    target: '_blank' do %>
+      <h3><i class="fab fa-twitter" style='color: #3399FF;'></i></h3>
+    <% end %>
+  </li>
+  <li class="list-inline-item">
     <%= link_to edit_post_path(post), id: "button-edit-#{post.id}" do %>
       <h3><%= icon 'fa', 'pen' %></h3>
     <% end %>
