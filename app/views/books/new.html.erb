@@ -57,13 +57,12 @@
         <%= f.hidden_field :info_link, value: @book.info_link %>
         <%= f.hidden_field :image_link, value: @book.image_link %>
         <%= f.hidden_field :systemid, value: @book.systemid %>
-        <%
-=begin%>
- <% @book.authors&.each do |author| %>
-          <%= hidden_field_tag 'book[authors][]', author %>
-        <% end %> 
-<%
-=end%>
+        <%= f.hidden_field :authors, value: @book.authors %>
+
+        <% @book.authors&.each do |author| %>
+          <%= hidden_field_tag 'book[authors][]', author.name %>
+        <% end %>
+
         <%= f.submit class: 'btn btn-success' %>
       <% end %>
   </div>
