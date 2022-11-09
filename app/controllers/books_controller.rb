@@ -7,7 +7,8 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new
+    @post = Post.new
+    @book = Book.find(params[:format])
     @volume_info = params[:volumeInfo]
   end
 

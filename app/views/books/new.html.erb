@@ -2,33 +2,68 @@
 <div class="container mt-3">
   <div class="row">
     <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-      <h1 class="mb-3"><%= t('.title') %></h1>
-      <div class="card mb-4 p-3">
+      <h5 class="text-center top-text p-1"><%= t('.title') %></h5>
+      <div class="card mb-3 p-1">
         <div class="row g-0">
           <div class="col-5">
-            <%= image_tag @volume_info[:bookImage].present? ? @volume_info[:bookImage] : 'sample.jpg', class: 'img-fluid border' %>
+          
+            <%= image_tag @book.image_link.present? ? @book.image_link : 'sample.jpg', class: 'img-fluid border m-3' %>
           </div>
           <div class="col-7">
             <div class="card-body">
-              <h5 class="card-title"><%= @volume_info[:title] %></h5>
-              <p class="card-text mb-2"><%= @volume_info[:authors]&.join(', ') %></p>
-              <p class="card-text"><small class="text-muted"><%= @volume_info[:publishedDate] %></small></p>
-              <%= link_to '詳細を見る', @volume_info[:canonicalVolumeLink], target: '_blank' %>
+              <h5 class="card-title"><%= @book.title %></h5>
+              <p class="card-text mb-2"><%= @book.authors.pluck(:name).join(', ')&.truncate(50) %></p>
+              <p class="card-text"><small class="text-muted"><%= @book.published_date %></small></p>
+              <%= link_to 'Googleで詳細を見る', @book.info_link, target: '_blank' %>
             </div>
           </div>
         </div>
       </div>
-      <!-- 投稿フォーム -->
-      <%= form_with model: @book, local: true do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
-        <%= f.hidden_field :title, value: @volume_info[:title] %>
-        <%= f.hidden_field :published_date, value: @volume_info[:publishedDate] %>
-        <%= f.hidden_field :info_link, value: @volume_info[:canonicalVolumeLink] %>
-        <%= f.hidden_field :image_link, value: @volume_info[:bookImage] %>
-        <% @volume_info[:authors]&.each do |author| %>
-          <%= hidden_field_tag 'book[authors][]', author %>
+
+      <%= form_with model: @post, local: true do |f| %>
+      <%= render 'shared/error_messages', object: f.object %> 
+
+        <div class="mb-4">
+          <h6><%= f.label "レビュー" %></h6>
+          <%= f.text_area :body, class: 'form-control', rows: 5 %>
+        </div>
+
+       <h6><%= f.label "カテゴリー選択" %></h6>
+        <div class='form-group'>
+          <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
+            <div class="form-check form-check-inline">
+              <%= category.label class: 'form-check-label' do %>
+                <%= category.check_box class: 'form-check-input' %>
+                <%= category.text %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <h6><%= f.label "年齢選択" %></h6>
+        <div class='form-group'>
+          <%= f.collection_check_boxes(:age_ids, Age.all, :id, :name) do |age| %>
+            <div class="form-check form-check-inline">
+              <%= age.label class: 'form-check-label' do %>
+                <%= age.check_box class: 'form-check-input' %>
+                <%= age.text %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        
+        <%= f.hidden_field :title, value: @book.title %>
+        <%= f.hidden_field :published_date, value: @book.published_date %>
+        <%= f.hidden_field :info_link, value: @book.info_link %>
+        <%= f.hidden_field :image_link, value: @book.image_link %>
+        <%= f.hidden_field :systemid, value: @book.systemid %>
+        <%= f.hidden_field :authors, value: @book.authors %>
+
+        <% @book.authors&.each do |author| %>
+          <%= hidden_field_tag 'book[authors][]', author.name %>
         <% end %>
-        <%= f.submit class: 'btn btn-primary' %>
+
+        <%= f.submit class: 'btn btn-success' %>
       <% end %>
   </div>
 </div>

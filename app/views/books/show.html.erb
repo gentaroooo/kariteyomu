@@ -16,8 +16,15 @@
             <% end %>
           </h3>
         <% end %> 
+        
         <p class="card-text mb-2"><small class="text-muted"><%= @book.published_date %></small></p>
-        <h5 class="float-left"><%= link_to 'Googleで見る', @book.info_link, class: "badge bg-light" %></h5>
+        <%= link_to 'Google', @book.info_link, class: "btn btn-light btn-sm" %>
+
+        <%= link_to new_book_path(@book), class: "btn btn-success btn-sm review" do %>
+          <i class="fa-solid fa-pen-to-square"></i>レビューする
+        <% end %>
+
+
       </div>
     </div>
   </div>
