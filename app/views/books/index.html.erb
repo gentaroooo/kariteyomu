@@ -3,7 +3,28 @@
   <div class="text-center top-text p-1">よみたい</div>
     <div class="container">
       <div class="row row-cols-1 row-cols-md-2">
-        <%= render @book %>
+        <%= render partial: 'books/book', collection: @book, locals: {library: @library}  %>
+
+        <% if @library.present? %>
+          <div class="low text-center">
+            <article class="card mb-3">
+              <div class="card-body">
+                  <div class='col'>
+                    <h5><%= @library.name%>貸出情報</h5>
+
+                    <p><div id="kensaku"><i class="fa fa-spinner fa-spin fa-4x fa-fw" style="color: orange"></i></div></p>
+                      <p id="choice"></p>
+                      <p id="choice2"></p>
+                      <%= javascript_pack_tag "calil_index" %>
+
+                  </div>
+              </div>
+            </article>
+          </div>
+        <% else %>
+            <%= link_to '図書館登録をすると貸出状況が表示されます', libraries_path, class: "btn bg-danger text-white m-3" %> 
+        <% end %>
+
       </div>
     </div>
     <%= paginate @book %> 
