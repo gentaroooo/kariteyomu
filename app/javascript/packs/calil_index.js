@@ -36,17 +36,14 @@ function promiseFactory(count) {
           if (data.continue === 0) {
             if (status === 'Error') {
                 $("#kensaku").remove();
-                debugger
-                $("#choice").prepend(`<div>
+                $(`#${book.systemid}`).after(`<div>
                 <button type="button" class="btn btn-dark">図書館から応答がありません<p>時間を空けてお試しください</button>
                 </div>`)
                 clearTimeout( timer_id );
             } else {
               if (Object.keys(situation).length === 0 && situation.constructor === Object) {
                   $("#kensaku").remove();
-                  $("#choice").prepend(`<h4>
-                  <button type="button" class="badge bg-secondary btn-block">図書館に本がありません</button>
-                  </h4>`)
+                  $("#choice").prepend(`<button type="button" class="badge bg-secondary btn-block">図書館に本がありません</button>`)
                   clearTimeout( timer_id );
               } else {
                 // situationからひとづつ値を取り出してvalueに代入
@@ -56,24 +53,14 @@ function promiseFactory(count) {
                   //choiceにvalue（図書館名）、this[value](貸出情報)を出力
                   if (this[value] === "貸出可") {
                     // $("#choice").prepend(`<h4>
-                    $(`#${book.systemid}`).after(`<h4>
-                    
-                    <span class="badge bg-success btn-block">${value} : ${this[value]}</span>
-                    </h4>`)
-
-
-
-                    
+                    $(`.library-info${book.systemid}`).after(`<span class="badge bg-info text-white">${value} : ${this[value]}</span>`)
+                  
                   } else {
 
-                  $("#choice").prepend(`<h4>
-                  <span class="badge bg-info btn-block">${value} : ${this[value]}</span>
-                  </h4>`)
+                    $(`.library-info${book.systemid}`).after(`<span class="badge bg-success text-white">${value} : ${this[value]}</span>`)
                   }
                 }, situation)
-                $("#choice2").prepend(`<h4>
-                  <button type="button" class="badge bg-outline-info btn-block reserve"><a href="${reserveurl}">予約する</a></button>
-                  </h4>`)
+                $(`.reserve${book.systemid}`).after(`<button type="button" class="badge bg-outline-info"><a href="${reserveurl}">予約する</a></button>`)
                 //data.continueが0だった場合にループ（setTimeout）を抜ける
                 clearTimeout( timer_id );
                 }
