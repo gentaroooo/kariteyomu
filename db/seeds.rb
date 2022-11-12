@@ -1,3 +1,12 @@
+User.create(
+  name: ENV['ADMIN_NAME'],
+  email:ENV['ADMIN_EMAIL'],
+  password: ENV['ADMIN_PASSWORD'],
+  password_confirmation: ENV['ADMIN_PASSWORD'],
+  role: 1,
+)
+
+
 # 100.times do
 #   User.create(
 #     name: Faker::Games::Pokemon.name,

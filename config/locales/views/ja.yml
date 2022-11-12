@@ -14,6 +14,7 @@ ja:
       not_updated: "%{item}を更新できませんでした"
       deleted: "%{item}を削除しました"
       delete_confirm: '削除しますか？'
+      not_authorized: '権限がありません'
       require_login: 'ログインしてください'
       created: "%{item}を作成しました"
       not_created: "%{item}を作成できませんでした"
@@ -102,3 +103,15 @@ ja:
       fail: '図書館登録に失敗しました'
     deleted:
       success: '図書館登録を削除しました'
+  admin:
+    user_sessions:
+      new:
+        title: 'ログイン'
+      create:
+        success: 'ログインしました'
+        fail: 'ログインに失敗しました'
+      destroy:
+        success: 'ログアウトしました'
+    dashboards:
+      index:
+        title: 'ダッシュボード'
