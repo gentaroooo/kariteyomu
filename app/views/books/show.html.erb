@@ -37,7 +37,7 @@
           <div class='col'>
             <h5><%= @library.name%>貸出情報</h5>
             <% if @book.systemid.present?%>
-              <p><div id="kensaku"><i class="fa fa-spinner fa-spin fa-4x fa-fw" style="color: orange"></i></div></p>
+              <p><div id="search"><i class="fa fa-spinner fa-spin fa-4x fa-fw" style="color: orange"></i></div></p>
               <p id="choice"></p>
               <p id="choice2"></p>
               <%= javascript_pack_tag "calil" %>
