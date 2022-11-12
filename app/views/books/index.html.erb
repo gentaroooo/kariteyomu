@@ -7,11 +7,15 @@
       
         <%= render partial: 'books/book', collection: @book, locals: {library: @library}  %>
 
-        <% if @library.present? %>
+        <%
+=begin%>
+ <% if @library.present? %>
             <%= javascript_pack_tag "calil_index" %>
         <% else %>
             <%= link_to '図書館登録をすると貸出状況が表示されます', libraries_path, class: "btn bg-danger text-white m-3" %> 
-        <% end %>
+        <% end %> 
+<%
+=end%>
 
       </div>
     </div>

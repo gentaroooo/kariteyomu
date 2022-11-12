@@ -1,14 +1,16 @@
-  <div class="col row-cols-1 row-cols-md-2 p-1">
-    <div class="card mx-auto library-info<%= book.systemid %>" style="width: 16rem; height: 9rem">
+  <div class="col row-cols-1 row-cols-md-2 p-1 text-center">
+    <div class="card mx-auto library-info<%= book.systemid %>" style="width: 11rem; height: 9rem">
 
       <%= image_tag book.image_link.present? ? book.image_link : 'sample.jpg', class: 'card-img-top book-img' %>
       <div class="card-title p-1"><%= book.title.truncate(15) %></div>
      
       <%= link_to '', book_path(book), class: "card-link" %>
-       <p><div id="kensaku"><i class="fa fa-spinner fa-pulse fa-4x fa-fw" style="color: orange"></i></div></p>
-      
-    
+       
     </div>
-      <div class="reserve<%= book.systemid %>"></div>
+    <%
+=begin%>
+ <p><div id="search"><i class="fa fa-spinner fa-pulse fa-4x fa-fw" style="color: orange"></i></div></p>  
+<%
+=end%>
   </div>
   

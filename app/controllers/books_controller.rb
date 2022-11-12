@@ -8,7 +8,7 @@ class BooksController < ApplicationController
     if @library.present?
       gon.library = @library.name
     end
-    gon.books = @book
+    gon.book = @book
   end
 
   def new
