@@ -26,14 +26,14 @@ function promiseFactory(count) {
           // data.continueが0だった場合
           if (data.continue === 0) {
             if (status === 'Error') {
-                $("#kensaku").remove();
+                $("#search").remove();
                 $("#choice").prepend(`<div>
                 <button type="button" class="btn btn-dark">図書館から応答がありません<p>時間を空けてお試しください</button>
                 </div>`)
                 clearTimeout( timer_id );
             } else {
               if (Object.keys(situation).length === 0 && situation.constructor === Object) {
-                  $("#kensaku").remove();
+                  $("#search").remove();
                   $("#choice").prepend(`<h4>
                   <button type="button" class="badge bg-secondary btn-block">図書館に本がありません</button>
                   </h4>`)
@@ -41,8 +41,8 @@ function promiseFactory(count) {
               } else {
                 // situationからひとづつ値を取り出してvalueに代入
                 Object.keys(situation).forEach( function(value) {
-                  //kensakuに値があれば削除からひとづつ値を取り出してvalueに代入
-                  $("#kensaku").remove();
+                  //searchに値があれば削除からひとづつ値を取り出してvalueに代入
+                  $("#search").remove();
                   //choiceにvalue（図書館名）、this[value](貸出情報)を出力
                   if (this[value] === "貸出可") {
                     $("#choice").prepend(`<h4>
