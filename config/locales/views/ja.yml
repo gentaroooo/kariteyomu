@@ -9,11 +9,15 @@ ja:
     search_word: '検索ワード'
     search: '検索'
     show: '詳細'
+    delete: '削除'
+    unspecified: '指定なし'
+
     message:
       updated: "%{item}を更新しました"
       not_updated: "%{item}を更新できませんでした"
       deleted: "%{item}を削除しました"
       delete_confirm: '削除しますか？'
+      not_authorized: '権限がありません'
       require_login: 'ログインしてください'
       created: "%{item}を作成しました"
       not_created: "%{item}を作成できませんでした"
@@ -102,3 +106,37 @@ ja:
       fail: '図書館登録に失敗しました'
     deleted:
       success: '図書館登録を削除しました'
+  admin:
+    user_sessions:
+      new:
+        title: 'ログイン'
+      create:
+        success: 'ログインしました'
+        fail: 'ログインに失敗しました'
+      destroy:
+        success: 'ログアウトしました'
+    dashboards:
+      index:
+        title: 'ダッシュボード'
+    
+    users:
+      index:
+        title: 'ユーザー一覧'
+      edit:
+        title: 'ユーザー編集'
+      show:
+        title: 'ユーザー詳細'
+    posts:
+      index:
+        title: 'レビュ一一覧'
+      edit:
+        title: 'レビュー編集'
+      show:
+        title: 'レビュー詳細'
+    books:
+      index:
+        title: '読みたい一覧'
+      edit:
+        title: '読みたい編集'
+      show:
+        title: '読みたい詳細'

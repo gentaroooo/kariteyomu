@@ -1,0 +1,19 @@
+<tr>
+  <td>
+    <%= book.id %>
+  </td>
+  <td>
+    <%= link_to book.title, admin_book_path(book) %>
+  </td>
+  <td>
+    <%= book.user.name %>
+  </td>
+  <td>
+    <%= l book.created_at, format: :long %>
+  </td>
+  <td>
+    <%= link_to t('defaults.show'), admin_book_path(book), class: 'btn btn-info' %>
+    <%= link_to t('defaults.edit'), edit_admin_book_path(book), class: 'btn btn-success' %>
+    <%= link_to t('defaults.delete'), admin_book_path(book), method: :delete, data: { confirm: t('defaults.message.delete_confirm') }, class: 'btn btn-danger' %>
+  </td>
+</tr>

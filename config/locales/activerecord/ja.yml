@@ -14,11 +14,24 @@ ja:
         name: 'ユーザーネーム'
         avatar: 'アバター'
         introduction: '自己紹介'
+        role: '権限'
       book:
         title: 'タイトル'
         body: '本文'
         book_image: 'サムネイル'
+        user: '作成者'
       comment:
         body: 'コメント'
       post:
         body: '本文'
+        user: '作成者'
+  attributes:
+    id: 'ID'
+    created_at: '作成日時'
+    updated_at: '更新日時'
+
+  enums:
+    user:
+      role:
+        general: '一般'
+        admin: '管理者'
