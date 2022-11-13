@@ -10,7 +10,6 @@ class Admin::UserSessionsController < Admin::BaseController
     if @user
       redirect_to admin_root_path, success: t('.success')
     else
-      # flash.new[:danger] = 'ログインに失敗しました'
       flash.now[:danger] = t('.fail')
       render :new
     end

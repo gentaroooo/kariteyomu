@@ -31,6 +31,6 @@ class Admin::PostsController < Admin::BaseController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body, :post_image, :post_image_cache)
+    params.require(:post).permit(:title, :body, :image_link, :info_link, :published_date, :systemid, category_ids: [], age_ids: [])
   end
 end

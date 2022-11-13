@@ -133,3 +133,10 @@ ja:
         title: 'レビュー編集'
       show:
         title: 'レビュー詳細'
+    books:
+      index:
+        title: '読みたい一覧'
+      edit:
+        title: '読みたい編集'
+      show:
+        title: '読みたい詳細'

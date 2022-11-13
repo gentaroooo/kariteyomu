@@ -29,6 +29,13 @@
             </p>
           <% end %>
 
+          <%= link_to admin_books_path, class: "nav-link" do %>
+            <i class="nav-icon far fa-file"></i>
+            <p>
+              <%= t('admin.books.index.title') %>
+            </p>
+          <% end %>
+
         <li class="nav-item">
           <%= link_to admin_users_path, class: "nav-link #{active_if('admin/users')}" do %>
             <i class="nav-icon far fa-user"></i>
