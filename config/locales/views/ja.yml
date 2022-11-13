@@ -9,6 +9,9 @@ ja:
     search_word: '検索ワード'
     search: '検索'
     show: '詳細'
+    delete: '削除'
+    unspecified: '指定なし'
+
     message:
       updated: "%{item}を更新しました"
       not_updated: "%{item}を更新できませんでした"
@@ -115,3 +118,18 @@ ja:
     dashboards:
       index:
         title: 'ダッシュボード'
+    
+    users:
+      index:
+        title: 'ユーザー一覧'
+      edit:
+        title: 'ユーザー編集'
+      show:
+        title: 'ユーザー詳細'
+    posts:
+      index:
+        title: 'レビュ一一覧'
+      edit:
+        title: 'レビュー編集'
+      show:
+        title: 'レビュー詳細'
