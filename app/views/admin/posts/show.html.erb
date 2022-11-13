@@ -18,7 +18,7 @@
         </tr>
         <tr>
           <th scope="row"><%= Post.human_attribute_name(:user) %></th>
-          <td><%= @post.user.decorate.full_name %></td>
+          <td><%= @post.user.name %></td>
         </tr>
         <tr>
           <th scope="row"><%= Post.human_attribute_name(:body) %></th>
