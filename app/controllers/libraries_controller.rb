@@ -3,6 +3,16 @@ class LibrariesController < ApplicationController
 
   def index
     @library = current_user.library
+
+    if params[:location].nil?
+      return
+    elsif params[:location].blank?
+      flash.now[:danger] = '検索キーワードが入力されていません'
+      return
+    else
+      @location = params[:location]
+      gon.location = @location
+    end
   end
 
   def create
