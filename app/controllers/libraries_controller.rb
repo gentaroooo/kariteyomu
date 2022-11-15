@@ -10,19 +10,10 @@ class LibrariesController < ApplicationController
       flash.now[:danger] = '検索キーワードが入力されていません'
       return
     else
-      # @location = params[:address]
-      # gon.address = @address
-      p Geocoder.coordinates(params[:address])
+        longitude_latitude = Geocoder.coordinates(params[:address])
 
-      longitude_latitude = Geocoder.coordinates(params[:address])
-
-      gon.longitude = longitude_latitude[1]
-      gon.latitude  = longitude_latitude[0]
-      
-      p gon.longitude
-      p gon.latitude
-      # geocoded_by :address
-      # after_validation :geocode
+        gon.longitude = longitude_latitude[1]
+        gon.latitude  = longitude_latitude[0]
     end
   end
 

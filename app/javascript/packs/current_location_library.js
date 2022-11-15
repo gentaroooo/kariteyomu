@@ -1,15 +1,16 @@
 //前回の図書館情報を削除してlibraryを追加
 $(".library").remove()
 $('#parent').html('<p class="library"></p>')
-if( navigator.geolocation ){
-  // 位置情報を取得する
+
+document.getElementById("btn").onclick = function(){
+
   navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
   // 取得に成功した場合の処理
   function successCallback(position){
     // 緯度を取得
-    var current_latitude = position.coords.latitude;
+    var latitude = position.coords.latitude;
     // 経度を取得
-    var current_longitude = position.coords.longitude;
+    var longitude = position.coords.longitude;
     //取得した緯度経度から近隣の図書館を検索
 
     $.ajax({
@@ -18,7 +19,7 @@ if( navigator.geolocation ){
         data:{
             appkey: "<%= ENV['APP_KEY'] %>",
             format: "json",
-            geocode: `${current_longitude},${current_latitude}`,
+            geocode: `${longitude},${latitude}`,
             limit: 20,
         },
         dataType: 'jsonp',
