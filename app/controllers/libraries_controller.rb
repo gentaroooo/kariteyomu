@@ -4,14 +4,25 @@ class LibrariesController < ApplicationController
   def index
     @library = current_user.library
 
-    if params[:location].nil?
+    if params[:address].nil?
       return
-    elsif params[:location].blank?
+    elsif params[:address].blank?
       flash.now[:danger] = '検索キーワードが入力されていません'
       return
     else
-      @location = params[:location]
-      gon.location = @location
+      # @location = params[:address]
+      # gon.address = @address
+      p Geocoder.coordinates(params[:address])
+
+      longitude_latitude = Geocoder.coordinates(params[:address])
+
+      gon.longitude = longitude_latitude[1]
+      gon.latitude  = longitude_latitude[0]
+      
+      p gon.longitude
+      p gon.latitude
+      # geocoded_by :address
+      # after_validation :geocode
     end
   end
 

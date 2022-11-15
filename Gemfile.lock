@@ -200,6 +200,7 @@ GEM
     font-awesome-sass (5.11.2)
       sassc (>= 1.11)
     formatador (1.1.0)
+    geocoder (1.8.1)
     globalid (1.0.0)
       activesupport (>= 5.0)
     gon (6.4.0)
@@ -491,6 +492,7 @@ DEPENDENCIES
   faraday
   fog-aws
   font-awesome-sass (~> 5.11.2)
+  geocoder
   gon
   jbuilder (~> 2.7)
   jquery-rails
