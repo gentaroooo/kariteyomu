@@ -3,7 +3,6 @@ class LibrariesController < ApplicationController
 
   def index
     @library = current_user.library
-
     if params[:address].nil?
       return
     elsif params[:address].blank?
@@ -30,8 +29,6 @@ class LibrariesController < ApplicationController
   end
 
   def edit
-    @library = current_user.library
-
     if params[:address].nil?
       return
     elsif params[:address].blank?

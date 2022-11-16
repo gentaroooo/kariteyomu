@@ -1,44 +1,59 @@
 <% content_for(:title, t('.title')) %>
 <div class="container">
-    <div class="row row-cols-1 row-cols-md-2 p-2 text-center">
+    <div class="row p-2">
         <% if @library.present? %>
-            <h5 class="text-info p-3"><%= "登録しているエリアは#{@library.name}です" %></h5> 
-             <div class="card m-2">
-                <div class="card-body">
-                    <h5>
-                        <%= link_to edit_library_path(@library), class: "button-edit-#{@library.id}" do %>
-                            エリアを変更する<%= icon 'fa', 'pen' %>
-                        <% end %>
-                    </h5>
-                    <h5 class="text-secondary">現在地を取得して近隣のエリアを再び選択できます</h5>
+            <div class="col text-center">
+
+                <h5 class="text-info p-3"><%= "登録しているエリアは#{@library.name}です" %></h5> 
+                    <div class="card m-2">
+                    <div class="card-body">
+                        <h5>
+                            <%= link_to edit_library_path(@library), class: "button-edit-#{@library.id}" do %>
+                                エリアを変更する<%= icon 'fa', 'pen' %>
+                            <% end %>
+                        </h5>
+                        <h5 class="text-secondary">現在地を取得して近隣のエリアを再び選択できます</h5>
+                    </div>
+                </div> 
+                <div class="card m-2">
+                    <div class="card-body">
+                        <h5>
+                            <%= link_to library_path(@library), id: "button-delete-#{@library.id}", method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
+                                エリアを削除する<%= icon 'fas', 'trash' %>
+                            <% end %>
+                        </h5>
+                        <h5 class="text-secondary">登録した図書館エリアを削除します</h5>
+                    </div>
                 </div>
-            </div> 
-            <div class="card m-2">
-                <div class="card-body">
-                    <h5>
-                        <%= link_to library_path(@library), id: "button-delete-#{@library.id}", method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
-                             エリアを削除する<%= icon 'fas', 'trash' %>
-                        <% end %>
-                    </h5>
-                    <h5 class="text-secondary">登録した図書館エリアを削除します</h5>
-                </div>
-            </div> 
+            </div>  
         <% else %>
-            <div class="center">
-                <h5 class="text-secondary m-3">現在地を取得すると近郊のエリアが表示されます</h5>
-                <h1><%= link_to "現在地を取得する", libraries_path, remote: true, class: 'btn btn-danger btn-lg m-2' %></h1>
+
+            <div class="col text-center">
+                <h5 class="text-secondary p-2">図書館エリア登録</h5>
+                <div class="border-bottom" style="padding:10px;"></div>
+                <h5 class="text-secondary m-2">現在地から登録をする</h5>
+                <h4 class><%= link_to libraries_path, remote: true, class: 'btn btn-info btn-lg m-2' do %>
+                    <i class="fa-solid fa-map-location-dot"></i>現在地から検索
+                <% end %></h4>
                 <div id="parent">
                     <p class="library"></p>
                 </div>
                 
-                <h5 class="text-secondary m-3">住所を入力してエリア登録をする</h5>
+                <div class="border-bottom" style="padding:10px;"></div>
+
+                <h5 class="text-secondary m-3">住所を入力して登録をする</h5>
                 <%= form_with url: libraries_path, local: true, method: :get do |f| %>
                     <div class="mb-4">
-                    <%= f.search_field :address, class: 'form-control', rows: 5, placeholder: 'エリアのキーワードを入力', value: params[:address] %>
+                        <%= f.search_field :address, class: 'form-control', rows: 5, placeholder: '住所または郵便番号を入力', value: params[:address] %>
+                            <small class="text-secondary">都道府県・市町村・郵便番号等で検索することができます。</small>
+                            <p class=""><small class="text-secondary">
+                            ●例1: 東京都 千代田区 丸の内<br>※都道府県と市町村の間にはスペースを入れてください<br>●例2: 丸の内 1-1-1 ※市町村と番地で検索<br>●例3: 1000001 ※郵便番号で検索</small></p>
+                        <%= f.submit "検索", class: 'btn btn-info', id: 'js-address' %>
                     </div>
-                    <%= f.submit class: 'btn btn-success', id: 'js-address' %>
-                    
-                <% end %>          
+                <% end %>
+                <div id="address_parent">
+                    <p class="address_library"></p>
+                </div>    
             </div>
         <% end %>
     </div>

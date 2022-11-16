@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
-  $(".library").remove()
-  $('#parent').html('<p class="library"></p>')
+  $(".address_library").remove()
+  $('#address_parent').html('<p class="address_library"></p>')
 
   $.ajax({
       type: 'GET',
@@ -33,13 +33,13 @@ $(document).on('turbolinks:load', function() {
     // 重複を削除した値
     console.log(filterData)
 
-    $(".library").remove()
-    $('#parent').html('<p class="library m-3"></p>')
-    $('.library').after('<button type="button" class="btn btn-success m-3">登録する</button>')
+    $(".address_library").remove()
+    $('#address_parent').html('<p class="address_library m-3"></p>')
+    $('.address_library').after('<button type="button" class="btn btn-success m-3">登録する</button>')
     //重複を削除したfilterDataをひとつずつvalueに格納
     Object.keys(filterData).forEach( function(value) {
       //チェックボックスで地域名を表示する(valueはsystemid）
-      $(".library").prepend(`<input type=radio name=chk1 value=${this[value].systemid}>
+      $(".address_library").prepend(`<input type=radio name=chk1 value=${this[value].systemid}>
       ${this[value].systemname}`)
     }, filterData)
     //チェックボックスをクリックしたら発火
