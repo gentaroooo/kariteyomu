@@ -9,9 +9,11 @@ class LibrariesController < ApplicationController
     elsif params[:address].blank?
       flash.now[:danger] = '検索キーワードが入力されていません'
       return
+    elsif Geocoder.coordinates(params[:address]).nil?
+      flash.now[:danger] = '無効な入力です'
+      return
     else
         longitude_latitude = Geocoder.coordinates(params[:address])
-
         gon.longitude = longitude_latitude[1]
         gon.latitude  = longitude_latitude[0]
     end
@@ -27,7 +29,23 @@ class LibrariesController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @library = current_user.library
+
+    if params[:address].nil?
+      return
+    elsif params[:address].blank?
+      flash.now[:danger] = '検索キーワードが入力されていません'
+      return
+    elsif Geocoder.coordinates(params[:address]).nil?
+      flash.now[:danger] = '無効な入力です'
+      return
+    else
+      longitude_latitude = Geocoder.coordinates(params[:address])
+      gon.longitude = longitude_latitude[1]
+      gon.latitude  = longitude_latitude[0]
+    end
+  end
 
   def update
     if @library.update(library_params)

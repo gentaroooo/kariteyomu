@@ -6,4 +6,12 @@
     <div id="parent">
         <p class="library"></p>
     </div>
+
+    <h5 class="text-secondary m-3">住所を入力してエリア登録をする</h5>
+    <%= form_with url: edit_library_path, local: true, method: :get do |f| %>
+        <div class="mb-4">
+        <%= f.search_field :address, class: 'form-control', rows: 5, placeholder: 'エリアのキーワードを入力', value: params[:address] %>
+        </div>
+        <%= f.submit class: 'btn btn-success', id: 'js-address' %>
+    <% end %>         
 </div>
