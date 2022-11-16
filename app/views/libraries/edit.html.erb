@@ -1,9 +1,30 @@
 <% content_for(:title, t('.title')) %>
-<div class="center">
-    <h5 class="text-info p-3"><%= "登録しているエリアは#{@library.name}です" %></h5> 
-    <h5 class="text-secondary m-3">現在地を取得すると近郊のエリアが表示されます</h5>
-    <h1><%= link_to "現在地を取得する", libraries_path, remote: true, class: 'btn btn-danger btn-lg m-2' %></h1>
+<div class="col text-center">
+    <h5 class="text-secondary p-2">図書館エリア変更</h5>
+    <div class="border-bottom" style="padding:10px;"></div>
+    <h5 class="text-secondary m-2">現在地から登録をする</h5>
+    <h4 class><%= link_to libraries_path, remote: true, class: 'btn btn-info btn-lg m-2' do %>
+        <i class="fa-solid fa-map-location-dot"></i>現在地から検索
+    <% end %></h4>
     <div id="parent">
         <p class="library"></p>
     </div>
+    
+    <div class="border-bottom" style="padding:10px;"></div>
+
+    <h5 class="text-secondary m-3">住所または郵便番号を入力して登録をする</h5>
+
+    <%= form_with url: edit_library_path, local: true, method: :get do |f| %>
+        <div class="mb-4">
+            <%= f.search_field :address, class: 'form-control', rows: 5, placeholder: '住所または郵便番号を入力', value: params[:address] %>
+                <small class="text-secondary">都道府県・市町村・郵便番号等で検索することができます。</small>
+                <p class=""><small class="text-secondary">
+                ●例1: 東京都 千代田区 丸の内<br>※都道府県と市町村の間にはスペースを入れてください<br>●例2: 丸の内 1-1-1 ※市町村と番地で検索<br>●例3: 1000001 ※郵便番号で検索</small></p>
+            <%= f.submit "検索", class: 'btn btn-info', id: 'js-address' %>
+        </div>
+    <% end %>
+    
+    <div id="address_parent">
+        <p class="address_library"></p>
+    </div>    
 </div>
