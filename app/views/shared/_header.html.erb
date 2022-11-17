@@ -1,21 +1,46 @@
 <header>
-  <nav class="navbar navbar-expand-lg navigation navbar-center bg-light p-1">
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <div class="container-fluid">
       <%= link_to root_path, class: 'navbar-brand col-3' do %>
         <%= image_tag 'logo.png', size: '200x30' %>
       <% end %>
-      <%= link_to profile_path, class: 'dropdown-item col-3' do %>
-        <div class="text-cente">
-          <i class="fa-solid fa-circle-user"></i>
-          <div class="icon-text">ユーザー</div>
-        </div>
-      <% end %> 
-      <%= link_to logout_path, class: 'dropdown-item col-3', method: :delete do %>
-        <div class="text-center">
-          <i class="fa-solid fa-right-from-bracket"></i>
-          <div class="icon-text">ログアウト</div>
-        </div>
-      <% end %> 
+
+         <!-- 横幅が狭い時に出るハンバーガーボタン -->
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- メニュー項目 -->
+            <div class="collapse navbar-collapse" id="nav-bar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <%= link_to profile_path, class: 'nav-link' do %>
+                          <i class="fa-solid fa-circle-user"></i>ユーザー
+                      <% end %> 
+                    </li>
+
+                    <li class="nav-item">
+                      <%= link_to logout_path, class: 'nav-link', method: :delet do %>
+                          <i class="fa-solid fa-right-from-bracket"></i>ログアウト
+                      <% end %> 
+                    </li>
+
+
+                    <li class="nav-item"><a href="#" class="nav-link">子猫</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">会社情報</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">ビジョン</a>
+                            <a class="dropdown-item" href="#">会社概要</a>
+                            <a class="dropdown-item" href="#">地図</a>
+                            <a class="dropdown-item" href="#">沿革</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">お問い合わせ</a></li>
+                </ul>
+            </div>
+
+
     </div>
   </nav>
 </header>
