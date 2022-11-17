@@ -5,10 +5,24 @@
         <%= image_tag 'logo.png', size: '200x30' %>
       <% end %>
 
-         <!-- 横幅が狭い時に出るハンバーガーボタン -->
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">会社情報</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">ビジョン</a>
+                <a class="dropdown-item" href="#">会社概要</a>
+                <a class="dropdown-item" href="#">地図</a>
+                <a class="dropdown-item" href="#">沿革</a>
+            </div>
+        </div>
+
+         <%
+=begin%>
+ <!-- 横幅が狭い時に出るハンバーガーボタン -->
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button> 
+<%
+=end%>
             
             <!-- メニュー項目 -->
             <div class="collapse navbar-collapse" id="nav-bar">
@@ -20,13 +34,14 @@
                     </li>
 
                     <li class="nav-item">
-                      <%= link_to logout_path, class: 'nav-link', method: :delet do %>
+                      <%= link_to logout_path, class: 'nav-link', method: :delete do %>
                           <i class="fa-solid fa-right-from-bracket"></i>ログアウト
                       <% end %> 
                     </li>
 
 
                     <li class="nav-item"><a href="#" class="nav-link">子猫</a></li>
+
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">会社情報</a>
                         <div class="dropdown-menu">
@@ -36,7 +51,6 @@
                             <a class="dropdown-item" href="#">沿革</a>
                         </div>
                     </li>
-                    <li class="nav-item"><a href="#" class="nav-link">お問い合わせ</a></li>
                 </ul>
             </div>
 
