@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-     <h3><%= t '.title' %></h3>
+     <div class="text-center top-text p-1"><%= t '.title' %></div>
       <%= form_with model: @user, local: true do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
         <div class="form-group">
