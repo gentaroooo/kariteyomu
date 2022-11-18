@@ -29,8 +29,7 @@
         <% else %>
 
             <div class="col text-center">
-                <h5 class="text-secondary p-2">図書館エリア登録</h5>
-                <div class="border-bottom" style="padding:10px;"></div>
+                <h5 class="text-secondary p-1 border-bottom">図書館エリア登録</h5>
                 <h5 class="text-secondary m-2">現在地から登録をする</h5>
                 <h4 class><%= link_to libraries_path, remote: true, class: 'btn btn-info btn-lg m-2' do %>
                     <i class="fa-solid fa-map-location-dot"></i>現在地から検索
@@ -39,11 +38,12 @@
                     <p class="library"></p>
                 </div>
                 
-                <div class="border-bottom" style="padding:10px;"></div>
+                <div class="border-bottom"></div>
 
-                <h5 class="text-secondary m-3">住所を入力して登録をする</h5>
+                <h5 class="text-secondary m-2">住所または郵便番号で登録する</h5>
+                <%= javascript_pack_tag "library" %>
                 <%= form_with url: libraries_path, local: true, method: :get do |f| %>
-                    <div class="mb-4">
+                    <div class="mb-4 p-1">
                         <%= f.search_field :address, class: 'form-control', rows: 5, placeholder: '住所または郵便番号を入力', value: params[:address] %>
                             <p class="text-left"><small class="text-secondary">
                             ●例1: 東京都 千代田区 丸の内<br>（都道府県と市町村の間にはスペースを入力）<br>●例2: 1000001（郵便番号で検索）</small></p>

@@ -1,9 +1,9 @@
 <% content_for(:title, @book.title) %>
 <div class="card mx-auto">
   <div class="row g-0">
-    <div class="col-5">
+    <div class="col-5 text-center">
       <%= image_tag @book.image_link.present? ? @book.image_link : 'sample.jpg', class: 'img-fluid border m-1' %>
-      <h6><%= link_to 'Google', @book.info_link, class: "btn-outline-success btn-sm m-4" %></h6>
+      <h6><%= link_to 'Google', @book.info_link, class: "btn-outline-success btn-sm text-center" %></h6>
     </div>
 
     <div class="col">

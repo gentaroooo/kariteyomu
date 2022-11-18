@@ -1,7 +1,6 @@
 <% content_for(:title, t('.title')) %>
 <div class="col text-center">
-    <h5 class="text-secondary p-2">図書館エリア変更</h5>
-    <div class="border-bottom" style="padding:10px;"></div>
+    <h5 class="text-secondary border-bottom p-1">図書館エリア変更</h5>
     <h5 class="text-secondary m-2">現在地から登録をする</h5>
     <h4 class><%= link_to libraries_path, remote: true, class: 'btn btn-info btn-lg m-2' do %>
         <i class="fa-solid fa-map-location-dot"></i>現在地から検索
@@ -12,7 +11,8 @@
     
     <div class="border-bottom" style="padding:10px;"></div>
 
-    <h5 class="text-secondary m-3">住所または郵便番号を入力して登録をする</h5>
+    <h5 class="text-secondary m-2">住所または郵便番号で登録する</h5>
+    <%= javascript_pack_tag "library" %>
 
     <%= form_with url: edit_library_path, local: true, method: :get do |f| %>
         <div class="mb-4">
