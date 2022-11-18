@@ -11,8 +11,7 @@
     <% if Rails.env.production? %>
       <%= render 'layouts/google_analytics' %>
     <% end %>
-    
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= display_meta_tags(default_meta_tags) %>
@@ -29,9 +28,7 @@
       <%= render 'shared/before_login_header' %>
     <% end %>
       <%= render 'shared/flash_message' %>
-    <div class="mb-5">
       <%= yield %>
-    </div>
     <% if logged_in? %>
       <%= render 'shared/footer' %> 
     <% else %>
