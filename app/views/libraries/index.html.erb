@@ -45,8 +45,8 @@
                 <%= form_with url: libraries_path, local: true, method: :get do |f| %>
                     <div class="mb-4">
                         <%= f.search_field :address, class: 'form-control', rows: 5, placeholder: '住所または郵便番号を入力', value: params[:address] %>
-                            <p class=""><small class="text-secondary">
-                            ●例1: 東京都 千代田区 丸の内（都道府県と市町村の間にはスペースを入力）<br>●例2: 1000001（郵便番号で検索）</small></p>
+                            <p class="text-left"><small class="text-secondary">
+                            ●例1: 東京都 千代田区 丸の内<br>（都道府県と市町村の間にはスペースを入力）<br>●例2: 1000001（郵便番号で検索）</small></p>
                         <%= f.submit "検索", class: 'btn btn-info', id: 'js-address' %>
                     </div>
                 <% end %>

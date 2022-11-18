@@ -2,8 +2,10 @@
 <div class="card mx-auto">
   <div class="row g-0">
     <div class="col-5">
-      <%= image_tag @book.image_link.present? ? @book.image_link : 'sample.jpg', class: 'img-fluid border m-3' %>
+      <%= image_tag @book.image_link.present? ? @book.image_link : 'sample.jpg', class: 'img-fluid border m-1' %>
+      <h6><%= link_to 'Google', @book.info_link, class: "btn-outline-success btn-sm m-4" %></h6>
     </div>
+
     <div class="col">
       <div class="card-body">
         <h5 class="card-title"><%= @book.title %></h5>
@@ -16,14 +18,10 @@
             <% end %>
           </h3>
         <% end %> 
-        
-        <p class="card-text mb-2"><small class="text-muted"><%= @book.published_date %></small></p>
-        <%= link_to 'Google', @book.info_link, class: "btn btn-light btn-sm" %>
 
         <%= link_to new_book_path(@book), class: "btn btn-success btn-sm review" do %>
           <i class="fa-solid fa-pen-to-square"></i>レビューする
         <% end %>
-
 
       </div>
     </div>
@@ -49,5 +47,7 @@
     </article>
   </div>
 <% else %>
+ <div class="low text-center">
     <%= link_to '図書館登録をすると貸出状況が表示されます', libraries_path, class: "btn bg-danger text-white m-3" %> 
+  </div>
 <% end %>
