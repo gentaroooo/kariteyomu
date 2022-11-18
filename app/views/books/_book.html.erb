@@ -2,7 +2,7 @@
     <div class="card mx-auto library-info<%= book.systemid %>" style="width: 11rem; height: 9rem">
 
       <%= image_tag book.image_link.present? ? book.image_link : 'sample.jpg', class: 'card-img-top book-img' %>
-      <div class="card-title p-1"><%= book.title.truncate(15) %></div>
+      <div class="card-title p-1"><%= book.title.truncate(10) %></div>
      
       <%= link_to '', book_path(book), class: "card-link" %>
        
