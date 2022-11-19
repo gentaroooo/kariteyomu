@@ -16,8 +16,11 @@ module ApplicationHelper
     {
       site: 'Kariteyomu',
       charset: 'utf-8',
-      description: '絵本検索と図書館検索を掛け合わせたサービスです。近所の図書館でお気に入りの絵本を探そう',
+      reverse: true,
+      title: '絵本検索と図書館検索を掛け合わせたサービス',
+      description: '絵本検索と図書館検索を掛け合わせたサービスです。近所の図書館でお気に入りの絵本を探せます',
       keywords: 'Kariteyomu,かりてよむ,借りてよむ,図書館,絵本,子育て',
+      separator: '|',
       canonical: request.original_url,
       noindex: !Rails.env.production?,
       icon: [
@@ -36,6 +39,7 @@ module ApplicationHelper
       twitter: {
         card: 'summary_large_image',
         site: '@zaki_run321',
+        image: image_url('ogp.png'),
       }
     }
   end
