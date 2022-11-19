@@ -26,14 +26,16 @@ module ApplicationHelper
       ],
       og: {
         site_name: :site,
+        title: 'Kariteyomu',
         description: :description,
         type: 'website',
         url: request.original_url,
-        image: image_url('top_image.jpg'),
+        image: image_url('ogp.png'),
         locale: 'ja_JP'
       },
       twitter: {
         card: 'summary_large_image',
+        site: '@zaki_run321',
       }
     }
   end
