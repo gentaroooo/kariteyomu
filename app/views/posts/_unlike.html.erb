@@ -1,7 +1,9 @@
-<%= link_to like_path(current_user.likes.find_by(post_id: post.id)),
-            id: "js-like-button-for-post-#{post.id}",
-            class:"float-right",
-            method: :delete,
-            remote: true do %>
-  <h1><i class="fa-solid fa-heart m-5"></i></h1>
-<% end %>
+<div class='crud-menu-btn list-inline float-right'>
+  <%= link_to like_path(current_user.likes.find_by(post_id: post.id)),
+              id: "js-like-button-for-post-#{post.id}",
+              class:"float-right",
+              method: :delete,
+              remote: true do %>
+    <h3><i class="fa-solid fa-heart m-2" style="color: #F15B55;"></i></h3>
+  <% end %>
+</div>
