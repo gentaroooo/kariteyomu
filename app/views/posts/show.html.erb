@@ -38,12 +38,6 @@
     <div class="card-body">
       <div class='row'>
         <div class='col-md-9'>
-          <% if logged_in? && current_user.own?(@post) %>
-            <%= render 'crud_menus', post: @post %>
-          <% else %>
-            <%= render 'like_button', post: @post  %>
-          <% end %>
-
           <%= link_to image_tag(@post.user.avatar.url, class:"rounded-circle m-1 user-image", size: '60x60'), user_path(@post.user) %>
           <%= link_to @post.user.name, user_path(@post.user) %>
           <p class="card-text mb-2">投稿日：<%= l @post.created_at, format: :long  %></p>
@@ -61,6 +55,18 @@
             <%= link_to age.name, posts_path(age_id: age.id), class: "badge bg-success text-white p-2" %>
           <% end %>
         </div>
+
+          <% if logged_in? && current_user.own?(@post) %>
+            <%= render 'crud_menus', post: @post %>
+          <% else %>
+            <%= render 'like_button', post: @post  %>
+          <% end %>
+
+        <%
+=begin%>
+ <%= render 'twitter', post: @post %> 
+<%
+=end%>
         
       </div>
     </div>
