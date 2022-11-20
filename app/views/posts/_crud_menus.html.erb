@@ -1,13 +1,14 @@
+<%= render 'twitter', post: post  %>
 <ul class='crud-menu-btn list-inline float-right'>
+  <li class="list-inline-item">
+  <%= link_to edit_post_path(post), id: "button-edit-#{post.id}" do %>
+    <h3><i class="fa-solid fa-gear m-2" style="color: #A1A3A6"></i></h3>
+  <% end %>
+  </li>
 
   <li class="list-inline-item">
-    <%= link_to edit_post_path(post), id: "button-edit-#{post.id}" do %>
-      <h3><%= icon 'fa', 'pen' %></h3>
-    <% end %>
-  </li>
-  <li class="list-inline-item">
     <%= link_to post_path(post), id: "button-delete-#{post.id}", method: :delete, data: { confirm: t('defaults.message.delete_confirm') } do %>
-      <h3><%= icon 'fas', 'trash' %></h3>
+      <h3><i class="fa-regular fa-trash-can m-2" style="color: #A1A3A6"></i></h3>
     <% end %>
   </li>
 </ul>
