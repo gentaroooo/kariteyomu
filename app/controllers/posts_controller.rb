@@ -81,6 +81,10 @@ class PostsController < ApplicationController
     @like_posts = current_user.like_posts.includes([:user, :authors, :categories, :likes]).order(created_at: :desc).page(params[:page])
   end
 
+  def myselfs
+    @myself_posts = current_user.posts.includes([:user, :authors, :categories, :likes]).order(created_at: :desc).page(params[:page])
+  end
+
   private
 
   def post_params

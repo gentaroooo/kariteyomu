@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create destroy], shallow: true
     resources :likes, only: %i[create destroy]
       collection do
-        get :likes
+        get :likes, :myselfs
       end
   end
 

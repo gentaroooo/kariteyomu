@@ -1,0 +1,47 @@
+<div class="col-md-10 offset-md-1">
+  <div class="acount">アカウント情報</div>
+  <div class="text-right"><%= link_to edit_profile_path(current_user) do %>
+    <i class="fa-solid fa-gear h3" style="color: #A1A3A6"></i>
+  <% end %></div>
+
+  <table class="table table-striped">
+    <tr>
+      <% if current_user.role != 'guest' %>
+        <th scope="row"><i class="fa-regular fa-envelope">
+          </i><%= t(User.human_attribute_name(:email)) %>
+        </th>
+        <td><%= current_user.email %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th scope="row"><i class="fa-regular fa-user"></i>
+        <%= t(User.human_attribute_name(:name)) %>
+      </th>
+      <td><%= current_user.name %></td>
+    </tr>
+    <tr>
+      <th scope="row"><i class="fa-regular fa-address-card"></i>
+        <%= t(User.human_attribute_name(:introduction)) %>
+      </th>
+      <td><%= current_user.introduction? ?  current_user.introduction : "登録がありません" %></td>
+    </tr>
+      <th scope="row"><i class="fa-solid fa-camera-retro"></i>
+        <%= t(User.human_attribute_name(:avatar)) %>
+      </th>
+      <td><%= image_tag current_user.avatar.url, class: 'rounded-circle', size: '50x50' %></td>
+    </tr>
+  </table>
+</div>
+
+<div class="col-md-10 offset-md-1">
+  <div class="lib">図書館情報</div>
+  <div class="text-right"><%= link_to libraries_path(current_user) do %>
+    <i class="fa-solid fa-gear h3" style="color: #A1A3A6"></i>
+  <% end %></div>
+  <table class="table table-striped">
+    <tr>
+      <th scope="row"><i class="fa-solid fa-location-dot"></i>図書館エリア</th>
+      <td><%= current_user.library.present? ?  current_user.library.name : "登録がありません" %></td>    
+    <tr>
+  </table>
+</div>

@@ -1,0 +1,62 @@
+<% content_for(:title, t('.title')) %>
+<div class="container">
+  <div class="row p-2 text-center">
+    <div class="col-md-10 offset-md-1">
+      <h4 class="text-center top-text p-1"><%= link_to edit_profile_path do %>
+        <i class="fa-solid fa-user-gear"></i>アカウント編集
+      <% end %></h4>
+      <table class="table">
+        <tr>
+          <% if current_user.role != 'guest' %>
+            <th scope="row"><%= t(User.human_attribute_name(:email)) %></th>
+            <td><%= current_user.email %></td>
+           <% end %>
+        </tr>
+        <tr>
+          <th scope="row"><%= t(User.human_attribute_name(:name)) %></th>
+          <td><%= current_user.name %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= t(User.human_attribute_name(:introduction)) %></th>
+          <td><%= current_user.introduction %></td>
+        </tr>
+
+        <tr>
+          <th scope="row"><%= t(User.human_attribute_name(:avatar)) %></th>
+          <td><%= image_tag current_user.avatar.url, class: 'rounded-circle', size: '50x50' %></td>
+        </tr>
+      </table>
+
+      <% if current_user.library.present? %>
+        <h4 class="text-center top-text p-1"><%= link_to libraries_path(current_user) do %>
+          <i class="fa-solid fa-map-location-dot"></i>エリア編集
+        <% end %></h4>
+      <% else %>
+        <h4 class="text-center top-text p-1"><%= link_to libraries_path(current_user) do %>
+          <i class="fa-solid fa-map-location-dot"></i>図書館エリア登録
+        <% end %></h4>
+      <% end %>
+
+      <table class="table">
+      <tr>
+        <th scope="row">図書館エリア</th>
+        <% if current_user.library.present? %>
+          <td><%= current_user.library.name %></td>
+        <% else %>
+         <td>登録がありません</td>
+        <% end %>
+        
+      </tr>
+      </table>
+    </div>
+
+    <div class="col-md-10 offset-md-1 text-center">
+      <%= link_to '自分のレビュー', show_post_user_path(current_user), class: 'btn btn-success m-1' %>
+      <%= link_to 'よみたいリスト', books_path(current_user), class: 'btn btn-success m-1' %>
+      <%= link_to 'いいねしたレビュー', likes_posts_path, class: 'btn btn-success m-1' %>
+      <%= link_to 'フォロー', following_user_path(current_user), class: 'btn btn-info m-1' %>
+      <%= link_to 'フォロワー', follower_user_path(current_user), class: 'btn btn-info m-1' %>
+    </div>
+    
+  </div>
+</div>
