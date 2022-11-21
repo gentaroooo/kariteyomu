@@ -1,52 +1,72 @@
 <% content_for(:title, t('.title')) %>
 <div class="container">
   <div class="row p-2 text-center">
-  
-    <div class="col-md-10 offset-md-1">アカウント情報
-
-      <table class="table table-striped">
-        <tr>
-          <% if current_user.role != 'guest' %>
-            <th scope="row"><i class="fa-regular fa-envelope">
-              </i><%= t(User.human_attribute_name(:email)) %></th>
-            <td><%= current_user.email %></td>
-           <% end %>
-        </tr>
-        <tr>
-          <th scope="row"><i class="fa-regular fa-user"></i>
-            <%= t(User.human_attribute_name(:name)) %></th>
-          <td><%= current_user.name %></td>
-        </tr>
-        <tr>
-          <th scope="row"><i class="fa-regular fa-address-card"></i>
-            <%= t(User.human_attribute_name(:introduction)) %></th>
-          <td><%= current_user.introduction? ?  current_user.introduction : "登録がありません" %></td>
-        </tr>
-        <tr>
-          <th scope="row"><i class="fa-solid fa-location-dot"></i>図書館エリア</th>
-          <td><%= current_user.library.present? ?  current_user.library.name : "登録がありません" %></td>    
-        <tr>
-          <th scope="row"><i class="fa-solid fa-camera-retro"></i>
-            <%= t(User.human_attribute_name(:avatar)) %></th>
-          <td><%= image_tag current_user.avatar.url, class: 'rounded-circle', size: '50x50' %></td>
-        </tr>
-      </table>
+    <div class="col text-center">
+      <ul class="nav nav-pills justify-content-center" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="acount-tab" data-toggle="tab" href="#acount" role="tab" aria-controls="acount" aria-selected="true">アカウント情報</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">レビュー</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="follow-tab" data-toggle="tab" href="#follow" role="tab" aria-controls="follow" aria-selected="false">フォロー</a>
+        </li>
+      </ul>
+  </div>
+</div>
 
 
-      <div class="col-md-10 offset-md-1">
-        <p><div class="border-bottom" style="padding:10px;">レビュー</div></p>
+  <div class="row p-2 text-center">
+   <div class="col text-center">
+    <div class="tab-content" id="myTabContent">
+    
+
+      <div class="tab-pane fade show active" id="acount" role="tabpanel" aria-labelledby="acount-tab">
+        <div class="col-md-10 offset-md-1">アカウント情報
+          <table class="table table-striped">
+            <tr>
+              <% if current_user.role != 'guest' %>
+                <th scope="row"><i class="fa-regular fa-envelope">
+                  </i><%= t(User.human_attribute_name(:email)) %></th>
+                <td><%= current_user.email %></td>
+                <% end %>
+            </tr>
+            <tr>
+              <th scope="row"><i class="fa-regular fa-user"></i>
+                <%= t(User.human_attribute_name(:name)) %></th>
+              <td><%= current_user.name %></td>
+            </tr>
+            <tr>
+              <th scope="row"><i class="fa-regular fa-address-card"></i>
+                <%= t(User.human_attribute_name(:introduction)) %></th>
+              <td><%= current_user.introduction? ?  current_user.introduction : "登録がありません" %></td>
+            </tr>
+            <tr>
+              <th scope="row"><i class="fa-solid fa-location-dot"></i>図書館エリア</th>
+              <td><%= current_user.library.present? ?  current_user.library.name : "登録がありません" %></td>    
+            <tr>
+              <th scope="row"><i class="fa-solid fa-camera-retro"></i>
+                <%= t(User.human_attribute_name(:avatar)) %></th>
+              <td><%= image_tag current_user.avatar.url, class: 'rounded-circle', size: '50x50' %></td>
+            </tr>
+          </table>
+
+          <%= link_to edit_profile_path(current_user) do %>
+            <h3><i class="fa-solid fa-gear m-2" style="color: #A1A3A6"></i></h3>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">レビュー
         <div class="text-center"><%= link_to "#{current_user.name}さんのレビュー", show_post_user_path(current_user), class: 'btn btn-success m-1' %></div>
         <div class="text-center"><%= link_to 'いいねしたレビュー', likes_posts_path, class: 'btn btn-success m-1' %></div>
+      </div>
 
-        <p><div class="border-bottom" style="padding:10px;">フォロー</div></p>
-
+      <div class="tab-pane fade" id="follow" role="tabpanel" aria-labelledby="follow-tab">フォロー
         <div class="text-center"><%= link_to 'フォローしたユーザー', following_user_path(current_user), class: 'btn btn-info m-1' %></div>
         <div class="text-center"><%= link_to 'フォロワー', follower_user_path(current_user), class: 'btn btn-info m-1' %></div>
+      </div>
     </div>
-
-        <%= link_to edit_profile_path(current_user) do %>
-      <h3><i class="fa-solid fa-gear m-2" style="color: #A1A3A6"></i></h3>
-    <% end %>
-    
   </div>
 </div>
