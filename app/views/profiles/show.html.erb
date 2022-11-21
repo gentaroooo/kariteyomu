@@ -7,7 +7,7 @@
           <a class="nav-link active" id="acount-tab" data-toggle="tab" href="#acount" role="tab" aria-controls="acount" aria-selected="true">アカウント情報</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">レビュー</a>
+          <a class="nav-link" id="myself_review-tab" data-toggle="tab" href="#myself_review" role="tab" aria-controls="myself_review" aria-selected="false">レビュー</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="follow-tab" data-toggle="tab" href="#follow" role="tab" aria-controls="follow" aria-selected="false">フォロー</a>
@@ -15,7 +15,7 @@
       </ul>
   </div>
 </div>
-
+<div class="container">
   <div class="row p-2 text-center">
    <div class="col text-center">
     <div class="tab-content" id="myTabContent">
@@ -23,8 +23,7 @@
         <%= render 'acount' %>
       </div>
       
-      <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-        レビュー
+      <div class="tab-pane fade" id="myself_review" role="tabpanel" aria-labelledby="myself_review-tab">レビュー
         <div class="text-center"><%= link_to "#{current_user.name}さんのレビュー", myselfs_posts_path, class: 'btn btn-success m-1' %></div>
         <div class="text-center"><%= link_to 'いいねしたレビュー', likes_posts_path, class: 'btn btn-success m-1' %></div>
       </div>
