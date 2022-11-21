@@ -27,18 +27,6 @@
         <%= f.submit class: 'btn btn-success' %>
       <% end %>
     </div>
-
-      <% if current_user.library.present? %>
-        <h4 class="text-center top-text p-1"><%= link_to libraries_path(current_user) do %>
-          <i class="fa-solid fa-map-location-dot"></i>エリア編集
-        <% end %></h4>
-      <% else %>
-
-
-        <h4 class="text-center top-text p-1"><%= link_to libraries_path(current_user) do %>
-          <i class="fa-solid fa-map-location-dot"></i>図書館エリア登録
-        <% end %></h4>
-      <% end %> 
       
   </div>
 </div>

@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="text-center top-text p-1"><%= current_user.name %> さんのレビュー</div>
+    <div class="row row-cols-1 row-cols-md-2">
+      <% @myself_posts.each do |post| %>
+        <%= render 'posts/post', { post: post } %>
+      <% end %>
+    </div>
+    <div class="mx-auto">
+      <%= paginate @myself_posts %>
+    </div>
+</div>

@@ -23,8 +23,9 @@
         <%= render 'acount' %>
       </div>
       
-      <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">レビュー
-        <div class="text-center"><%= link_to "#{current_user.name}さんのレビュー", show_post_user_path(current_user), class: 'btn btn-success m-1' %></div>
+      <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+        レビュー
+        <div class="text-center"><%= link_to "#{current_user.name}さんのレビュー", myselfs_posts_path, class: 'btn btn-success m-1' %></div>
         <div class="text-center"><%= link_to 'いいねしたレビュー', likes_posts_path, class: 'btn btn-success m-1' %></div>
       </div>
 
