@@ -23,10 +23,10 @@
 
         <div class="mb-4">
           <h6><%= f.label "レビュー" %></h6>
-          <%= f.text_area :body, class: 'form-control', rows: 5 %>
+          <%= f.text_area :body, class: 'form-control', rows: 5, placeholder: 'レビュー内容を入力' %>
         </div>
 
-       <h6><%= f.label "カテゴリー選択" %></h6>
+       <h6><%= f.label "カテゴリー選択(任意）" %></h6>
         <div class='form-group'>
           <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
             <div class="form-check form-check-inline">
@@ -38,7 +38,7 @@
           <% end %>
         </div>
 
-        <h6><%= f.label "年齢選択" %></h6>
+        <h6><%= f.label "年齢選択(任意）" %></h6>
         <div class='form-group'>
           <%= f.collection_check_boxes(:age_ids, Age.all, :id, :name) do |age| %>
             <div class="form-check form-check-inline">
