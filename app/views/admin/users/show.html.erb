@@ -24,6 +24,11 @@
           <th scope="row"><%= User.human_attribute_name(:avatar) %></th>
           <td><%= image_tag @user.avatar.url %></td>
         </tr>
+        </tr>
+        <tr>
+          <th scope="row"><%= User.human_attribute_name(:introduction) %></th>
+          <td><%= @user.introduction %></td>
+        </tr>
         <tr>
           <th scope="row"><%= User.human_attribute_name(:created_at) %></th>
           <td><%= l @user.created_at, format: :long %></td>

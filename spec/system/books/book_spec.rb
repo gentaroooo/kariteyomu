@@ -17,14 +17,6 @@ RSpec.describe 'Books', type: :system do
           end
         end
 
-        context 'ログインしている場合' do
-          it 'フッターのリンクからよみたい一覧へ遷移できること' do
-            login_as(me)
-            click_on('よみたい')
-            expect(current_path).to eq(books_path), 'フッターのリンクからよみたい一覧画面へ遷移できません'
-          end
-        end
-
         context 'よみたいが一件もない場合' do
           it '何もない旨のメッセージが表示されること' do
             login_as(me)
@@ -81,7 +73,6 @@ RSpec.describe 'Books', type: :system do
           create(:book_author, author: author, book: book)
           visit book_path(book)
           expect(page).to have_content book.title
-          expect(page).to have_content book.published_date
         end
       end
 

@@ -13,12 +13,6 @@
           <%= f.label :body %>
           <%= f.text_area :body, class: 'form-control', rows: 10 %>
         </div>
-
-        <div class='mt-3 mb-3'>
-          <%= image_tag @post.image_link,
-                        id: 'preview',
-                        size: '300x200' %>
-        </div>
         <%= f.submit class: 'btn btn-primary' %>
       <% end %>
     </div>
