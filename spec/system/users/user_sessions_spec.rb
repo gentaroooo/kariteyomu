@@ -25,15 +25,4 @@ RSpec.describe 'UserSessions', type: :system do
       end
     end
   end
-
-  describe 'ログアウト' do
-    context '正常系' do
-      it 'ログアウトができる' do
-        login_as(user)
-        click_link 'ログアウト'
-        expect(current_path).to eq root_path
-        expect(page).to  have_content 'ログアウトしました'
-      end
-    end
-  end
 end

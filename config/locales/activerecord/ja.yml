@@ -23,6 +23,7 @@ ja:
       comment:
         body: 'コメント'
       post:
+        title: 'タイトル'
         body: '本文'
         user: '作成者'
   attributes:
