@@ -1,4 +1,3 @@
-$(document).on('turbolinks:load', function() {
   $(".address_library").remove()
   $('#address_parent').html('<p class="address_library"></p>')
 
@@ -68,4 +67,3 @@ $(document).on('turbolinks:load', function() {
     console.log(data)
     $("#jsonp").append("エラーです")
   })
-});
