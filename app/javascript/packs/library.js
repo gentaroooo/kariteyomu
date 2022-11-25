@@ -1,3 +1,4 @@
+  $(".alert").remove()
   $(".address_library").remove()
   $('#address_parent').html('<p class="address_library"></p>')
 
@@ -58,6 +59,7 @@
             }
           },
         })
+        $(".flash").prepend('<div class="alert alert-success" role="alert">図書館情報を登録しました');
       })
     })
   })
@@ -65,5 +67,4 @@
   .fail(function(data){
     console.log("失敗")
     console.log(data)
-    $("#jsonp").append("エラーです")
   })

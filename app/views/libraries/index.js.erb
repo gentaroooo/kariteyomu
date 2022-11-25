@@ -1,4 +1,5 @@
 //前回の図書館情報を削除してlibraryを追加
+$(".alert").remove()
 $(".library").remove()
 $('#parent').html('<p class="library"></p>')
 if( navigator.geolocation ){
@@ -75,7 +76,6 @@ if( navigator.geolocation ){
     .fail(function(data){
         console.log("失敗")
         console.log(data)
-        $(".flash").prepend('<div class="alert alert-danger" role="alert">図書館情報の更新に失敗しました');
     })
   }
   // 取得に失敗した場合の処理
