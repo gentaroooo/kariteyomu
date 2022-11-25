@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+  $(".alert").remove()
   $(".address_library").remove()
   $('#address_parent').html('<p class="address_library"></p>')
 
@@ -59,6 +59,7 @@ $(document).on('turbolinks:load', function() {
             }
           },
         })
+        $(".flash").prepend('<div class="alert alert-success" role="alert">図書館情報を登録しました');
       })
     })
   })
@@ -66,6 +67,4 @@ $(document).on('turbolinks:load', function() {
   .fail(function(data){
     console.log("失敗")
     console.log(data)
-    $("#jsonp").append("エラーです")
   })
-});
