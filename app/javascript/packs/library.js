@@ -28,7 +28,6 @@
         if (nameList.indexOf(item.systemid) === index) {
             return item;
         }
-
     })
     // 重複を削除した値
     console.log(filterData)
@@ -39,12 +38,12 @@
     //重複を削除したfilterDataをひとつずつvalueに格納
     Object.keys(filterData).forEach( function(value) {
       //チェックボックスで地域名を表示する(valueはsystemid）
-      $(".address_library").prepend(`<input type=radio name=chk1 value=${this[value].systemid}>
-      ${this[value].systemname}`)
+      $(".address_library").prepend(`<label><input type=radio name=chk1 value=${this[value].systemid}>${this[value].systemname}</label>`)
     }, filterData)
     //チェックボックスをクリックしたら発火
     $('button').click(function() {
       //すべてのチェック済みvalue値を取得する
+      var libraryArea = $("input[name='chk1']:checked").parent().text();
       $('input:checked').each(function() {
         //libraryNameにチェック済みの値を代入する
         var libraryName = $(this).val();
@@ -56,6 +55,7 @@
           data: {
             library: {
             name:libraryName,
+            display:libraryArea,
             }
           },
         })

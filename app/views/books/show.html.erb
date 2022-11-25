@@ -11,11 +11,9 @@
         <h5 class="card-title"><%= @book.title %></h5>
         <p class="card-text mb-2"><%= @book.authors.pluck(:name).join(', ')&.truncate(50) %></p>
 
-
         <%= link_to new_book_path(@book), class: "btn btn-success btn-sm review float-left m-2" do %>
           <i class="fa-solid fa-pen-to-square"></i>レビューする
         <% end %>
-        
 
         <ul class='list-inline float-left'>
             
@@ -26,7 +24,6 @@
                   <h3><i class="fa-regular fa-trash-can m-2" style="color: #A1A3A6"></i></h3>
                 <% end %>
             <% end %> 
-
             
           </li>
           <%= render 'twitter', { book: @book } %>
@@ -42,7 +39,7 @@
     <article class="card mb-3">
       <div class="card-body">
           <div class='col'>
-            <h5><%= @library.name%>貸出情報</h5>
+            <h5><%= @library.display.present? ? "#{@library.display} 図書館状況" : "#{@library.name} 図書館状況" %></h5>
             <% if @book.systemid.present?%>
               <p><div id="search"><i class="fa fa-spinner fa-spin fa-4x fa-fw" style="color: orange"></i></div></p>
               <p id="choice"></p>
