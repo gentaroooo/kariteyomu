@@ -21,7 +21,8 @@ class LibrariesController < ApplicationController
   def create
     @library = current_user.build_library(library_params)
     if @library.save
-      redirect_to libraries_path, success: t('defaults.message.updated', item: Library.model_name.human)
+      flash.now['danger'] = t('defaults.message.not_updated', item: Library.model_name.human)
+      redirect_to libraries_path
     else
       flash.now['danger'] = t('defaults.message.not_updated', item: Library.model_name.human)
       redirect_to libraries_path

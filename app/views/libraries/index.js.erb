@@ -67,6 +67,7 @@ if( navigator.geolocation ){
               }
             },
           })
+          $(".flash").prepend('<div class="alert alert-success" role="alert">図書館情報を登録しました');
         })
       })
     })
@@ -74,8 +75,7 @@ if( navigator.geolocation ){
     .fail(function(data){
         console.log("失敗")
         console.log(data)
-        $("#jsonp").append("エラーです")
-        window.alert('位置情報の取得に失敗しました。エラーコード：' + error.code)
+        $(".flash").prepend('<div class="alert alert-danger" role="alert">図書館情報の更新に失敗しました');
     })
   }
   // 取得に失敗した場合の処理
