@@ -17,7 +17,7 @@ module ApplicationHelper
       site: 'Kariteyomu',
       charset: 'utf-8',
       reverse: true,
-      title: '絵本検索と図書館検索を掛け合わせたサービス',
+      title: '絵本検索と図書館検索を掛け合わせたサービスです',
       description: '絵本検索と図書館検索を掛け合わせたサービスです。',
       keywords: 'Kariteyomu,かりてよむ,借りてよむ,図書館,絵本,子育て',
       separator: '|',

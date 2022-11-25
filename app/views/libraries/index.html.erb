@@ -5,7 +5,7 @@
         <% if @library.present? %>
             <div class="col text-center">
 
-                <h5 class="text-info p-3"><%= "登録しているエリアは#{@library.name}です" %></h5> 
+                <h5 class="text-info p-3"><%= @library.display.present? ? "登録しているエリアは#{@library.display}です" : "登録しているエリアは#{@library.name}です  再登録すると日本語でエリア表示されます" %></h5> 
                     <div class="card m-2">
                     <div class="card-body">
                         <h5>

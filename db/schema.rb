@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_04_011735) do
+ActiveRecord::Schema.define(version: 2022_11_25_055823) do
 
   create_table "ages", force: :cascade do |t|
     t.string "name"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2022_11_04_011735) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "display"
     t.index ["user_id"], name: "index_libraries_on_user_id"
   end
 

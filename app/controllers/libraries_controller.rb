@@ -63,7 +63,7 @@ class LibrariesController < ApplicationController
   private
 
   def library_params
-    params.require(:library).permit(:name)
+    params.require(:library).permit(:name, :display)
   end
 
   def set_library

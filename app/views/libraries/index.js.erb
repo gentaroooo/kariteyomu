@@ -48,11 +48,12 @@ if( navigator.geolocation ){
       //重複を削除したfilterDataをひとつずつvalueに格納
       Object.keys(filterData).forEach( function(value) {
         //チェックボックスで地域名を表示する(valueはsystemid）
-        $(".library").prepend(`<input type=radio name=chk1 value=${this[value].systemid}>
-        ${this[value].systemname}`)
+        $(".library").prepend(`<label><input type=radio name=chk1 value=${this[value].systemid}>${this[value].systemname}</label>`)
       }, filterData)
       //チェックボックスをクリックしたら発火
       $('button').click(function() {
+        var libraryArea = $("input[name='chk1']:checked").parent().text();
+      
         //すべてのチェック済みvalue値を取得する
         $('input:checked').each(function() {
           //libraryNameにチェック済みの値を代入する
@@ -65,6 +66,7 @@ if( navigator.geolocation ){
             data: {
               library: {
               name:libraryName,
+              display:libraryArea,
               }
             },
           })

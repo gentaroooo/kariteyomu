@@ -41,7 +41,13 @@
   <table class="table table-striped">
     <tr>
       <th scope="row"><i class="fa-solid fa-location-dot"></i>図書館エリア</th>
-      <td><%= current_user.library.present? ?  current_user.library.name : "登録がありません" %></td>    
+
+      <% if current_user.library.present? %>
+        <td><%= current_user.library.display.present? ? current_user.library.display : current_user.library.name %></td>
+      <% else %>
+       <td>登録がありません</td>
+      <% end %>
+      
     <tr>
   </table>
 </div>
