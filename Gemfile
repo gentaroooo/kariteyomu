@@ -62,3 +62,4 @@ gem 'fog-aws'
 gem "aws-sdk-s3", require: false
 gem 'meta-tags'
 gem "geocoder"
+gem 'sitemap_generator'
