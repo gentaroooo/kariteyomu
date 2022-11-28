@@ -42,6 +42,7 @@
     }, filterData)
     //チェックボックスをクリックしたら発火
     $('button').click(function() {
+      $(".alert").remove()
       //すべてのチェック済みvalue値を取得する
       var libraryArea = $("input[name='chk1']:checked").parent().text();
       $('input:checked').each(function() {

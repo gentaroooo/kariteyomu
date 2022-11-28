@@ -52,6 +52,7 @@ if( navigator.geolocation ){
       }, filterData)
       //チェックボックスをクリックしたら発火
       $('button').click(function() {
+        $(".alert").remove()
         var libraryArea = $("input[name='chk1']:checked").parent().text();
       
         //すべてのチェック済みvalue値を取得する
