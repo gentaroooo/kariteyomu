@@ -41,7 +41,7 @@
  |絵本検索|レビューをする|レビュー　詳細画面|
 |---|---|---|
 |<img src="https://gyazo.com/d4b7de0b7bb69895727b7acef3674057.gif" width="200px" height="370px">|<img src="https://gyazo.com/2c7b6a916a9ea96f3c1a6de84317314a.gif" width="200px" height="370px">|<img src="https://gyazo.com/40dde59ffdb32b249232b4b6cdd64412.gif" width="200px" height="370px">
-|Google Books APIsにて<br>絵本の検索を行います|レビューをするボタンを押して<br>レビューを入力します| 読みたい絵本は詳細画面から<br>よみたいリストに追加できます|
+|Google Books APIsにて<br>絵本の検索を行います|レビューをするボタンを押して<br>レビューを入力します| レビュー詳細画面から<br>よみたいリストに<br>追加することもできます|
 
 <br>
 
