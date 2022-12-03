@@ -22,12 +22,6 @@ RSpec.describe User, type: :model do
       expect(user.errors[:name]).to eq ["は16文字以内で入力してください"]
     end
 
-    # it '自己紹介が1000文字より大きい場合、無効' do
-    #   user = build(:user, introduction: 'a' * 1001)
-    #   expect(user).to be_invalid
-    #   expect(user.errors[:introduction]).to eq ["は1000文字以内で入力してください"]
-    # end
-
     it 'メールアドレスがない場合、無効' do
       user = build(:user, email: nil)
       expect(user).to be_invalid
