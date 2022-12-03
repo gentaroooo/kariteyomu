@@ -1,1 +1,1 @@
-Sitemap: https://www.kariteyomu.net/sitemap.xml.gzgi
+Sitemap: https://www.kariteyomu.net/sitemap.xml.gz
