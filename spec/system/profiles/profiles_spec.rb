@@ -29,14 +29,6 @@ RSpec.describe 'Profiles', type: :system do
           expect(page).to have_content 'edit@example.com'
           expect(page).to have_selector "img[src$='map.png']"
         end
-
-        # it 'ユーザーが投稿した本の一覧が表示される' do
-        #   book_1 = create(:book, user: user)
-        #   book_2 = create(:book, user: user)
-        #   visit profile_path
-        #   expect(page).to have_content book_1.title
-        #   expect(page).to have_content book_2.title
-        # end
       end
 
       context '異常系' do
@@ -63,8 +55,7 @@ RSpec.describe 'Profiles', type: :system do
         expect(page).to have_content guest.name
         expect(page).not_to have_content guest.email
         expect(page).to have_content guest.introduction
-        expect(page).to have_content date(guest.created_at)
-        click_on '編集'
+        visit edit_profile_path
         expect(current_path).to eq edit_profile_path
         expect(page).not_to have_content 'メールアドレス'
       end

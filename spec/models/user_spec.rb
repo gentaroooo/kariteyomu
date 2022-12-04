@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:created_user) { create(:user) }
+  let(:pic_path) { Rails.root.join('spec/image/map.png') }
+  let(:pic) { Rack::Test::UploadedFile.new(pic_path) }
 
   describe 'バリデーション確認' do
     it '有効であること' do
