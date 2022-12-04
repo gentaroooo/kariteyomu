@@ -42,10 +42,4 @@ RSpec.describe 'Users', type: :system do
       end
     end
   end
-
-  describe 'ユーザー詳細表示' do
-    let(:me) { create(:user) }
-    let(:others) { create(:user) }
-    before { login_as(me) }
-  end
 end

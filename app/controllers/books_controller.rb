@@ -39,15 +39,6 @@ class BooksController < ApplicationController
 
   def edit; end
 
-  def update
-    if @book.update(book_params)
-      redirect_to @book, success: t('defaults.message.updated', item: Book.model_name.human)
-    else
-      flash.now['danger'] = t('defaults.message.not_updated', item: Book.model_name.human)
-      render :edit
-    end
-  end
-
   def destroy
     @book.destroy!
     redirect_to books_path, success: t('defaults.message.deleted', item: Book.model_name.human)
