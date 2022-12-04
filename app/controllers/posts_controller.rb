@@ -60,23 +60,6 @@ class PostsController < ApplicationController
     redirect_to posts_path, success: t('defaults.message.deleted', item: Post.model_name.human)
   end
 
-  def search 
-    @post = Post.new
-    @volume_info = params[:volumeInfo]
-    
-    if params[:search].nil?
-      return
-    elsif params[:search].blank?
-      flash.now[:danger] = '検索キーワードが入力されていません'
-      return
-    else
-      url = "https://www.googleapis.com/books/v1/volumes"
-      text = params[:search]
-      res = Faraday.get(url, q: text, langRestrict: 'ja', maxResults: 30)
-      @google_books = JSON.parse(res.body)
-    end
-  end
-
   def likes
     @like_posts = current_user.like_posts.includes([:user, :authors, :categories, :likes]).order(created_at: :desc).page(params[:page])
   end
