@@ -132,6 +132,44 @@ RSpec.describe 'Posts', type: :system do
             expect(page).to have_link 'Google', href: post.info_link
           end
 
+          it '本の詳細から年齢で絞りこむ' do
+            visit search_books_path
+            fill_in 'search', with: 'apple'
+            click_button '検索'
+            first(".review").click
+            expect(current_path).to eq new_post_path
+            fill_in 'post_body', with: 'レビューした内容'
+            check '0〜1歳'
+            expect { click_button '登録する' }.to change { Post.count }.by(1)
+            expect(current_path).to eq posts_path
+            expect(page).to have_content 'レビューを投稿しました'
+
+            visit post_path(me)
+            click_on '0〜1歳'
+            expect(current_path).to eq posts_path
+            first(".card-link").click
+            expect(page).to have_content '0〜1歳'
+          end
+
+          it '本の詳細からカテゴリーで絞りこむ' do
+            visit search_books_path
+            fill_in 'search', with: 'apple'
+            click_button '検索'
+            first(".review").click
+            expect(current_path).to eq new_post_path
+            fill_in 'post_body', with: 'レビューした内容'
+            check '幼稚園保育園'
+            expect { click_button '登録する' }.to change { Post.count }.by(1)
+            expect(current_path).to eq posts_path
+            expect(page).to have_content 'レビューを投稿しました'
+
+            visit post_path(me)
+            click_on '幼稚園保育園'
+            expect(current_path).to eq posts_path
+            first(".card-link").click
+            expect(page).to have_content '幼稚園保育園'
+          end
+
           it '本の編集ができる' do
             visit edit_post_path(post_by_me)
             fill_in 'post_body', with: 'レビュー編集'
@@ -139,6 +177,14 @@ RSpec.describe 'Posts', type: :system do
             expect(current_path).to eq post_path(post_by_me)
             expect(page).to have_content 'レビューを更新しました'
             expect(page).to have_content 'レビュー編集'
+          end
+
+          it '本の削除ができる' do
+            visit post_path(post_by_me)
+            accept_alert do
+              click_on 'button-delete-1'
+            end  
+            expect(page).to have_content 'レビューを削除しました'
           end
         end
 
