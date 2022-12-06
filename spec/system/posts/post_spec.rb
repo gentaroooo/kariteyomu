@@ -251,7 +251,13 @@ RSpec.describe 'Posts', type: :system do
         end
 
         context '異常系' do
-          before { login_as(me) }
+          before do
+            login_as(me)
+            category
+            age
+            library
+          end
+
           it '検索キーワードがない場合検索されない' do
             visit search_books_path
             fill_in 'search', with: ''
@@ -276,6 +282,24 @@ RSpec.describe 'Posts', type: :system do
             click_button '更新する'
             expect(page).to have_content 'レビューを更新できませんでした'
             expect(page).to have_content '本文を入力してください'
+          end
+
+          it 'ログインして投稿した後にログアウトしてPOSTの詳細' do
+            visit search_books_path
+            fill_in 'search', with: 'apple'
+            click_button '検索'
+            first(".review").click
+            expect(current_path).to eq new_post_path
+            fill_in 'post_body', with: 'レビューした内容'
+            check '幼稚園保育園'
+            expect { click_button '登録する' }.to change { Post.count }.by(1)
+            expect(current_path).to eq posts_path
+            expect(page).to have_content 'レビューを投稿しました'
+            find(".dropdown-toggle").click
+            click_on 'ログアウト'
+            expect(page).to  have_content 'ログアウトしました'
+            visit post_path(me)
+            expect(page).to  have_content 'ログインしてエリア登録すると、図書館の貸出情報が表示されます'
           end
         end
       end
