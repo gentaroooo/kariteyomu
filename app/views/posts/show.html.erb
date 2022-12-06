@@ -66,43 +66,36 @@
     </div>
   </article>
 
-  <% if @library.present? %>
-  <div class="low text-center">
-    <article class="card mb-3">
-      <div class="card-body">
-          <div class='col'>
-            <h5><%= @library.display.present? ? "#{@library.display} 図書館状況" : "#{@library.name} 図書館状況" %></h5>
-            <% if @post.systemid.present?%>
-              <p><div id="search"><i class="fa fa-spinner fa-spin fa-4x fa-fw" style="color: orange"></i></div></p>
-              <p id="choice"></p>
-              <p id="choice2"></p>
-              <%= javascript_pack_tag "calil" %>
-            <% else %>
-              <button type="button" class="btn btn-dark">検索できません<p>Googleに本NOの登録がありませんでした</button>
-            <% end %>
-          </div>
-      </div>
-    </article>
-  </div>
-<% else %>
- <div class="low text-center">
-    <%= link_to '図書館登録をすると貸出状況が表示されます', libraries_path, class: "btn bg-danger text-white m-3" %> 
-  </div>
-<% end %>
-
-
-
-
-
-
-
-
-
-
   <p>
     <% if logged_in? %>
+      <% if @library.present? %>
+        <div class="low text-center">
+          <article class="card mb-3">
+            <div class="card-body">
+                <div class='col'>
+                  <h5><%= @library.display.present? ? "#{@library.display} 図書館状況" : "#{@library.name} 図書館状況" %></h5>
+                  <% if @post.systemid.present?%>
+                    <p><div id="search"><i class="fa fa-spinner fa-spin fa-4x fa-fw" style="color: orange"></i></div></p>
+                    <p id="choice"></p>
+                    <p id="choice2"></p>
+                    <%= javascript_pack_tag "calil" %>
+                  <% else %>
+                    <button type="button" class="btn btn-dark">検索できません<p>Googleに本NOの登録がありませんでした</button>
+                  <% end %>
+                </div>
+            </div>
+          </article>
+        </div>
+      <% else %>
+        <div class="low text-center">
+            <%= link_to '図書館登録をすると貸出状況が表示されます', libraries_path, class: "btn bg-danger text-white m-3" %> 
+        </div>
+      <% end %>
       <%= render 'comments/form', { post: @post, comment: @comment } %>
     <% end %>
+    <div class="low text-center">
+        ログインしてエリア登録すると、図書館の貸出情報が表示されます 
+    </div>
     <p><%= render 'comments/comments', { comments: @comments } %></p>
   </p>
 </div>
