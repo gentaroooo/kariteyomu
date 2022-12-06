@@ -42,6 +42,12 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comment = Comment.new
     @comments = @post.comments.includes(:user).order(created_at: :desc)
+
+    @library = current_user.library
+    if @library.present?
+      gon.library = @library.name
+    end
+    gon.book = @post
   end
 
   def edit; end
