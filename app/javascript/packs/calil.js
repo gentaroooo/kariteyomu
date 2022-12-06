@@ -35,7 +35,7 @@ function promiseFactory(count) {
               if (Object.keys(situation).length === 0 && situation.constructor === Object) {
                   $("#search").remove();
                   $("#choice").prepend(`<h4>
-                  <button type="button" class="badge bg-secondary btn-block">図書館に本がありません</button>
+                  <button type="button" class="badge bg-secondary">図書館に本がありません</button>
                   </h4>`)
                   clearTimeout( timer_id );
               } else {
@@ -46,17 +46,17 @@ function promiseFactory(count) {
                   //choiceにvalue（図書館名）、this[value](貸出情報)を出力
                   if (this[value] === "貸出可") {
                     $("#choice").prepend(`<h4>
-                    <span class="badge bg-success btn-block">${value} : ${this[value]}</span>
+                    <button type="button" class="badge bg-outline text-info">${value} : ${this[value]}</button>
                     </h4>`)
                   } else {
 
                   $("#choice").prepend(`<h4>
-                  <span class="badge bg-info btn-block">${value} : ${this[value]}</span>
+                  <button type="button" class="badge bg-outline">${value} : ${this[value]}</button>
                   </h4>`)
                   }
                 }, situation)
                 $("#choice2").prepend(`<h4>
-                  <button type="button" class="badge bg-outline-info btn-block reserve"><a href="${reserveurl}">予約する</a></button>
+                  <button type="button" class="badge"><a href="${reserveurl}">予約する</a></button>
                   </h4>`)
                 //data.continueが0だった場合にループ（setTimeout）を抜ける
                 clearTimeout( timer_id );
