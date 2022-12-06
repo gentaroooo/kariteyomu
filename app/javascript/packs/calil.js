@@ -10,10 +10,12 @@ function promiseFactory(count) {
             appkey: gon.calil_key,
             isbn: Number(gon.book.systemid),
             systemid: gon.library,
+            callback: 'no',
           },
-          dataType: 'jsonp',
-          jsonp: 'callback',
+          dataType: 'json',
         })
+
+        // let checkAPIResponse = (await get(`https://api.calil.jp/check?appKey=${calilAppKey}&isbn=${isbn}&systemid=Univ_Aizu&callback=no`)).data;
 
         // 成功した場合dataにJSONを格納
         .done(function(data){
