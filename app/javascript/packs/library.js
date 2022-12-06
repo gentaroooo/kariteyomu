@@ -10,9 +10,9 @@
           format: "json",
           geocode: `${gon.longitude},${gon.latitude}`,
           limit: 20,
+          callback: 'no',
       },
-      dataType: 'jsonp',
-      jsonp: 'callback'
+      dataType: 'json',
   })
 
   //図書館検索に成功した場合JSONをdataに格納
