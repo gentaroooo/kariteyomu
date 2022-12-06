@@ -9,6 +9,7 @@ RSpec.describe 'Posts', type: :system do
     let(:age) { create(:age) }
     let(:category) { create(:category) }
     let(:category_b) { create(:category_2) }
+    let(:library) { create(:library, user: me) }
 
       describe 'レビューリスト' do
         context 'ログインしていない場合' do
@@ -59,6 +60,7 @@ RSpec.describe 'Posts', type: :system do
             login_as(me)
             category
             age
+            library
           end
 
           it '検索した本を新規追加できる（カテゴリー1、年齢1）' do
@@ -130,6 +132,66 @@ RSpec.describe 'Posts', type: :system do
             expect(page).to have_content post.published_date
             expect(page).to have_content author.name
             expect(page).to have_link 'Google', href: post.info_link
+          end
+          
+          it '検索した本の詳細を選択すると図書館情報が表示される(はらぺこあおむし）' do
+            visit search_books_path
+            fill_in 'search', with: 'はらぺこあおむし'
+            click_button '検索'
+            first(".review").click
+            expect(current_path).to eq new_post_path
+            fill_in 'post_body', with: 'レビューした内容'
+            expect { click_button '登録する' }.to change { Post.count }.by(1)
+            expect(current_path).to eq posts_path
+            expect(page).to have_content 'レビューを投稿しました'
+            visit post_path(1)
+            sleep 5
+            expect(page).to have_content '予約する'
+          end
+
+          it '検索した本の詳細を選択すると図書館情報が表示される(くまくまパン)' do
+            visit search_books_path
+            fill_in 'search', with: 'くまくまパン'
+            click_button '検索'
+            first(".review").click
+            expect(current_path).to eq new_post_path
+            fill_in 'post_body', with: 'レビューした内容'
+            expect { click_button '登録する' }.to change { Post.count }.by(1)
+            expect(current_path).to eq posts_path
+            expect(page).to have_content 'レビューを投稿しました'
+            visit post_path(1)
+            sleep 5
+            expect(page).to have_content '予約する'
+          end
+
+          it '検索した本の詳細を選択すると図書館情報が表示される(図書館に書籍がないケース)' do
+            visit search_books_path
+            fill_in 'search', with: '実践Rails'
+            click_button '検索'
+            first(".review").click
+            expect(current_path).to eq new_post_path
+            fill_in 'post_body', with: 'レビューした内容'
+            expect { click_button '登録する' }.to change { Post.count }.by(1)
+            expect(current_path).to eq posts_path
+            expect(page).to have_content 'レビューを投稿しました'
+            visit post_path(1)
+            sleep 5
+            expect(page).to have_content '図書館に本がありません'
+          end
+
+          it '検索した本の詳細を選択すると図書館情報が表示される(ISBN無し)' do
+            visit search_books_path
+            fill_in 'search', with: 'おおかみと7ひきのこやぎ'
+            click_button '検索'
+            first(".review").click
+            expect(current_path).to eq new_post_path
+            fill_in 'post_body', with: 'レビューした内容'
+            expect { click_button '登録する' }.to change { Post.count }.by(1)
+            expect(current_path).to eq posts_path
+            expect(page).to have_content 'レビューを投稿しました'
+            visit post_path(1)
+            sleep 5
+            expect(page).to have_content '検索できません'
           end
 
           it '本の詳細から年齢で絞りこむ' do
