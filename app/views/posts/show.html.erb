@@ -92,10 +92,11 @@
         </div>
       <% end %>
       <%= render 'comments/form', { post: @post, comment: @comment } %>
-    <% end %>
-    <div class="low text-center">
+      <%= render 'comments/comments', { comments: @comments } %>
+    <% else %>
+      <%= render 'comments/comments', { comments: @comments } %>
+      <div class="low text-center">
         ログインしてエリア登録すると、図書館の貸出情報が表示されます 
-    </div>
-    <p><%= render 'comments/comments', { comments: @comments } %></p>
-  </p>
+      </div>
+    <% end %>
 </div>
