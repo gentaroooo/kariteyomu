@@ -58,7 +58,7 @@ RSpec.describe 'Books', type: :system do
           expect(page).to have_content 'よみたいリストに登録しました'
         end
 
-        it '検索した本の詳細を選択すると図書館情報が表示される' do
+        it '検索した本の詳細を選択すると図書館情報が表示される(はらぺこあおむし)' do
           visit search_books_path
           fill_in 'search', with: 'はらぺこあおむし'
           click_button '検索'
@@ -66,6 +66,36 @@ RSpec.describe 'Books', type: :system do
           visit book_path(1)
           sleep 5
           expect(page).to have_content '予約する'
+        end
+
+        it '検索した本の詳細を選択すると図書館情報が表示される(くまくまパン)' do
+          visit search_books_path
+          fill_in 'search', with: 'くまくまパン'
+          click_button '検索'
+          first('#new_book').click
+          visit book_path(1)
+          sleep 5
+          expect(page).to have_content '予約する'
+        end
+
+        it '検索した本の詳細を選択すると図書館情報が表示される（図書館に本がありません）' do
+          visit search_books_path
+          fill_in 'search', with: '実践Rails'
+          click_button '検索'
+          first('#new_book').click
+          visit book_path(1)
+          sleep 5
+          expect(page).to have_content '図書館に本がありません'
+        end
+
+        it '検索した本の詳細を選択すると図書館情報が表示されない（ISBN無し）' do
+          visit search_books_path
+          fill_in 'search', with: 'おおかみと7ひきのこやぎ'
+          click_button '検索'
+          first('#new_book').click
+          visit book_path(1)
+          sleep 5
+          expect(page).to have_content '検索できません'
         end
 
         it '本の詳細が表示される' do
