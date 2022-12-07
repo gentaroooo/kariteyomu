@@ -12,9 +12,9 @@ class LibrariesController < ApplicationController
       flash.now[:danger] = '無効な入力です'
       return
     else
-        longitude_latitude = Geocoder.coordinates(params[:address])
-        gon.longitude = longitude_latitude[1]
-        gon.latitude  = longitude_latitude[0]
+      longitude_latitude = Geocoder.coordinates(params[:address])
+      gon.longitude = longitude_latitude[1]
+      gon.latitude  = longitude_latitude[0]
     end
   end
 
