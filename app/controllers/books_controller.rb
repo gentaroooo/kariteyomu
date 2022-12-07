@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   def index
     @books = Book.all.includes([:authors, :user]).order(created_at: :desc).page(params[:page])
     @book = current_user.books.includes([:authors, :user]).order(created_at: :desc).page(params[:page]).per(8)
-        @library = current_user.library
+    @library = current_user.library
     if @library.present?
       gon.library = @library.name
     end
