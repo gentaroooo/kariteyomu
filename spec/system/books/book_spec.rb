@@ -58,6 +58,14 @@ RSpec.describe 'Books', type: :system do
           expect(page).to have_content 'よみたいリストに登録しました'
         end
 
+        it '本の削除ができる' do
+          visit book_path(book_by_me)
+          accept_alert do
+            click_on 'button-delete-1'
+          end  
+          expect(page).to have_content 'よみたいを削除しました'
+        end
+
         it '検索した本の詳細を選択すると図書館情報が表示される(はらぺこあおむし)' do
           visit search_books_path
           fill_in 'search', with: 'はらぺこあおむし'
@@ -114,7 +122,6 @@ RSpec.describe 'Books', type: :system do
           visit book_path(1)
           sleep 5
           expect(page).to have_content '予約する'
-          
           accept_alert do
             click_on 'button-delete-1'
           end  
