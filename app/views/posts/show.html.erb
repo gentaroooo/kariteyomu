@@ -61,6 +61,10 @@
           <% else %>
             <%= render 'like_button', post: @post  %>
           <% end %>
+
+          <% if @post.systemid.present? %>
+            <%= link_to image_tag('banner2.gif'), "https://calil.jp/book/#{@post.systemid}", class: "btn-sm text-center m-1" %>
+          <% end %>
         
       </div>
     </div>

@@ -11,12 +11,16 @@
         <h5 class="card-title"><%= @book.title %></h5>
         <p class="card-text mb-2"><%= @book.authors.pluck(:name).join(', ')&.truncate(50) %></p>
 
-        <%= link_to new_book_path(@book), class: "btn btn-success btn-sm review float-left m-2" do %>
-          <i class="fa-solid fa-pen-to-square"></i>レビューする
-        <% end %>
-
         <ul class='list-inline float-left'>
             
+          <li class="list-inline-item">
+
+            <%= link_to new_book_path(@book), class: "btn btn-success btn-sm review float-left" do %>
+              <i class="fa-solid fa-pen-to-square"></i>レビューする
+            <% end %>
+
+          </li>
+
           <li class="list-inline-item">
             <% if current_user.own?(@book) %> 
                 <%= link_to book_path(@book), id: "button-delete-#{@book.id}",
@@ -24,9 +28,13 @@
                   <h3><i class="fa-regular fa-trash-can m-2" style="color: #A1A3A6"></i></h3>
                 <% end %>
             <% end %> 
-            
           </li>
-          <%= render 'twitter', { book: @book } %>
+          
+          <p><%= render 'twitter', { book: @book } %></p>
+
+          <% if @book.systemid.present? %>
+            <%= link_to image_tag('banner2.gif'), "https://calil.jp/book/#{@book.systemid}", class: "btn-sm float-left m-1" %>
+          <% end %>
 
         </ul>
       </div>
