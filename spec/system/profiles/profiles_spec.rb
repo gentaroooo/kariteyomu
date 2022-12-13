@@ -32,7 +32,7 @@ RSpec.describe 'Profiles', type: :system do
       end
 
       context '異常系' do
-        it '入力が不足している場合、プロフィールの編集ができない' do
+        it '入力が不足している場合、プロフィールの編集ができない（ユーザーネーム）' do
           visit edit_profile_path
           fill_in 'ユーザーネーム', with: ''
           fill_in '自己紹介', with: '自己紹介編集'
@@ -42,6 +42,19 @@ RSpec.describe 'Profiles', type: :system do
           expect(current_path).to eq profile_path
           expect(page).to have_content 'ユーザーを更新できませんでした'
           expect(page).to have_content 'ユーザーネームを入力してください' 
+        end
+
+        it '入力が不足している場合、プロフィールの編集ができない（email)' do
+          visit edit_profile_path
+          fill_in 'ユーザーネーム', with: 'ユーザー編集'
+          fill_in '自己紹介', with: '自己紹介編集'
+          fill_in 'メールアドレス', with: ''
+          file_path = Rails.root.join('spec', 'image', 'map.png')
+          attach_file('user[avatar]', file_path)
+          click_button '更新する'
+          expect(current_path).to eq profile_path
+          expect(page).to have_content 'ユーザーを更新できませんでした'
+          expect(page).to have_content 'メールアドレスを入力してください' 
         end
       end
     end
