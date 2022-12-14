@@ -58,6 +58,15 @@ RSpec.describe 'Books', type: :system do
           expect(page).to have_content 'よみたいリストに登録しました'
         end
 
+        it '検索した本を新規追加できる' do
+          visit search_books_path
+          fill_in 'search', with: 'apple'
+          click_button '検索'
+          first('#new_book').click 
+          expect(current_path).to eq books_path
+          expect(page).to have_content 'よみたいリストに登録しました'
+        end
+
         it '本の削除ができる' do
           visit book_path(book_by_me)
           accept_alert do

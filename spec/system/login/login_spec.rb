@@ -16,6 +16,7 @@ RSpec.describe 'ログイン・ログアウト', type: :system do
           expect(page).to have_content('図書館')
         end
       end
+
       context 'メールアドレスが空の場合' do
         it 'ログインに失敗すること' do
           visit login_path
@@ -26,11 +27,34 @@ RSpec.describe 'ログイン・ログアウト', type: :system do
           expect(page).to have_content('ログインに失敗しました'), 'フラッシュメッセージ「ログインに失敗しました」が表示されていません'
         end
       end
+
+      context 'メールアドレスを間違った場合' do
+        it 'ログインに失敗すること' do
+          visit login_path
+          fill_in 'メールアドレス', with: 'a@example.com'
+          fill_in 'パスワード', with: 'password'
+          click_button 'ログイン'
+          expect(current_path).to eq login_path
+          expect(page).to have_content('ログインに失敗しました'), 'フラッシュメッセージ「ログインに失敗しました」が表示されていません'
+        end
+      end
+
       context 'パスワードが空の場合' do
         it 'ログインに失敗すること' do
           visit login_path
           fill_in 'メールアドレス', with: 'user.email'
           fill_in 'パスワード', with: ''
+          click_button 'ログイン'
+          expect(current_path).to eq login_path
+          expect(page).to have_content('ログインに失敗しました'), 'フラッシュメッセージ「ログインに失敗しました」が表示されていません'
+        end
+      end
+
+      context 'パスワードを間違えている場合' do
+        it 'ログインに失敗すること' do
+          visit login_path
+          fill_in 'メールアドレス', with: 'user.email'
+          fill_in 'パスワード', with: 'failpassword'
           click_button 'ログイン'
           expect(current_path).to eq login_path
           expect(page).to have_content('ログインに失敗しました'), 'フラッシュメッセージ「ログインに失敗しました」が表示されていません'
