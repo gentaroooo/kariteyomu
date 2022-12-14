@@ -89,4 +89,3 @@
 
 ### 関連リンク
 - Qiita　[【個人開発】絵本を検索して図書館で「貸出可能」か確認できるサービスを作ってみた](https://qiita.com/zakirun/items/2cf035a74db6646928d6)
-- Twitter [開発者](https://twitter.com/zaki_run321)
