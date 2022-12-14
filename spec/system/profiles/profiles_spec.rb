@@ -56,6 +56,21 @@ RSpec.describe 'Profiles', type: :system do
           expect(page).to have_content 'ユーザーを更新できませんでした'
           expect(page).to have_content 'メールアドレスを入力してください' 
         end
+
+        it '自己紹介が空でもプロフィールの編集はできる' do
+          visit edit_profile_path
+          fill_in 'ユーザーネーム', with: '名前編集'
+          fill_in '自己紹介', with: ''
+          fill_in 'メールアドレス', with: 'edit@example.com'
+          file_path = Rails.root.join('spec', 'image', 'map.png')
+          attach_file('user[avatar]', file_path)
+          click_button '更新する'
+          expect(current_path).to eq profile_path
+          expect(page).to have_content 'ユーザーを更新しました'
+          expect(page).to have_content '名前編集'
+          expect(page).to have_content 'edit@example.com'
+          expect(page).to have_selector "img[src$='map.png']" 
+        end
       end
     end
 
